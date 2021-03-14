@@ -1,6 +1,6 @@
 #include "Entity.h"
 
-Entity::Entity(vec2D pos, float width, float height, float angle)
+Entity::Entity(Vec2f pos, float width, float height, float angle)
 {
 }
 

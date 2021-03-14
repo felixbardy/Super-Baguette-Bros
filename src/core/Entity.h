@@ -1,13 +1,7 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-/// TODO Écrire la déclaration de Entity
-
-/// FIXME Trouver ou coder une vraie classe de vecteurs
-struct vec2D
-{
-        
-};
+#include "vector2D.h"
 
 class Entity
 {
@@ -16,19 +10,19 @@ private:
     ///? et un constant pour avoir des IDs d'objet comme ceci:
     ///? static int last_ID;
     ///? const int ID;
-    vec2D pos;
-    vec2D vel;
+    Vec2f pos;
+    Vec2f vel;
     float width, height;
     float angle;
 public:
-    Entity(vec2D pos, float width, float height, float angle);
+    Entity(Vec2f pos, float width, float height, float angle);
     ~Entity();
 
-    vec2D   getPosition() const;
-    void    setPosition(vec2D newpos);
+    Vec2f   getPosition() const;
+    void    setPosition(Vec2f newpos);
 
-    vec2D   getVelocity() const;
-    void    setVelocity(vec2D newvel);
+    Vec2f   getVelocity() const;
+    void    setVelocity(Vec2f newvel);
 
     float   getAngle() const;
     void    setAngle(float newangle);
@@ -40,8 +34,8 @@ public:
     void    setHeight(float newheight);
 
 
-    void    applyForce(vec2D force);
-    void    move(vec2D offset);
+    void    applyForce(Vec2f force);
+    void    move(Vec2f offset);
     void    rotate(float angle);
 };
 
