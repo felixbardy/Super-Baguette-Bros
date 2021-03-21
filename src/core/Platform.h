@@ -5,5 +5,15 @@
 
 /// TODO Implémenter Platform après Entity
 
+class Platform : Entity
+{
+private:
+    /* data */
+public:
+    Platform(/* args */);
+    ~Platform();
+};
+
+
 
 #endif //PLATFORM_H
