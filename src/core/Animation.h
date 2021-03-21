@@ -30,7 +30,7 @@ struct Animation
 //? qui soient spécifiques à chaque type d'animation pour ne pas
 //? s'encombrer de paramètres inutiles à telle ou telle animation
 
-struct LinearAnimation
+struct LinearAnimation : Animation
 {
     /// Le point de départ de l'animation
     Vec2f start_point;
@@ -48,7 +48,7 @@ struct LinearAnimation
  **/
 LinearAnimation create_linear_animation(const Entity& object, Vec2f start_point, Vec2f movement, float speed);
 
-struct RotationAnimation
+struct RotationAnimation : Animation
 {
     /// Angle initial de l'objet
     float start_angle;
@@ -63,7 +63,7 @@ struct RotationAnimation
  **/
 RotationAnimation create_rotation_animation(const Entity& object, float start_angle, float rotation_speed);
 
-struct BouncyAnimation
+struct BouncyAnimation : Animation
 {
     /// La hauteur d'un rebond
     float height;
@@ -83,7 +83,7 @@ struct BouncyAnimation
  **/
 BouncyAnimation create_bouncy_animation(const Entity& object, float rebound_height, float rebound_width, int max_bounces);
 
-struct PhysicAnimation
+struct PhysicAnimation : Animation
 {
     /// Accélération
     Vec2f acc;
