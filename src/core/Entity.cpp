@@ -1,5 +1,12 @@
 #include "Entity.h"
 
+Entity::Entity() :
+pos({0,0}),
+width(0),
+height(0),
+angle(0)
+{}
+
 Entity::Entity(Vec2f pos, float width, float height, float angle)
 {
 }

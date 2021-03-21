@@ -31,6 +31,7 @@ public:
      * \param height Hauteur de l'objet
      * \param angle Inclinaison de l'objet
      **/
+    Entity();
     Entity(Vec2f pos, float width, float height, float angle);
     ~Entity();
 
