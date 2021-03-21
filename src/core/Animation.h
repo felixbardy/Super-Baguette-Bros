@@ -46,7 +46,7 @@ struct LinearAnimation : Animation
  * \param movement Le mouvement de l'objet
  * \param speed La vitesse de déplacement de l'objet
  **/
-LinearAnimation create_linear_animation(const Entity& object, Vec2f start_point, Vec2f movement, float speed);
+LinearAnimation create_linear_animation(Entity* object, Vec2f start_point, Vec2f movement, float speed);
 
 struct RotationAnimation : Animation
 {
@@ -61,7 +61,7 @@ struct RotationAnimation : Animation
  * \param start_angle L'inclinaison initiale de l'objet
  * \param rotation_speed La vitesse de rotation de l'objet (négative pour le sens horaire)
  **/
-RotationAnimation create_rotation_animation(const Entity& object, float start_angle, float rotation_speed);
+RotationAnimation create_rotation_animation(Entity* object, float start_angle, float rotation_speed);
 
 struct BouncyAnimation : Animation
 {
@@ -81,7 +81,7 @@ struct BouncyAnimation : Animation
  * \param rebound_width La longueur d'un rebond
  * \param max_bounces Le nombre de rebonds avant disparition de l'objet
  **/
-BouncyAnimation create_bouncy_animation(const Entity& object, float rebound_height, float rebound_width, int max_bounces);
+BouncyAnimation create_bouncy_animation(Entity* object, float rebound_height, float rebound_width, int max_bounces);
 
 struct PhysicAnimation : Animation
 {
@@ -97,7 +97,7 @@ struct PhysicAnimation : Animation
  * \param acceleration L'acceleration constante à appliquer à l'objet (habituellement la gravité)
  * \param bounciness La propention de l'objet à rebondir (de 0 à 1)
  **/
-PhysicAnimation create_physic_animation(const Entity& object, Vec2f acceleration, float bounciness);
+PhysicAnimation create_physic_animation(Entity* object, Vec2f acceleration, float bounciness);
 
 ///TODO Ajouter des types d'animation si besoin
 
