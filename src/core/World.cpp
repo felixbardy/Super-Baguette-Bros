@@ -24,6 +24,12 @@ World::World(/* args */)
 
 World::~World()
 {
+    for (Animation* anim : animations)
+        delete anim;
+    
+    delete [] segments;
+    delete [] platforms;
+    delete nPlatforms;
 }
 
 void World::testRegression()
