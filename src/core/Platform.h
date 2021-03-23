@@ -5,7 +5,7 @@
 
 /// TODO Implémenter Platform après Entity
 
-class Platform : Entity
+class Platform : public Entity
 {
 private:
     /* data */

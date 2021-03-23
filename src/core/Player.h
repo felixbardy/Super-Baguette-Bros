@@ -5,7 +5,7 @@
 
 /// TODO Fixer clairement à quoi ressemblent les contrôles du joueur avant de l'implémenter
 
-class Player : Entity
+class Player : public Entity
 {
 private:
     /* data */
