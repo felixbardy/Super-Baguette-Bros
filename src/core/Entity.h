@@ -1,7 +1,7 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include "vector2D.h"
+#include "extern/vector2d.h"
 
 /// \brief Classe universelle d'entité
 /** 
