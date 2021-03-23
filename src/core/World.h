@@ -48,8 +48,8 @@ private:
     //? IDEE: -platforms est un tableau 2D stockant les n segments chargés (à priori 3)
     //?       -pour savoir si une animation/entité doit être supprimée, il suffit de regarder
     //?        si l'objet pointé est dans la plage d'adresse du tableau de plateformes remplacé
-    Platform* platforms;
-    int nPlatforms;
+    Platform** platforms;
+    int* nPlatforms;
 
     //? Ajouter une liste pour d'autres entités
 
