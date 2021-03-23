@@ -70,7 +70,7 @@ public:
     //FIXME Les 2 getters sont une solution moche, trouver mieux
 
     /// Retourne le tableau 2D contenant les plateformes chargées
-    const Platform** getPlatforms() const;
+    Platform** getPlatforms() const;
 
     /// Retourne les tailles des tableaux de plateformes
     const int* getPlatformsSizes() const;

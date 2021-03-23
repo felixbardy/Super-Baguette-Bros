@@ -58,7 +58,7 @@ void World::testRegression()
     // TODO Implémenter le test de régression de World
 }
 
-const Platform** World::getPlatforms() const
+Platform** World::getPlatforms() const
 {
     return platforms;
 }
