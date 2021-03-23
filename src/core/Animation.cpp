@@ -50,3 +50,8 @@ PhysicAnimation create_physic_animation(Entity* object, Vec2f acceleration, floa
 
     return anim;
 }
+
+void testRegressionAnimations()
+{
+    //TODO Implémenter le test régression pour les fonctions génératrices d'animations
+}

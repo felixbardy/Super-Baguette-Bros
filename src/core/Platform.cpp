@@ -7,3 +7,9 @@ Platform::Platform(/* args */)
 Platform::~Platform()
 {
 }
+
+/*
+Platform::testRegression()
+{
+}
+*/

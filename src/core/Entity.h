@@ -34,6 +34,7 @@ public:
     Entity();
     Entity(Vec2f pos, float width, float height, float angle);
     ~Entity();
+    void testRegression();
 
     /// \brief Renvoie la position de l'objet
     Vec2f   getPosition() const;

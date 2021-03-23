@@ -101,4 +101,6 @@ PhysicAnimation create_physic_animation(Entity* object, Vec2f acceleration, floa
 
 ///TODO Ajouter des types d'animation si besoin
 
+void testRegressionAnimations();
+
 #endif //ANIMATION_H

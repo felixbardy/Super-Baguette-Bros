@@ -12,6 +12,7 @@ private:
 public:
     Player(/* args */);
     ~Player();
+    void testRegression();
 };
 
 

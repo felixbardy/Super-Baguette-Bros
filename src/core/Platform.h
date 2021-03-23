@@ -12,6 +12,7 @@ private:
 public:
     Platform(/* args */);
     ~Platform();
+    // void testRegression();
 };
 
 

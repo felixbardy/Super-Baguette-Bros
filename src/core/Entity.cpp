@@ -19,6 +19,11 @@ Entity::~Entity()
 {
 }
 
+void Entity::testRegression()
+{
+    //TODO Implémenter le test régression de Entity
+}
+
 Vec2f   Entity::getPosition() const
 {
     return pos;

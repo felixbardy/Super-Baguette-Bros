@@ -6,6 +6,17 @@
 
 int main()
 {
-    std::cout<<"Ceci est le programme de test du module 'core'"<<std::endl;
+    std::cout<<"Début des tests régression..."<<std::endl;
+    World w;
+    w.testRegression();
+    Entity e;
+    e.testRegression();
+    Player p;
+    p.testRegression();
+    //Platform p2;
+    //p2.testRegression();
+    Segment s;
+    s.testRegression();
+    testRegressionAnimations();
     return 0;
 }

@@ -29,6 +29,7 @@ public:
     Segment(Platform* platforms, Animation* animations);
     /// Destructeur 
     ~Segment();
+    void testRegression();
 };
 
 class World
@@ -57,6 +58,7 @@ private:
 public:
     World(/* args */);
     ~World();
+    void testRegression();
 };
 
 
