@@ -30,9 +30,7 @@ CORE_OBJECTS = obj/core/Animation.o \
 
 #TODO Ajouter les autres sources
 
-.PHONY: default all \ #standard
-		doc clean pentaclean \ #règles additionneles
-		core_test #règles de comfort
+.PHONY: default all doc clean pentaclean core_test 
 
 default: all
 
