@@ -1,17 +1,15 @@
 #include "Segment.h"
 
 Segment::Segment() 
+: platforms(nullptr), nPlatforms(0),
+ animations(nullptr), nAnimations(0)
 {
-    platforms = nullptr;
-    nPlatforms = 0;
-    animations = nullptr;
-    nAnimations = 0;
 }
 
 Segment::Segment(Platform* platforms, int nPlatforms,  Animation* animations, int nAnimations)
-: platforms(platforms), nPlatforms(nPlatforms), animations(animations), nAnimations(nAnimations)
+: platforms(platforms), nPlatforms(nPlatforms),
+ animations(animations), nAnimations(nAnimations)
 {
-
 }
 
 Segment::~Segment()

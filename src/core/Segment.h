@@ -7,7 +7,9 @@
 class Segment
 {
 private:
-    //? Ajouter un ID de Segment répercuté sur les Entités / Animations permettrait de savoir quoi supprimer pour décharger le Segment
+    //? Ajouter un ID de Segment répercuté sur les Entités / Animations
+    //? permettrait de savoir quoi supprimer pour décharger le Segment
+    //! Pas besoin d'ID pour l'instant 
     //? static int ID;
     /// Position de debut du segment
     int debut;
@@ -22,10 +24,9 @@ private:
     /// Nombre d'animations associées au segment
     int nAnimations;
 public:
-    // TODO Définir un constructeur par flux de fichier pour charger le segment depuis un fichier de niveau
-    ///Constructeur par défaut
+    ///Constructeur par défaut, le segment est inutilisable tel quel.
     Segment();
-    /// Constructeur par données
+    /// Constructeur par données. Une fois les pointeurs passées, l'objet se charge de la destruction
     Segment(Platform* platforms, int nPlatforms,  Animation* animations, int nAnimations);
     /// Destructeur 
     ~Segment();
