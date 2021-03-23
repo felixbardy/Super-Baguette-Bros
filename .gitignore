@@ -1,7 +1,7 @@
 ###Répertoires à ignorer récursivement###
 bin/**
 doc/**
-obj/**
+obj/**.o
 
 
 ###Exceptions###
