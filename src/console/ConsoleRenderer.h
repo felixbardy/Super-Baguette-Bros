@@ -13,7 +13,6 @@ private:
     int image_width;
     float tile_width;
     char** image;
-    int draw_offset;
 
     void fill(char c);
     void draw_line(int sx, int sy, int ex, int ey, char c);

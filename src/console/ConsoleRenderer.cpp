@@ -25,13 +25,23 @@ void ConsoleRenderer::render()
 {
     cout << "\x1B[2J\x1B[H";
     fill(' ');
-    draw_rectangle(0,0,10,10,'H');
-    draw_rectangle(0,14,10,19,'H');
-    draw_line(11,14,25,14,'=');
+    
+    Platform** platforms = world->getPlatforms();
+    const int* nPlatforms = world->getPlatformsSizes();
+    const Player& player = world->getPlayer();
+
+    //FIXME Récupérer la vraie fin du monde
+    float world_end = 1000000; 
+
+    // Si le joueur est trop proche du bord, la caméra se bloque
+    // Sinon, elle suit le joueur
+    int camera_offset = max( (image_width/2) * tile_width, min( player.getPosition().x, world_end - (image_width/2) * tile_width));
+    
+
     for (int y = 0; y < image_height; y++)
     {
         for (int x = 0; x < image_width; x++)
-            cout << image[y][x] << " ";
+            cout << image[y][x] << image[y][x];
         cout << endl;
     }
 }
