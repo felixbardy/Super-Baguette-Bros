@@ -34,6 +34,7 @@ void Segment::testRegression()
 
 
 World::World(/* args */)
+: platforms(nullptr), segments(nullptr), nPlatforms(nullptr)
 {
 }
 
