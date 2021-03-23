@@ -28,9 +28,13 @@ CORE_OBJECTS = obj/core/Animation.o \
 			   obj/core/Player.o \
 			   obj/core/World.o
 
+CONSOLE_SOURCES = src/console/ConsoleRenderer.cpp
+
+CONSOLE_OBJECTS = obj/console/ConsoleRenderer.o
+
 #TODO Ajouter les autres sources
 
-.PHONY: default all doc clean pentaclean core_test 
+.PHONY: default all doc clean pentaclean core_test console_test
 
 default: all
 
@@ -44,10 +48,16 @@ all: core_test doc
 # Règle de comfort
 core_test: bin/core_test
 
+# Règle de comfort
+console_test: bin/console_test
+
 # Génère l'exécutable de test du module 'core'
 bin/core_test: $(CORE_OBJECTS) obj/core_test.o
 	$(CXX) $(LFLAGS) -g $(CORE_OBJECTS) obj/core_test.o -o bin/core_test
 
+# Génère l'exécutable de test du module 'console'
+bin/console_test: $(CORE_OBJECTS) $(CONSOLE_OBJECTS) obj/console_test.o
+	$(CXX) $(LFLAGS) -g $(CORE_OBJECTS) $(CONSOLE_OBJECTS) obj/console_test.o -o bin/console_test
 
 # * * * * * * * * #
 # *PATTERN RULES* #
