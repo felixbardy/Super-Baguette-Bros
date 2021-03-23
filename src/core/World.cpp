@@ -48,7 +48,8 @@ World::~World()
     if (segments != nullptr)
         delete [] segments;
 
-    delete nPlatforms;
+    if (nPlatforms != nullptr)
+        delete [] nPlatforms;
 }
 
 void World::testRegression()
