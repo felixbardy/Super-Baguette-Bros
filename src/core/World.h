@@ -15,6 +15,10 @@ class Segment
 private:
     //? Ajouter un ID de Segment répercuté sur les Entités / Animations permettrait de savoir quoi supprimer pour décharger le Segment
     //? static int ID;
+    /// Position de debut du segment
+    int debut;
+    /// Position de fin du segment
+    int fin;
     /// Tableau des plateformes associées au segment
     Platform* platforms;
     /// Nombre de plateformes associées au segment
@@ -28,7 +32,7 @@ public:
     ///Constructeur par défaut
     Segment();
     /// Constructeur par données
-    Segment(Platform* platforms, Animation* animations);
+    Segment(Platform* platforms, int nPlatforms,  Animation* animations, int nAnimations);
     /// Destructeur 
     ~Segment();
     void testRegression();
@@ -61,6 +65,18 @@ public:
     World(/* args */);
     ~World();
     void testRegression();
+
+    //FIXME Les 2 getters sont une solution moche, trouver mieux
+
+    /// Retourne le tableau 2D contenant les plateformes chargées
+    const Platform** getPlatforms() const;
+
+    /// Retourne les tailles des tableaux de plateformes
+    const int* getPlatformsSizes() const;
+
+    /// Retourne une référence vers le Player
+    const Player& getPlayer() const;
+
 };
 
 
