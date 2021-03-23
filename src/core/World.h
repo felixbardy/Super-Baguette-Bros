@@ -25,6 +25,8 @@ private:
     int nAnimations;
 public:
     // TODO Définir un constructeur par flux de fichier pour charger le segment depuis un fichier de niveau
+    ///Constructeur par défaut
+    Segment();
     /// Constructeur par données
     Segment(Platform* platforms, Animation* animations);
     /// Destructeur 

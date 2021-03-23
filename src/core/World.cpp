@@ -1,5 +1,9 @@
 #include "World.h"
 
+Segment::Segment()
+{
+}
+
 Segment::Segment(Platform* platforms, Animation* animations)
 {
 }
