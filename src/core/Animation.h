@@ -3,8 +3,6 @@
 
 #include "Entity.h"
 
-/// TODO Implémenter l'animation après Entity
-
 enum AnimationType
 {
     ///* Ordonner les types d'animation par priorité pour pouvoir les comparer simplement

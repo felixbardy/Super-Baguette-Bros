@@ -58,6 +58,7 @@ private:
     std::vector<Animation*> animations;
 
 public:
+    //TODO Définir un constructeur par flux de fichier pour pouvoir charger un niveau 
     World(/* args */);
     ~World();
     void testRegression();
