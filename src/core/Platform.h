@@ -10,7 +10,8 @@ class Platform : Entity
 private:
     /* data */
 public:
-    Platform(/* args */);
+    Platform();
+    Platform(Vec2f pos, float width, float height, float angle);
     ~Platform();
     // void testRegression();
 };
