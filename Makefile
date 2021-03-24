@@ -5,9 +5,9 @@ OS = Linux
 # Compilateur
 CXX = g++
 # Flags pour les compilations
-CFLAGS = -ggdb -Wall -Wextra -std=c++17
+CFLAGS = -ggdb -Wall -std=c++17
 # Flags pour l'édition des liens
-LFLAGS = -ggdb -Wall -Wextra
+LFLAGS = -ggdb -Wall
 
 LOCAL_INCLUDES = 	src 
 
