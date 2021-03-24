@@ -28,13 +28,21 @@ private:
     /// Tableau dynamique stockant les pointeurs vers les Animations
     std::vector<Animation*> animations;
 
+    void loadFirstSegments();
+    //TODO Implémenter des méthodes pour le chargement des segments
+    //? Soit des méthodes du genre 'chargerSuivant()' et 'chargerPrecedant()'
+    //? Soit 'chargerSegment(int from, int to)' (from: index dans 'segments', to: index dans 'platforms')
+
 public:
     //TODO Définir un constructeur par flux de fichier pour pouvoir charger un niveau 
-    World(/* args */);
+    /// Constructeur par défaut (objet inutilisable)
+    World();
+    /// Constructeur par données 
+    World(Segment* segments, int nSegments);
     ~World();
     void testRegression();
 
-    //FIXME Les 2 getters sont une solution moche, trouver mieux
+    //FIXME Les 2 getters sont une solution moche, on peut sûrement trouver mieux
 
     /// Retourne le tableau 2D contenant les plateformes chargées
     Platform** getPlatforms() const;

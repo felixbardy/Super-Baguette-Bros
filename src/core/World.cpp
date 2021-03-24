@@ -1,8 +1,17 @@
 #include "World.h"
 
-World::World(/* args */)
-: platforms(nullptr), segments(nullptr), nPlatforms(nullptr)
+World::World()
+: platforms(nullptr), segments(nullptr),
+ nPlatforms(nullptr), last_loaded_segment(-1)
 {
+}
+
+World::World(Segment* segments, int nSegments)
+: segments(segments), nSegments(nSegments)
+{
+    nPlatforms = new int[3];
+    //TODO Initialiser le joueur avec une position passée en paramètre
+    player = Player();
 }
 
 World::~World()
@@ -18,6 +27,13 @@ World::~World()
 
     if (nPlatforms != nullptr)
         delete [] nPlatforms;
+}
+
+void World::loadFirstSegments()
+{
+    //TODO Charger les 3 premiers segments
+    Segment& first_segment = segments[0];
+    
 }
 
 void World::testRegression()
