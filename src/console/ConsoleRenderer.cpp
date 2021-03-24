@@ -78,7 +78,7 @@ void ConsoleRenderer::draw_line(int sx, int sy, int ex, int ey, char c)
     }
     else // Where the shit hits the fan
     {
-        //FIXME Dessiner une diagonale •_•
+        //FIXME Il y a sûrement un meilleur moyen de dessiner une diagonale
         Vec2f start(sx,sy);
         Vec2f end(ex,ey);
         Vec2f current;

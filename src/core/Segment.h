@@ -31,6 +31,8 @@ public:
     /// Destructeur 
     ~Segment();
     void testRegression();
+
+    //TODO Définir des getters pour pouvoir charger le segment avec World
 };
 
 #endif //SEGMENT_H
