@@ -12,7 +12,7 @@ int main(int argc, char ** argv)
     SDL_Window * window = SDL_CreateWindow("SDL2 Sprite Sheets",
         SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, 0);
     SDL_Renderer * renderer = SDL_CreateRenderer(window, -1, 0);
-    SDL_Surface * image = IMG_Load("/data/sprite-sheet.png");
+    SDL_Surface * image = IMG_Load("../data/sprite-sheet.png");
     SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, image);
  
     SDL_SetRenderDrawColor(renderer, 168, 230, 255, 255);
