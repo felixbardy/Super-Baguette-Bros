@@ -1,5 +1,5 @@
 #include "ConsoleRenderer.h"
-
+#include <cassert>
 using namespace std;
 
 ConsoleRenderer::ConsoleRenderer(World* world, int height, int width, float scale)
@@ -24,7 +24,7 @@ ConsoleRenderer::~ConsoleRenderer()
 void ConsoleRenderer::render()
 {
     cout << "\x1B[2J\x1B[H";
-    fill(' ');
+    fill('*');
     
     Platform** platforms = world->getPlatforms();
     const int* nPlatforms = world->getPlatformsSizes();
@@ -36,16 +36,16 @@ void ConsoleRenderer::render()
     // Si le joueur est trop proche du bord, la caméra se bloque
     // Sinon, elle suit le joueur
     int camera_offset = max( (image_width/2) * tile_width, min( player.getPosition().x, world_end - (image_width/2) * tile_width));
-    
 
-    for (int y = 0; y < image_height; y++)
-    {
+	for (int y = 0; y < image_height; y++)
+	{
         for (int x = 0; x < image_width; x++)
+        {
             cout << image[y][x] << image[y][x];
+        }
         cout << endl;
     }
 }
-
 
 void ConsoleRenderer::fill(char c)
 {

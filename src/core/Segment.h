@@ -20,19 +20,35 @@ private:
     /// Nombre de plateformes associées au segment
     int nPlatforms;
     /// Tableau des animations associées au segment
-    Animation* animations;
+    Animation** animations;
     /// Nombre d'animations associées au segment
     int nAnimations;
 public:
     ///Constructeur par défaut, le segment est inutilisable tel quel.
     Segment();
     /// Constructeur par données. Une fois les pointeurs passées, l'objet se charge de la destruction
-    Segment(Platform* platforms, int nPlatforms,  Animation* animations, int nAnimations);
+    Segment(Platform* platforms, int nPlatforms,  Animation** animations, int nAnimations);
     /// Destructeur 
     ~Segment();
+    /// Suite de tests pour s'assurer du bon fonctionnement de Segment
     void testRegression();
 
-    //TODO Définir des getters pour pouvoir charger le segment avec World
+    /** \brief Passe le tableau de plateformes déjà alloué au Segment
+     * \param platforms pointeur vers les plateformes
+     * \param size taille du tableau à charger
+     **/
+    void setPlatforms(Platform* platforms, int size);
+
+    /** \brief Passe le tableau d'Animations déjà alloué  au Segment
+     * \param animations pointeur vers le tableau d'Animations
+     * \param size taille du tableau à charger
+     **/
+    void setAnimations(Animation** animations, int size);
+    
+
+    void loadPlatforms(Platform*& platforms, int& size);
+
+    void loadAnimations(Animation**& animations, int& size);
 };
 
 #endif //SEGMENT_H
