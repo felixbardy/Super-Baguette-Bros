@@ -15,6 +15,7 @@ private:
 
     Segment* segments;
     int nSegments;
+    int last_loaded_segment;
 
     //? IDEE: -platforms est un tableau 2D stockant les n segments chargés (à priori 3)
     //?       -pour savoir si une animation doit être supprimée, il suffit de regarder
@@ -28,6 +29,7 @@ private:
     /// Tableau dynamique stockant les pointeurs vers les Animations
     std::vector<Animation*> animations;
 
+    /// Charge les 3 premiers segments
     void loadFirstSegments();
     //TODO Implémenter des méthodes pour le chargement des segments
     //? Soit des méthodes du genre 'chargerSuivant()' et 'chargerPrecedant()'

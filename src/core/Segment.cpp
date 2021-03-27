@@ -6,16 +6,17 @@ Segment::Segment()
 {
 }
 
-Segment::Segment(Platform* platforms, int nPlatforms,  Animation* animations, int nAnimations)
-: platforms(platforms), nPlatforms(nPlatforms),
- animations(animations), nAnimations(nAnimations)
+Segment::Segment(Platform* platforms, int nPlatforms,  Animation** animations, int nAnimations)
+: platforms (platforms),  nPlatforms (nPlatforms),
+  animations(animations), nAnimations(nAnimations)
 {
 }
 
 Segment::~Segment()
 {
+    
     if (platforms != nullptr){
-        delete[] platforms;
+        delete [] platforms;
         platforms = nullptr;
     }
     if (animations != nullptr){
@@ -28,4 +29,28 @@ Segment::~Segment()
 void Segment::testRegression()
 {
     //TODO Implémenter le test de régression de Segment
+}
+
+void Segment::setPlatforms(Platform* platforms, int size)
+{
+    this->platforms = platforms;
+    this->nPlatforms = size;
+}
+
+void Segment::setAnimations(Animation** animations, int size)
+{
+    this->animations = animations;
+    this->nAnimations = size;
+}
+
+void Segment::loadPlatforms(Platform*& platforms, int& size)
+{
+    platforms = this->platforms;
+    size = nPlatforms;
+}
+
+void Segment::loadAnimations(Animation**& animations, int& size)
+{
+    animations = this->animations;
+    size = nAnimations;
 }

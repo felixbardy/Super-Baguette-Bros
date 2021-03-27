@@ -9,21 +9,24 @@ World::World()
 World::World(Segment* segments, int nSegments)
 : segments(segments), nSegments(nSegments)
 {
+    platforms = new Platform*[3];
     nPlatforms = new int[3];
     //TODO Initialiser le joueur avec une position passée en paramètre
     player = Player();
+
+    loadFirstSegments();
 }
 
 World::~World()
 {
     for (Animation* anim : animations)
-        delete anim;
-
-    if (platforms != nullptr)
-        delete [] platforms;
+        if (!anim->from_segment) delete anim;
     
     if (segments != nullptr)
         delete [] segments;
+
+    if (platforms != nullptr)
+        delete platforms;
 
     if (nPlatforms != nullptr)
         delete [] nPlatforms;
@@ -31,8 +34,27 @@ World::~World()
 
 void World::loadFirstSegments()
 {
-    //TODO Charger les 3 premiers segments
-    Segment& first_segment = segments[0];
+    Segment* segment;
+    Platform* new_platforms;
+    Animation** new_animations;
+    int platforms_size;
+    int animations_size;
+
+    for (int i = 0; i < 3; i++)
+    {
+        // On récupère les données du segment
+        segment = &segments[i];
+        segment->loadPlatforms(new_platforms, platforms_size);
+        segment->loadAnimations(new_animations, animations_size);
+
+        // On charge les plateformes dans World
+        platforms[i] = new_platforms;
+        nPlatforms[i] = platforms_size;
+
+        // Et on charge les animations dans World
+        for (int j = 0; j < animations_size; j++)
+            animations.push_back(new_animations[j]);
+    }
     
 }
 

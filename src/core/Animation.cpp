@@ -1,6 +1,9 @@
 #include "Animation.h"
 
-LinearAnimation create_linear_animation(Entity* object, Vec2f start_point, Vec2f movement, float speed)
+LinearAnimation createLinearAnimation(
+    Entity* object, Vec2f start_point, Vec2f movement,
+    float speed, bool from_segment = false
+)
 {
     LinearAnimation anim;
     anim.object = object;
@@ -13,7 +16,10 @@ LinearAnimation create_linear_animation(Entity* object, Vec2f start_point, Vec2f
     return anim;
 }
 
-RotationAnimation create_rotation_animation(Entity* object, float start_angle, float rotation_speed)
+RotationAnimation createRotationAnimation(
+    Entity* object, float start_angle, float rotation_speed,
+    bool from_segment = false
+)
 {
     RotationAnimation anim;
     anim.object = object;
@@ -25,7 +31,10 @@ RotationAnimation create_rotation_animation(Entity* object, float start_angle, f
     return anim;
 }
 
-BouncyAnimation create_bouncy_animation(Entity* object, float rebound_height, float rebound_width, int max_bounces)
+BouncyAnimation createBouncyAnimation(
+    Entity* object, float rebound_height, float rebound_width,
+    int max_bounces, bool from_segment = false
+)
 {
     BouncyAnimation anim;
     anim.object = object;
@@ -39,7 +48,10 @@ BouncyAnimation create_bouncy_animation(Entity* object, float rebound_height, fl
     return anim;
 }
 
-PhysicAnimation create_physic_animation(Entity* object, Vec2f acceleration, float bounciness)
+PhysicAnimation createPhysicAnimation(
+    Entity* object, Vec2f acceleration, float bounciness,
+    bool from_segment = false
+)
 {
     PhysicAnimation anim;
     anim.object = object;
