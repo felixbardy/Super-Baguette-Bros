@@ -19,7 +19,7 @@ void Player::moveLeft()
 
 void Player::moveRight()
 {
-    move(1,0);
+    move({1,0});
 }
 
 void Player::jump()
