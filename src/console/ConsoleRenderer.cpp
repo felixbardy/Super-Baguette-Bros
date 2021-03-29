@@ -2,7 +2,7 @@
 #include <cassert>
 using namespace std;
 
-ConsoleRenderer::ConsoleRenderer(World* world, int height, int width, float scale)
+ConsoleRenderer::ConsoleRenderer(World* world, int width, int height, float scale)
 : world(world), image_height(height), image_width(width), tile_width(scale)
 {
     image = new char*[image_height];
