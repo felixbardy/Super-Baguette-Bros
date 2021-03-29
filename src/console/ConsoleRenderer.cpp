@@ -68,42 +68,45 @@ void ConsoleRenderer::fill(char c)
 
 void ConsoleRenderer::draw_line(int sx, int sy, int ex, int ey, char c)
 {
-    assert(0 <= sx && sx < image_width);
-    assert(0 <= ex && ex < image_width);
-    assert(0 <= sy && sy < image_height);
-    assert(0 <= ey && ey < image_height);
+    Vec2f start(sx - camera_offset, sy), end(ex - camera_offset, ey);
     
     int tmp;
-    if (ey < sy) {tmp=ey; ey=sy; sy=tmp;}
-    if (ex < sx) {tmp=ex; ex=sx; sx=tmp;}
+    if (end.y < start.y) {tmp=end.y; end.y=start.y; start.y=tmp;}
+    if (end.x < start.x) {tmp=end.x; end.x=start.x; start.x=tmp;}
 
-    if (sx == ex) // Vertical
+    if (start.x == end.x) // Vertical
     {
-        for (int i = sy; i < ey; i++)
-            image[i][sx] = c;
+        for (int i = start.y; i < end.y; i++)
+            if ( is_in_bounds( Vec2f(start.x, i) ) )
+                image[i][int(start.x)] = c;
     }
-    else if (sy == ey) // Horizontal
+    else if (start.y == end.y) // Horizontal
     {
-        for (int i = sx; i < ex; i++)
+        cout << "horizontal line: " << endl;;
+        for (int i = start.x; i < end.x; i++)
         {
-            std::cout<<i<<std::endl;
-            image[i][sy] = c;
+            cout << "(" << i << ", " << start.y << ")" << endl;
+            if ( is_in_bounds( Vec2f(i, start.y) ) )
+            {
+                cout << "(" << i << ", " << start.y << ") is in bounds" << endl;
+                image[int(start.y)][i] = c;
+            }
         }
     }
     else // Where the shit hits the fan
     {
         //FIXME Il y a sûrement un meilleur moyen de dessiner une diagonale
-        Vec2f start(sx,sy);
-        Vec2f end(ex,ey);
         Vec2f current;
         int steps = int( (end-start).getLength() ) + 1;
         for (int i = 0; i <= steps; i++)
         {
             float t = (i/(float)steps);
             current = end * t + start * (1 - t);
-            image[int(current.y)][int(current.x)] = c;
+            if ( is_in_bounds(current) )
+                image[int(current.y)][int(current.x)] = c;
         }
     }
+    cout << "dessiné!" << endl;
 }
 
 void ConsoleRenderer::draw_rectangle(int minx, int miny, int maxx, int maxy, char c)
