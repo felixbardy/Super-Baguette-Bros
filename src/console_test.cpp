@@ -65,6 +65,8 @@ int main()
         if (input.find('r') != string::npos) input_mask |= Player::RIGHT;
         if (input.find('l') != string::npos) input_mask |= Player::LEFT;
 
+        last_input = input;
+
         //2• On le transmet à l'objet Player
         w.setPlayerInputs(input_mask);    
 
