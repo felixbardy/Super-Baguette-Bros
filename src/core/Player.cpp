@@ -1,13 +1,43 @@
 #include "Player.h"
 
 Player::Player(/* args */)
-: current_input(0)
 {
+    in_air = false;
+    jumping = false;
 }
 
 Player::~Player()
 {
 }
+
+
+void Player::moveleft(Vec2f& pos)
+{
+    pos.x = pos.x - 0.15;
+}
+
+void Player::moveright(Vec2f& pos)
+{
+    pos.x = pos.x + 0.15;
+}
+
+void Player::jump(Vec2f& pos)
+{
+    if (!in_air)
+        pos.y = pos.y + 0.15;
+}
+
+
+bool Player::isJumping()
+{
+    return jumping;
+}
+
+bool Player::isInAir()
+{
+    return in_air;
+}
+
 
 void Player::addInput(uint16_t mask)
 {
