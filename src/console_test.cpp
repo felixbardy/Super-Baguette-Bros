@@ -13,8 +13,8 @@ int main()
     // On créé 3 plateformes par segment
     Platform* platforms = new Platform[3];
     platforms[0] = Platform({0,0}, 10, 1, 0);
-    platforms[1] = Platform({10,5}, 10, 1, 0);
-    platforms[2] = Platform({20,10}, 10, 1, 0);
+    platforms[1] = Platform({10,3}, 10, 1, 0);
+    platforms[2] = Platform({20,6}, 10, 1, 0);
 
     // On ne fait pas d'animations pour l'instant
     Animation** animations = new Animation*[0];
@@ -25,9 +25,9 @@ int main()
     // Et on s'attaque au 2ème segment
 
     platforms = new Platform[3];
-    platforms[0] = Platform({30,0}, 10, 1, 0);
-    platforms[1] = Platform({40,5}, 10, 1, 0);
-    platforms[2] = Platform({50,10}, 10, 1, 0);
+    platforms[0] = Platform({30,9}, 10, 1, 0);
+    platforms[1] = Platform({40,6}, 10, 1, 0);
+    platforms[2] = Platform({50,3}, 10, 1, 0);
     animations = new Animation*[0];
 
     segments[1].setPlatforms(platforms, 3);
@@ -35,9 +35,9 @@ int main()
 
     // Segment 3
     platforms = new Platform[3];
-    platforms[0] = Platform({60,0}, 10, 1, 0);
+    platforms[0] = Platform({60,2}, 10, 1, 0);
     platforms[1] = Platform({70,5}, 10, 1, 0);
-    platforms[2] = Platform({80,10}, 10, 1, 0);
+    platforms[2] = Platform({80,8}, 10, 1, 0);
     animations = new Animation*[0];
     
     segments[2].setPlatforms(platforms, 3);
