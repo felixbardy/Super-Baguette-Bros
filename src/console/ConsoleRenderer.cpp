@@ -43,7 +43,6 @@ void ConsoleRenderer::render()
         const int n = nPlatforms[i];
         for (int j = 0; j < n; j++)
         {
-            cout << "Plateforme " << j << " du segment " << i << ": ";
             const Platform&  current_platform = current_platforms[j];
             Vec2f position = current_platform.getPosition();
             float width = current_platform.getWidth();
@@ -82,16 +81,9 @@ void ConsoleRenderer::draw_line(int sx, int sy, int ex, int ey, char c)
     }
     else if (start.y == end.y) // Horizontal
     {
-        cout << "horizontal line: " << endl;;
         for (int i = start.x; i < end.x; i++)
-        {
-            cout << "(" << i << ", " << start.y << ")" << endl;
             if ( is_in_bounds( Vec2f(i, start.y) ) )
-            {
-                cout << "(" << i << ", " << start.y << ") is in bounds" << endl;
                 image[int(start.y)][i] = c;
-            }
-        }
     }
     else // Where the shit hits the fan
     {
@@ -106,7 +98,6 @@ void ConsoleRenderer::draw_line(int sx, int sy, int ex, int ey, char c)
                 image[int(current.y)][int(current.x)] = c;
         }
     }
-    cout << "dessiné!" << endl;
 }
 
 void ConsoleRenderer::draw_rectangle(int minx, int miny, int maxx, int maxy, char c)
