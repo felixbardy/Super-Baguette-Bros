@@ -109,7 +109,6 @@ void World::step()
                 // 3.3.1• Sinon, décrémenter la position en y
                 //TODO optimiser la fonction avec arret auto quand on_platform=1;
                 if (player.superposition(platforms[i][j])) on_platform=1;
-                    ;
 
             }
         }
