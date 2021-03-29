@@ -108,3 +108,8 @@ void ConsoleRenderer::draw_rectangle(int minx, int miny, int maxx, int maxy, cha
             image[y][x] = c;
 
 }
+
+bool ConsoleRenderer::is_in_bounds(Vec2f point)
+{
+    return !((point.x >= image_width  || point.x < 0) || (point.y >= image_height || point.y < 0));
+}

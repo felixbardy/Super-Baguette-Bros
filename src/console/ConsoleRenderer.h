@@ -18,6 +18,8 @@ private:
     void fill(char c);
     void draw_line(int sx, int sy, int ex, int ey, char c);
     void draw_rectangle(int minx, int miny, int maxx, int maxy, char c);
+
+    bool is_in_bounds(Vec2f point);
 public:
     ConsoleRenderer(World* world, int width, int height, float scale);
     ~ConsoleRenderer();
