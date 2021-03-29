@@ -50,11 +50,14 @@ int main()
     string input;
     string last_input;
     uint16_t input_mask;
-    while (input.c_str() != "s")
+    while (input.find('s') == string::npos)
     {
+        //4• On Affiche l' "image"
+        cr.render();
+
         //1.1• On attend l'input du joueur
         cin >> input;
-        if (input.c_str() == "") input = last_input;
+        if (input.find('a') != string::npos) input = last_input;
 
         //1.2• On traite l'input du joueur
         input_mask = 0;
@@ -66,10 +69,8 @@ int main()
         w.setPlayerInputs(input_mask);    
 
         //3• On applique l'update physique
-        w.step()
+        w.step();
         
-        //4• On Affiche l' "image"
-        cr.render();
     }
     
 	return 0;
