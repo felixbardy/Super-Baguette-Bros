@@ -227,7 +227,7 @@ typedef Vector2D <float> Vec2f;
 typedef Vector2D <double> Vec2d;
 
 template <class RealType>
-Vector2D<RealType> intersection(Vector2D<RealType> A, Vector2D<RealType> B, Vector2D<RealType> C, Vector2D<RealType> D, bool& intersects = false)
+Vector2D<RealType> intersection(Vector2D<RealType> A, Vector2D<RealType> B, Vector2D<RealType> C, Vector2D<RealType> D, bool& intersects)
 {
      // Line AB represented as a1x + b1y = c1
      double a = B.y - A.y;
