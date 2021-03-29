@@ -40,6 +40,11 @@ public:
      **/
     void jump();
 
+    /** \brief Modifie la position du joueur lors de sa chute
+     * \param pos La position initiale du joueur
+     **/
+    void fall();
+
     /// Retourne la valeur de jumping
     bool isJumping();
 

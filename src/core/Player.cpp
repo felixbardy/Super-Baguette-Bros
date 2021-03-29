@@ -29,6 +29,10 @@ void Player::jump()
     in_air = true;
 }
 
+void Player::fall()
+{
+	move({0, -0.5});
+}
 
 bool Player::isJumping()
 {
