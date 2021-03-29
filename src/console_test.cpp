@@ -1,6 +1,9 @@
 #include "console/ConsoleRenderer.h"
 #include <cassert>
 
+
+using namespace std;
+
 int main()
 {
     // Création d'une liste simple de 3 segments
@@ -43,13 +46,30 @@ int main()
     World w = World(segments, 3);
     
     ConsoleRenderer cr = ConsoleRenderer(&w, 60, 20, 1);
-    int offset = -1;
-    while (offset != 0)
+
+    string input;
+    string last_input;
+    uint16_t input_mask;
+    while (input.c_str() != "s")
     {
+        //1.1• On attend l'input du joueur
+        cin >> input;
+        if (input.c_str() == '') input = last_input;
+
+        //1.2• On traite l'input du joueur
+        input_mask = 0;
+        if (input.find('j') != string::npos) input_mask |= Player::JUMP;
+        if (input.find('r') != string::npos) input_mask |= Player::RIGHT;
+        if (input.find('l') != string::npos) input_mask |= Player::LEFT;
+
+        //2• On le transmet à l'objet Player
+        w.setPlayerInputs(input_mask);    
+
+        //3• On applique l'update physique
+        w.step()
+        
+        //4• On Affiche l' "image"
         cr.render();
-        cin >> offset;
-        //FIXME Le Joueur est protégé en écriture: Ajouter les méthodes de contrôle dans World
-        //w.getPlayer().move(Vec2f(offset,0));
     }
     
 	return 0;

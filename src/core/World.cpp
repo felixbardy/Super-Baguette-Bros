@@ -82,3 +82,14 @@ void World::setPlayerInputs(uint16_t input_mask)
 {
     player.addInput(input_mask);
 }
+
+void World::step()
+{
+    //3• On applique l'update physique:
+    //    3.1• Si le joueur saute, on met in_air à true et on incrémente la position en y
+    //    3.2• Si le joueur va à droite/gauche: incrémenter/décrémenter la position en x
+    //    3.3• Si le joueur ne saute pas, vérifier la présence d'une plateforme en dessous:
+    //        3.3.1• Si il y a une plateforme, fixer la position du joueur à sa hauteur
+    //        3.3.1• Sinon, décrémenter la position en y
+    
+}

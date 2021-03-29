@@ -60,7 +60,8 @@ public:
      **/
     void setPlayerInputs(uint16_t input_mask);
 
-
+    /// Exécute une frame dans le monde
+    void step();
 };
 
 
