@@ -22,9 +22,9 @@ int main()
     // Et on s'attaque au 2ème segment
 
     platforms = new Platform[3];
-    platforms[0] = Platform({0,0}, 10, 1, 0);
-    platforms[1] = Platform({10,5}, 10, 1, 0);
-    platforms[2] = Platform({20,10}, 10, 1, 0);
+    platforms[0] = Platform({30,0}, 10, 1, 0);
+    platforms[1] = Platform({40,5}, 10, 1, 0);
+    platforms[2] = Platform({50,10}, 10, 1, 0);
     animations = new Animation*[0];
 
     segments[1].setPlatforms(platforms, 3);
@@ -32,9 +32,9 @@ int main()
 
     // Segment 3
     platforms = new Platform[3];
-    platforms[0] = Platform({0,0}, 10, 1, 0);
-    platforms[1] = Platform({10,5}, 10, 1, 0);
-    platforms[2] = Platform({20,10}, 10, 1, 0);
+    platforms[0] = Platform({60,0}, 10, 1, 0);
+    platforms[1] = Platform({70,5}, 10, 1, 0);
+    platforms[2] = Platform({80,10}, 10, 1, 0);
     animations = new Animation*[0];
     
     segments[2].setPlatforms(platforms, 3);
@@ -43,7 +43,14 @@ int main()
     World w = World(segments, 3);
     
     ConsoleRenderer cr = ConsoleRenderer(&w, 60, 20, 1);
-    cr.render();
+    int offset = -1;
+    while (offset != 0)
+    {
+        cr.render();
+        cin >> offset;
+        //FIXME Le Joueur est protégé en écriture: Ajouter les méthodes de contrôle dans World
+        //w.getPlayer().move(Vec2f(offset,0));
+    }
     
 	return 0;
 }
