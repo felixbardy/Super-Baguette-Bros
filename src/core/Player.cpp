@@ -12,20 +12,21 @@ Player::~Player()
 }
 
 
-void Player::moveLeft(Vec2f& pos)
+void Player::moveLeft()
 {
-    pos.x = pos.x - 0.15;
+    move({-1,0});
 }
 
-void Player::moveRight(Vec2f& pos)
+void Player::moveRight()
 {
-    pos.x = pos.x + 0.15;
+    move(1,0);
 }
 
-void Player::jump(Vec2f& pos)
+void Player::jump()
 {
-    if (!in_air)
-        pos.y = pos.y + 0.15;
+    //if (!in_air)
+    move({0,1});
+    in_air = true;
 }
 
 

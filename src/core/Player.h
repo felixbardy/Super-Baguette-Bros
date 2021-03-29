@@ -28,17 +28,17 @@ public:
     /** \brief Modifie la position du joueur lors d'un deplacement à gauche
      * \param pos La position initiale du joueur
      **/
-    void moveLeft(Vec2f& pos);
+    void moveLeft();
 
     /** \brief Modifie la position du joueur lors d'un deplacement à droite
      * \param pos La position initiale du joueur
      **/
-    void moveRight(Vec2f& pos);
+    void moveRight();
 
     /** \brief Modifie la position du joueur lors d'un saut
      * \param pos La position initiale du joueur
      **/
-    void jump(Vec2f& pos);
+    void jump();
 
     /// Retourne la valeur de jumping
     bool isJumping();
