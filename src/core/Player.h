@@ -12,13 +12,30 @@ private:
     /// Stocke les masques passés comme input
     uint16_t current_input;
 public:
-    Player(/* args */);
+    /// Constructeur par défaut de Player
+    Player();
+    /// Destructeur de Player
     ~Player();
+
+    /** \brief Permet d'activer les inputs voulus du joueur
+     * \param mask Le masque représentant les inputs à activer
+     **/
     void addInput(uint16_t mask);
+
+    /** \brief Permet de désactiver les inputs voulus du joueur
+     * \param mask Le masque représentant les inputs à désactiver
+     **/
     void clearInput(uint16_t mask);
+
+    /** \brief Renvoie vrai si les inputs passés sont activés
+     * \param mask Le masque représentant les inputs à vérifier
+     **/
     bool checkInput(uint16_t mask);
+
+    /// Désactive tous les inputs du joueur
     void clearAllInputs();
 
+    /// Une suite de tests pour s'assurer du bon fonctionnement de Player
     void testRegression();
 
     // Masques d'input
