@@ -41,10 +41,9 @@ int main()
     segments[2].setAnimations(animations, 0);
 
     World w = World(segments, 3);
-    /*
-    ConsoleRenderer cr = ConsoleRenderer(&w, 3, 4, 1);
+    
+    ConsoleRenderer cr = ConsoleRenderer(&w, 60, 20, 1);
     cr.render();
-	std::cout << "consolerenderer fini\n";
-    */
+    
 	return 0;
 }
