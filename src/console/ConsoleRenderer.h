@@ -11,6 +11,7 @@ private:
     World* world;
     int image_height;
     int image_width;
+    int camera_offset;
     float tile_width;
     char** image;
 

@@ -3,7 +3,7 @@
 using namespace std;
 
 ConsoleRenderer::ConsoleRenderer(World* world, int width, int height, float scale)
-: world(world), image_height(height), image_width(width), tile_width(scale)
+: world(world), image_height(height), image_width(width), tile_width(scale), camera_offset(0)
 {
     image = new char*[image_height];
     for (int i = 0; i < image_height; i++)
