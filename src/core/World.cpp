@@ -100,16 +100,20 @@ void World::step()
     {
         // 3.3.1• Si il y a une plateforme, fixer la position du joueur à sa hauteur*
 
-		for (int i = 0; i < *nPlatforms; i++)
-		{
-            if (player.superposition(*platforms[i]))
-		        ;
-	        // 3.3.1• Sinon, décrémenter la position en y
-	        else 
+        bool on_platform = 0;
+
+        for (int i=0;i<3;i++)
+        {
+            for (int j = 0; j < *nPlatforms; j++)
             {
-		        player.fall();
-	        }
+                // 3.3.1• Sinon, décrémenter la position en y
+                //TODO optimiser la fonction avec arret auto quand on_platform=1;
+                if (player.superposition(platforms[i][j])) on_platform=1;
+                    ;
+
+            }
         }
+        if (!on_platform) player.fall();
 	}
 
     player.clearAllInputs();
