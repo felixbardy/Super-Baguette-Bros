@@ -12,12 +12,12 @@ Player::~Player()
 }
 
 
-void Player::moveleft(Vec2f& pos)
+void Player::moveLeft(Vec2f& pos)
 {
     pos.x = pos.x - 0.15;
 }
 
-void Player::moveright(Vec2f& pos)
+void Player::moveRight(Vec2f& pos)
 {
     pos.x = pos.x + 0.15;
 }
