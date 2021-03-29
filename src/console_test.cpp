@@ -54,7 +54,7 @@ int main()
     {
         //1.1• On attend l'input du joueur
         cin >> input;
-        if (input.c_str() == '') input = last_input;
+        if (input.c_str() == "") input = last_input;
 
         //1.2• On traite l'input du joueur
         input_mask = 0;
