@@ -45,9 +45,16 @@ public:
      **/
     void setAnimations(Animation** animations, int size);
     
-
+    /** \brief Renvoie le tableau de plateformes et sa taille en données-résultat
+     * \param platforms pointeur auquel affecter le tableau
+     * \param size entier auquel affecter la taille du tableau
+     **/
     void loadPlatforms(Platform*& platforms, int& size);
 
+    /** \brief Renvoie le tableau de pointeurs d'Animations et sa taille en données-résultat
+     * \param platforms pointeur auquel affecter le tableau
+     * \param size entier auquel affecter la taille du tableau
+     **/
     void loadAnimations(Animation**& animations, int& size);
 };
 
