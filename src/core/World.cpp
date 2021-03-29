@@ -77,3 +77,8 @@ const int* World::getPlatformsSizes() const
 const Player& World::getPlayer() const{
     return player;
 }
+
+void World::setPlayerInputs(uint16_t input_mask)
+{
+    player.addInput(input_mask);
+}

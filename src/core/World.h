@@ -55,6 +55,10 @@ public:
     /// Retourne une référence vers le Player
     const Player& getPlayer() const;
 
+    /// Passe l'input au Player pour l'nterpréter lors de la prochaine boucle
+    void setPlayerInputs(uint16_t input_mask);
+    
+
 };
 
 
