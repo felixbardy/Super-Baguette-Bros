@@ -24,7 +24,7 @@ ConsoleRenderer::~ConsoleRenderer()
 void ConsoleRenderer::render()
 {
     cout << "\x1B[2J\x1B[H";
-    fill('*');
+    fill(' ');
     
     Platform** platforms = world->getPlatforms();
     const int* nPlatforms = world->getPlatformsSizes();
@@ -35,9 +35,23 @@ void ConsoleRenderer::render()
 
     // Si le joueur est trop proche du bord, la caméra se bloque
     // Sinon, elle suit le joueur
-    int camera_offset = max( (image_width/2) * tile_width, min( player.getPosition().x, world_end - (image_width/2) * tile_width));
+    this->camera_offset = max( 0.0f, min( player.getPosition().x - image_width/2, world_end - image_width * tile_width));
 
-	for (int y = 0; y < image_height; y++)
+    for (int i = 0; i < 3; i++)
+    {
+        Platform* current_platforms = platforms[i];
+        const int n = nPlatforms[i];
+        for (int j = 0; j < n; j++)
+        {
+            cout << "Plateforme " << j << " du segment " << i << ": ";
+            const Platform&  current_platform = current_platforms[j];
+            Vec2f position = current_platform.getPosition();
+            float width = current_platform.getWidth();
+            draw_line(position.x, position.y, position.x+width, position.y, '=');
+        }
+    }
+
+	for (int y = image_height-1; y >= 0; y--)
 	{
         for (int x = 0; x < image_width; x++)
         {
