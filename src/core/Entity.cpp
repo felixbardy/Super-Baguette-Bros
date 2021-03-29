@@ -88,3 +88,11 @@ void    Entity::rotate(float angle)
 {
     this->angle += angle;
 }
+
+bool    Entity::superposition(Entity ent2)
+{
+    if ( ((ent2.pos.x + ent2.width) < pos.x) || ((pos.x + width) < ent2.pos.x) || ((ent2.pos.y + ent2.height) < pos.y) || ((pos.y + height) < ent2.pos.y))
+        return false;
+    else
+        return true;
+}
