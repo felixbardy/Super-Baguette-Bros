@@ -1,6 +1,7 @@
 #include "Player.h"
 
 Player::Player(/* args */)
+: current_input(0)
 {
     in_air = false;
     jumping = false;
