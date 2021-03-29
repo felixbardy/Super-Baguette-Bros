@@ -39,12 +39,12 @@ int main(int argc, char ** argv)
                     //* Les keybindings sont à définir ici
                     //TODO: peut-etre mettre des fonctions de mises a jour qui gerent aussi, les deplacements etc...
                     case SDL_SCANCODE_A:
-                    srcrect = { (sprite * 33) + 33, 0, 33, 66 };
+                    srcrect = { ((int)sprite * 33) + 33, 0, 33, 66 };
                     direction = false;	
 			        break;
 
 		            case SDL_SCANCODE_D:
-                    srcrect = { (sprite * 33) + 33, 66, 33, 66 };
+                    srcrect = { ((int)sprite * 33) + 33, 66, 33, 66 };
                     direction = true;
 		            break;
 
