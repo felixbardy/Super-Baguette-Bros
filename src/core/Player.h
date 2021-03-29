@@ -25,24 +25,16 @@ public:
     /// Destructeur de Player
     ~Player();
 
-    /** \brief Modifie la position du joueur lors d'un deplacement à gauche
-     * \param pos La position initiale du joueur
-     **/
+    /// \brief Modifie la position du joueur lors d'un deplacement à gauche
     void moveLeft();
 
-    /** \brief Modifie la position du joueur lors d'un deplacement à droite
-     * \param pos La position initiale du joueur
-     **/
+    /// \brief Modifie la position du joueur lors d'un deplacement à droite
     void moveRight();
 
-    /** \brief Modifie la position du joueur lors d'un saut
-     * \param pos La position initiale du joueur
-     **/
+    /// \brief Modifie la position du joueur lors d'un saut
     void jump();
 
-    /** \brief Modifie la position du joueur lors de sa chute
-     * \param pos La position initiale du joueur
-     **/
+    /// \brief Modifie la position du joueur lors de sa chute
     void fall();
 
     /// Retourne la valeur de jumping
