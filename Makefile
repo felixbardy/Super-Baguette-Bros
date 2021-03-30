@@ -1,4 +1,3 @@
-
 # Système d'exploitation [Linux, MacOS]
 OS = Linux
 
@@ -87,7 +86,7 @@ bin/console_test: $(CORE_OBJECTS) $(CONSOLE_OBJECTS) obj/console_test.o
 
 # Génère l'exécutable de test des sprites
 bin/sprite_test: $(CORE_OBJECTS) $(SDL_OBJECTS) obj/sprite_test.o
-	$(CXX) $(LFLAGS) -g $(CORE_OBJECTS) $(SDL_OBJECTS) obj/sprite_test.o -o bin/sprite_test $(LIB_INCLUDES) $(LIB_LINKS)
+	$(CXX) $(LFLAGS) -g $(CORE_OBJECTS) $(SDL_OBJECTS) obj/sprite_test.o -o bin/sprite_test $(LIB_LINKS)
 
 # * * * * * * * * #
 # *PATTERN RULES* #
