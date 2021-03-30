@@ -2360,7 +2360,7 @@ private:
 
 // Custom macro added for convenience -Bardy Félix
 #ifndef XMLCheckResult
-	#define XMLCheckResult(a_eResult) if (a_eResult != XML_SUCCESS) { printf("Error: %i\n", a_eResult); return a_eResult; }
+	#define XMLCheckResult(a_eResult) if (a_eResult != XML_SUCCESS) { printf("Error: %i\n", a_eResult); exit(a_eResult); }
 #endif
 
 #if defined(_MSC_VER)
