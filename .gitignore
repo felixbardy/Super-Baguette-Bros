@@ -1,8 +1,7 @@
 ###Répertoires à ignorer récursivement###
-bin/**
-doc/**
-obj/**
-
+bin/
+doc/
+obj/
 
 ###Exceptions###
 !.keep

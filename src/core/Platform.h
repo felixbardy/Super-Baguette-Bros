@@ -5,5 +5,17 @@
 
 /// TODO Implémenter Platform après Entity
 
+class Platform : public Entity
+{
+private:
+    /* data */
+public:
+    Platform();
+    Platform(Vec2f pos, float width, float height, float angle);
+    ~Platform();
+    // void testRegression();
+};
+
+
 
 #endif //PLATFORM_H
