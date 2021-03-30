@@ -102,12 +102,11 @@ void World::step()
 
         bool on_platform = 0;
 
-        for (int i=0;i<3;i++)
+        for (int i=0;i<3 & on_platform==0;i++)
         {
             for (int j = 0; j < *nPlatforms; j++)
             {
                 // 3.3.1• Sinon, décrémenter la position en y
-                //TODO optimiser la fonction avec arret auto quand on_platform=1;
                 if (player.superposition(platforms[i][j])) on_platform=1;
 
             }
