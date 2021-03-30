@@ -62,7 +62,7 @@ void World::loadFirstSegments()
 }
 
 
-void World::loadPreviousSegments()
+void World::loadPreviousSegment()
 {
     /// test si le premier segment charger est deja le premier du niveau 
     if(centerLoadedSegment > 1)
@@ -85,20 +85,22 @@ void World::loadPreviousSegments()
 
         */
 
-        ///methode alternative (+ rapide)
+        /// Méthode alternative (+ rapide)
 
+        //! Cette méthode repose sur le fait que toutes les animations
+        //! chargées depuis un segment ont des indexs adjacents dans le vecteur
         int n=0;
-        for (Animation* anim : animations){
-            if((anim->object>platforms[2])&
-            (anim->object<(platforms[2]+(nPlatforms[2]*sizeof(Platform)))))
-            {
+        for (Animation* anim : animations)
+        {
+            if( anim->object == platforms[2] )
+            {// Si l'objet pointé est le premier du tableau d'animations on s'arrête
                 break;
             }
             n++;
         }
-        animations.erase(animations.begin() + n, animations.begin()+n+segments[centerLoadedSegment+1].getNAnimation());
+        animations.erase(animations.begin() + n, animations.begin() + n + segments[centerLoadedSegment+1].getNAnimation());
 
-        ///changement de place des references
+        /// Décalage des données
 
         platforms[2]=platforms[1];
         platforms[1]=platforms[0];
@@ -107,7 +109,7 @@ void World::loadPreviousSegments()
         nPlatforms[1]=nPlatforms[0];
         segments[centerLoadedSegment-2].loadPlatforms(platforms[0],nPlatforms[0]);
 
-
+        //TODO Charger les nouvelles animations
 
 
     }
@@ -140,16 +142,17 @@ void World::loadNextSegment()
 
         ///methode alternative (+ rapide)
 
+        //! Cette méthode repose sur le fait que toutes les animations
+        //! chargées depuis un segment ont des indexs adjacents dans le vecteur
         int n=0;
         for (Animation* anim : animations){
-            if((anim->object>platforms[0])&
-            (anim->object<(platforms[0]+(nPlatforms[0]*sizeof(Platform)))))
-            {
+            if(anim->object == platforms[0])
+            {// Si l'objet pointé est le premier du tableau d'animations on s'arrête
                 break;
             }
             n++;
         }
-        animations.erase(animations.begin() + n, animations.begin()+n+segments[centerLoadedSegment-1].getNAnimation());
+        animations.erase(animations.begin() + n, animations.begin() + n + segments[centerLoadedSegment-1].getNAnimation());
 
         ///changement de place des references
 

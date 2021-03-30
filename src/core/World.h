@@ -35,10 +35,10 @@ private:
     /// Charge les 3 premiers segments
     void loadFirstSegments();
 
-    /// decale les segment charge vers de debut du niveau (si un segment plus proche du debut existe) 
-    void loadPreviousSegments();
+    /// Décale les segments chargés vers le début du niveau (si un segment plus proche du debut existe) 
+    void loadPreviousSegment();
 
-    /// decale les segment charge vers la fin du niveau (si un segment plus loin du debut existe) 
+    /// Décale les segments chargés vers la fin du niveau (si un segment plus loin du debut existe) 
     void loadNextSegment();
 
 public:
