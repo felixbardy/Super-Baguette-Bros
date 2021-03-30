@@ -54,3 +54,8 @@ void Segment::loadAnimations(Animation**& animations, int& size)
     animations = this->animations;
     size = nAnimations;
 }
+
+int Segment::getNAnimation()
+{
+    return nAnimations;
+}

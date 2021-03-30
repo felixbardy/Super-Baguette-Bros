@@ -56,6 +56,9 @@ public:
      * \param size entier auquel affecter la taille du tableau
      **/
     void loadAnimations(Animation**& animations, int& size);
+
+    /// retourne le nombre d'animations dans le segent
+    int getNAnimation();
 };
 
 #endif //SEGMENT_H

@@ -62,19 +62,108 @@ void World::loadFirstSegments()
 }
 
 
-// TODO faire la fonction loadPreviousSegments
 void World::loadPreviousSegments()
 {
-    // TODO test si le premier segment charger est deja le premier du niveau 
-    if(centerLoadedSegment >=1){cout<<"REUSSIT\n";}
+    /// test si le premier segment charger est deja le premier du niveau 
+    if(centerLoadedSegment > 1)
+    {
+
+        ///unload des animations
+
+        /// methode inneficace (peut etre utile pour debug la version + rapide)
+        /*
+
+        int n=0;
+        for (Animation* anim : animations){
+            if((anim->object>platforms[2])&
+            (anim->object<(platforms[2]+(nPlatforms[2]*sizeof(Platform)))))
+            {
+                animations.erase(animations.begin() + n);
+            }
+            n++;
+        }
+
+        */
+
+        ///methode alternative (+ rapide)
+
+        int n=0;
+        for (Animation* anim : animations){
+            if((anim->object>platforms[2])&
+            (anim->object<(platforms[2]+(nPlatforms[2]*sizeof(Platform)))))
+            {
+                break;
+            }
+            n++;
+        }
+        animations.erase(animations.begin() + n, animations.begin()+n+segments[centerLoadedSegment+1].getNAnimation());
+
+        ///changement de place des references
+
+        platforms[2]=platforms[1];
+        platforms[1]=platforms[0];
+        
+        nPlatforms[2]=nPlatforms[1];
+        nPlatforms[1]=nPlatforms[0];
+        segments[centerLoadedSegment-2].loadPlatforms(platforms[0],nPlatforms[0]);
+
+
+
+
+    }
 
 }
 
-// TODO faire la fonction loadNextSegments
+/// quasiment identique a loadPreviousSegments
 void World::loadNextSegment()
 {
-    // TODO test si le dernier segment charger est deja le dernier du niveau
-    if(centerLoadedSegment >=(nSegments-1)){cout<<"REUSSIT\n";}
+    /// test si le dernier segment charger est deja le dernier du niveau
+    if(centerLoadedSegment < nSegments-2)
+    {
+
+        ///unload des animations
+
+        /// methode inneficace (peut etre utile pour debug la version + rapide)
+        /*
+
+        int n=0;
+        for (Animation* anim : animations){
+            if((anim->object>platforms[0])&
+            (anim->object<(platforms[0]+(nPlatforms[0]*sizeof(Platform)))))
+            {
+                animations.erase(animations.begin() + n);
+            }
+            n++;
+        }
+
+        */
+
+        ///methode alternative (+ rapide)
+
+        int n=0;
+        for (Animation* anim : animations){
+            if((anim->object>platforms[0])&
+            (anim->object<(platforms[0]+(nPlatforms[0]*sizeof(Platform)))))
+            {
+                break;
+            }
+            n++;
+        }
+        animations.erase(animations.begin() + n, animations.begin()+n+segments[centerLoadedSegment-1].getNAnimation());
+
+        ///changement de place des references
+
+        platforms[0]=platforms[1];
+        platforms[1]=platforms[2];
+        
+        nPlatforms[0]=nPlatforms[1];
+        nPlatforms[1]=nPlatforms[2];
+        segments[centerLoadedSegment+2].loadPlatforms(platforms[2],nPlatforms[2]);
+
+
+
+
+    }
 }
 
 
