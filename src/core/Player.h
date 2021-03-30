@@ -18,6 +18,9 @@ private:
     /// Stocke les masques passés comme input
     uint16_t current_input;
 
+    /// Indique le nombre de vies du joueur
+    int lives;
+
 public:
 
     /// Constructeur par défaut de Player
@@ -72,6 +75,15 @@ public:
     static const uint16_t LEFT     = 1 << 3;
     static const uint16_t RIGHT    = 1 << 4;
     // Il reste de la place pour encore 11 inputs (ex: attaque)
+
+    /// Enlève une vie au joueur
+    void removeLife();
+
+    /// Ajoute une vie au joueur
+    void addLife();
+
+    /// Renvoie le nombre des vie du joueur
+    int checkLife();
 
 };
 

@@ -1,4 +1,3 @@
-
 # Système d'exploitation [Linux, MacOS]
 OS = Linux
 
@@ -24,13 +23,13 @@ ifeq ($(OS), MacOS)
 		-lSDL2_ttf
 else
 	ifeq ($(OS), Linux)
-		LIB_INCLUDES = 
+		LIB_INCLUDES = \
+			-I/usr/include/SDL2 \
 
 		LIB_LINKS = \
 			-lSDL2 \
 			-lSDL2_ttf \
-			-lSDL2_image \
-			-lSDL2_mixer
+			-lSDL2_image
 	endif
 endif
 
@@ -87,7 +86,7 @@ bin/console_test: $(CORE_OBJECTS) $(CONSOLE_OBJECTS) obj/console_test.o
 
 # Génère l'exécutable de test des sprites
 bin/sprite_test: $(CORE_OBJECTS) $(SDL_OBJECTS) obj/sprite_test.o
-	$(CXX) $(LFLAGS) $(LIB_LINKS) -g $(CORE_OBJECTS) $(SDL_OBJECTS) obj/sprite_test.o -o bin/sprite_test
+	$(CXX) $(LFLAGS) -g $(CORE_OBJECTS) $(SDL_OBJECTS) obj/sprite_test.o -o bin/sprite_test $(LIB_LINKS)
 
 # * * * * * * * * #
 # *PATTERN RULES* #

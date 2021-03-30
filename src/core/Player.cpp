@@ -5,6 +5,7 @@ Player::Player(/* args */)
 {
     in_air = false;
     jumping = false;
+    lives = 3;
 }
 
 Player::~Player()
@@ -68,4 +69,19 @@ void Player::clearAllInputs()
 void Player::testRegression()
 {
     //TODO Implémenter le test de régression de Player
+}
+
+void Player::removeLife()
+{
+    lives--;
+}
+
+void Player::addLife()
+{
+    lives++;
+}
+
+int Player::checkLife()
+{
+    return lives;
 }
