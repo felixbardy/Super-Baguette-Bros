@@ -3,12 +3,13 @@
 
 World::World()
 : platforms(nullptr), segments(nullptr),
- nPlatforms(nullptr), last_loaded_segment(-1)
+ nPlatforms(nullptr), centerLoadedSegment(1)
 {
+    
 }
 
 World::World(Segment* segments, int nSegments)
-: segments(segments), nSegments(nSegments)
+: segments(segments), nSegments(nSegments), centerLoadedSegment(1)
 {
     platforms = new Platform*[3];
     nPlatforms = new int[3];
@@ -57,7 +58,27 @@ void World::loadFirstSegments()
             animations.push_back(new_animations[j]);
     }
     
+    
 }
+
+
+// TODO faire la fonction loadPreviousSegments
+void World::loadPreviousSegments()
+{
+    // TODO test si le premier segment charger est deja le premier du niveau 
+    if(centerLoadedSegment >=1){cout<<"REUSSIT\n";}
+
+}
+
+// TODO faire la fonction loadNextSegments
+void World::loadNextSegment()
+{
+    // TODO test si le dernier segment charger est deja le dernier du niveau
+    if(centerLoadedSegment >=(nSegments-1)){cout<<"REUSSIT\n";}
+}
+
+
+
 
 void World::testRegression()
 {
@@ -102,7 +123,7 @@ void World::step()
 
         bool on_platform = 0;
 
-        for (int i=0;i<3 & on_platform==0;i++)
+        for (int i=0; (i<3) & (on_platform==0) ;i++)
         {
             for (int j = 0; j < *nPlatforms; j++)
             {

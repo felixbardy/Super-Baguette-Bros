@@ -13,11 +13,14 @@ private:
     /// Le joueur
     Player player;
 
+    /// tableau de segments precharge dans la ram
     Segment* segments;
     int nSegments;
-    int last_loaded_segment;
 
-    //? IDEE: -platforms est un tableau 2D stockant les n segments chargés (à priori 3)
+    /// repere dans les segments actuellement charger
+    int centerLoadedSegment;
+
+    //? IDEE: -platforms est un tableau 2D stockant les plateformes des n segments chargés (à priori 3)
     //?       -pour savoir si une animation doit être supprimée, il suffit de regarder
     //?        si l'objet pointé est dans la plage d'adresse du tableau de plateformes remplacé
     Platform** platforms;
@@ -31,9 +34,12 @@ private:
 
     /// Charge les 3 premiers segments
     void loadFirstSegments();
-    //TODO Implémenter des méthodes pour le chargement des segments
-    //? Soit des méthodes du genre 'chargerSuivant()' et 'chargerPrecedant()'
-    //? Soit 'chargerSegment(int from, int to)' (from: index dans 'segments', to: index dans 'platforms')
+
+    /// decale les segment charge vers de debut du niveau (si un segment plus proche du debut existe) 
+    void loadPreviousSegments();
+
+    /// decale les segment charge vers la fin du niveau (si un segment plus loin du debut existe) 
+    void loadNextSegment();
 
 public:
     //TODO Définir un constructeur par flux de fichier pour pouvoir charger un niveau 
