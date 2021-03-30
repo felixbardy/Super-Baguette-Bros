@@ -7,6 +7,13 @@ World::World()
 {
 }
 
+World::World(std::string filename)
+: platforms(nullptr), segments(nullptr),
+ nPlatforms(nullptr), last_loaded_segment(-1)
+{
+    
+}
+
 World::World(Segment* segments, int nSegments)
 : segments(segments), nSegments(nSegments)
 {

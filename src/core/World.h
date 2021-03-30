@@ -1,6 +1,7 @@
 #ifndef WORLD_H
 #define WORLD_H
 
+#include <string>
 #include <vector>
 
 #include "Player.h"
@@ -39,6 +40,8 @@ public:
     //TODO Définir un constructeur par flux de fichier pour pouvoir charger un niveau 
     /// Constructeur par défaut (objet inutilisable)
     World();
+    /// Constructeur par fichier
+    World(std::string filename);
     /// Constructeur par données 
     World(Segment* segments, int nSegments);
     ~World();
