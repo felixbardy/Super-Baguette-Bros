@@ -1,5 +1,8 @@
 #include "World.h"
+
 #include <assert.h>
+
+#include "extern/tinyxml2.h"
 
 World::World()
 : platforms(nullptr), segments(nullptr),
