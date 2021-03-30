@@ -91,8 +91,10 @@ void    Entity::rotate(float angle)
 
 bool    Entity::superposition(Entity ent2)
 {
-    if ( ((ent2.pos.x + ent2.width) < pos.x) || ((pos.x + width) < ent2.pos.x) || ((ent2.pos.y + ent2.height) < pos.y) || ((pos.y + height) < ent2.pos.y))
-        return false;
-    else
-        return true;
+    return !( // Vrai sauf si:
+           ((ent2.pos.x + ent2.width) < pos.x)  // ent2 est complètement à gauche de this
+        || ((pos.x + width) < ent2.pos.x)       // this est complètement à gauche de ent2
+        || ((ent2.pos.y + ent2.height) < pos.y) // ent2 est complètement en dessous de this
+        || ((pos.y + height) < ent2.pos.y)      // this est complètement en dessous de ent2
+    );
 }
