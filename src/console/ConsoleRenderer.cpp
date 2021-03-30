@@ -37,6 +37,13 @@ void ConsoleRenderer::render()
     // Sinon, elle suit le joueur
     this->camera_offset = max( 0.0f, min( player.getPosition().x - image_width/2, world_end - image_width * tile_width));
 
+    //Dessin du joueur
+    Vec2f position = player.getPosition();
+    //FIXME Solution approximative pour afficher le joueur
+    draw_line(position.x, position.y, position.x, position.y+3, 'H');
+
+
+    //Dessin des plateformes
     for (int i = 0; i < 3; i++)
     {
         Platform* current_platforms = platforms[i];

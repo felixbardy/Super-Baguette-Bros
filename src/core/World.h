@@ -55,6 +55,13 @@ public:
     /// Retourne une référence vers le Player
     const Player& getPlayer() const;
 
+    /** \brief Passe l'input au Player pour l'nterpréter lors de la prochaine boucle
+     * \param input_mask Le masque représentant les inputs à activer
+     **/
+    void setPlayerInputs(uint16_t input_mask);
+
+    /// Exécute une frame dans le monde
+    void step();
 };
 
 

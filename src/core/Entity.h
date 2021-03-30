@@ -67,6 +67,9 @@ public:
     void    move(Vec2f offset);
     /// \brief Ajoute l'angle donné (en radians) à l'inclinaison de l'objet 
     void    rotate(float angle);
+
+    /// \brief Vérifie s'il y a une superposition entre deux entités
+    bool    superposition(Entity ent2);
 };
 
 

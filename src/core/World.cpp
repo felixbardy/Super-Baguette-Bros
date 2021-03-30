@@ -1,4 +1,5 @@
 #include "World.h"
+#include <assert.h>
 
 World::World()
 : platforms(nullptr), segments(nullptr),
@@ -76,4 +77,43 @@ const int* World::getPlatformsSizes() const
 
 const Player& World::getPlayer() const{
     return player;
+}
+
+void World::setPlayerInputs(uint16_t input_mask)
+{
+    player.addInput(input_mask);
+}
+
+void World::step()
+{
+    // 3• On applique l'update physique:
+
+    // 3.1• Si le joueur va à droite/gauche: incrémenter/décrémenter la position en x
+    if (player.checkInput(Player::RIGHT)) player.moveRight();
+
+    if (player.checkInput(Player::LEFT)) player.moveLeft();
+
+    // 3.2• Si le joueur saute, on met in_air à true et on incrémente la position en y
+    if (player.checkInput(Player::JUMP)) player.jump();
+    // 3.3• Si le joueur ne saute pas, vérifier la présence d'une plateforme en dessous:
+    else
+    {
+        // 3.3.1• Si il y a une plateforme, fixer la position du joueur à sa hauteur*
+
+        bool on_platform = 0;
+
+        for (int i=0;i<3;i++)
+        {
+            for (int j = 0; j < *nPlatforms; j++)
+            {
+                // 3.3.1• Sinon, décrémenter la position en y
+                //TODO optimiser la fonction avec arret auto quand on_platform=1;
+                if (player.superposition(platforms[i][j])) on_platform=1;
+
+            }
+        }
+        if (!on_platform) player.fall();
+	}
+
+    player.clearAllInputs();
 }
