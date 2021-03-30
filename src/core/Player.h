@@ -3,8 +3,6 @@
 
 #include "Entity.h"
 
-/// TODO Fixer clairement à quoi ressemblent les contrôles du joueur avant de l'implémenter
-
 class Player : public Entity
 {
 private:
@@ -82,7 +80,7 @@ public:
     /// Ajoute une vie au joueur
     void addLife();
 
-    /// Renvoie le nombre des vie du joueur
+    /// Renvoie le nombre de vies du joueur
     int checkLife();
 
 };
