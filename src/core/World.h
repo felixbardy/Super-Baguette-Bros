@@ -13,17 +13,19 @@ private:
     /// Le joueur
     Player player;
 
-    /// tableau de segments precharge dans la ram
+    /// Tableau de segments prechargés
     Segment* segments;
+    
+    /// Taille du tableau de segments
     int nSegments;
 
-    /// repere dans les segments actuellement charger
+    /// Index du segment central parmis ceux actuellement chargés
     int centerLoadedSegment;
 
-    //? IDEE: -platforms est un tableau 2D stockant les plateformes des n segments chargés (à priori 3)
-    //?       -pour savoir si une animation doit être supprimée, il suffit de regarder
-    //?        si l'objet pointé est dans la plage d'adresse du tableau de plateformes remplacé
+    /// Tableau 2D mettant en relation les plateformes des segments avec World
     Platform** platforms;
+
+    /// Tableau stockant les tailles des tableaux de segments
     int* nPlatforms;
 
     //? Ajouter une liste pour d'autres entités
