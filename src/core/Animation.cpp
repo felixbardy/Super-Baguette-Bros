@@ -2,7 +2,7 @@
 
 LinearAnimation createLinearAnimation(
     Entity* object, Vec2f start_point, Vec2f movement,
-    float speed, bool from_segment = false
+    float speed, bool from_segment
 )
 {
     LinearAnimation anim;
@@ -18,7 +18,7 @@ LinearAnimation createLinearAnimation(
 
 RotationAnimation createRotationAnimation(
     Entity* object, float start_angle, float rotation_speed,
-    bool from_segment = false
+    bool from_segment
 )
 {
     RotationAnimation anim;
@@ -33,7 +33,7 @@ RotationAnimation createRotationAnimation(
 
 BouncyAnimation createBouncyAnimation(
     Entity* object, float rebound_height, float rebound_width,
-    int max_bounces, bool from_segment = false
+    int max_bounces, bool from_segment
 )
 {
     BouncyAnimation anim;
@@ -50,7 +50,7 @@ BouncyAnimation createBouncyAnimation(
 
 PhysicAnimation createPhysicAnimation(
     Entity* object, Vec2f acceleration, float bounciness,
-    bool from_segment = false
+    bool from_segment
 )
 {
     PhysicAnimation anim;
