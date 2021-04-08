@@ -8,6 +8,7 @@ LinearAnimation createLinearAnimation(
     LinearAnimation anim;
     anim.object = object;
     anim.type   = LINEAR;
+    anim.from_segment = from_segment;
 
     anim.start_point    = start_point;
     anim.movement       = movement;
@@ -24,6 +25,7 @@ RotationAnimation createRotationAnimation(
     RotationAnimation anim;
     anim.object = object;
     anim.type   = ROTATION;
+    anim.from_segment = from_segment;
 
     anim.start_angle    = start_angle;
     anim.rotation_speed = rotation_speed;
@@ -39,6 +41,7 @@ BouncyAnimation createBouncyAnimation(
     BouncyAnimation anim;
     anim.object = object;
     anim.type   = BOUNCY;
+    anim.from_segment = from_segment;
 
     anim.height         = rebound_height;
     anim.width          = rebound_width;
@@ -56,6 +59,7 @@ PhysicAnimation createPhysicAnimation(
     PhysicAnimation anim;
     anim.object = object;
     anim.type   = PHYSIC;
+    anim.from_segment = from_segment;
 
     anim.acc        = acceleration;
     anim.bounciness = bounciness;
