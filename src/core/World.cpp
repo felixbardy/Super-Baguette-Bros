@@ -36,7 +36,7 @@ World::World(std::string filename)
 
     // Récupérer la liste des segments
     XMLElement* segment_list = root->FirstChildElement("Segments");
-    // S'il est inexistant, go back to Orang-outan...
+    // Si c'est nullptr, je meurs...
     if (segment_list == nullptr) exit(XML_ERROR_PARSING_ELEMENT);
 
     // Récupérer le nombre total de segments
@@ -50,6 +50,7 @@ World::World(std::string filename)
     // Récupération du 1er segment
     XMLElement * segment = segment_list->FirstChildElement("Segment");
     Platform * segment_platforms = nullptr;
+    Animation** segment_animations = nullptr;
 
     for (int segment_index = 0; segment_index < nSegments; segment_index++)
     {   
@@ -96,22 +97,109 @@ World::World(std::string filename)
             result = platform->QueryIntAttribute("angle", &angle);
             XMLCheckResult(result);
 
+            // 1.5.2• Affecter la nouvelle plateforme
             segment_platforms[platform_index] = Platform(Vec2f(x,y),width,height,angle);
 
-            // 1.5.2• Récupérer la prochaine plateforme (= nullptr à la fin)
+            // 1.5.3• Récupérer la prochaine plateforme (= nullptr à la fin)
             platform = platform->NextSiblingElement("Platform");
         }
         }
 
         //* 2• Récupérer les animations
         //TODO Récupérer les animations
-        //? Cache misère en attendant l'implémentation
-        Animation** segment_animations = new Animation*[0];
+
+        // 2.1• Récupérer l'élément Animations
+        XMLElement * animations_list = segment->FirstChildElement("Animations");
+        // Mon imagination pour ces blaques est limitée...
+        if (animations_list == nullptr) exit(XML_ERROR_PARSING_ELEMENT);
+        
+        // 2.2• Récupérer la taille du tableau
+        result = animations_list->QueryIntAttribute("count", &count); XMLCheckResult(result);
+        int nAnimations = count;
+
+        std::cout<<"Segment n°"<<segment_index<<std::endl;
+        std::cout<<"Nombre d'animations: "<<nAnimations<<std::endl;
+
+        // Si le tableau est vide 
+        if (nAnimations == 0) // Allouer un tableau vide
+            segment_animations = new Animation*[0];
+        else // Sinon...
+        {
+        // 2.3• Allouer le tableau
+        segment_animations = new Animation*[nAnimations];
+
+        // 2.4• Récupérer la 1ère Animation
+        XMLElement * animation = animations_list->FirstChildElement("Animation");
+
+        // 2.5• Traiter toute la liste d'Animations
+        for (int animation_index = 0; animation_index < nAnimations; animation_index++)
+        {
+            std::cout<<"Animation n°"<<animation_index<<std::endl;
+
+            // 2.5.1• Récupérer le type de l'Animation
+            int temp_int;
+            AnimationType type;
+            
+            result = animation->QueryIntAttribute("type", &temp_int);
+            XMLCheckResult(result);
+            type = (AnimationType) temp_int;
+
+            // 2.5.2• Allouer et affecter l'animation en fonction de son type
+            if (type == LINEAR)
+            {
+                float start_x, start_y, mov_x, mov_y, speed;
+                int target;
+
+                // target
+                result = animation->QueryIntAttribute("target", &target);
+                XMLCheckResult(result);
+
+                // start.x
+                result = animation->QueryFloatAttribute("start_x", &start_x);
+                XMLCheckResult(result);
+
+                // start.y
+                result = animation->QueryFloatAttribute("start_y", &start_y);
+                XMLCheckResult(result);
+
+                // mov.x
+                result = animation->QueryFloatAttribute("mov_x", &mov_x);
+                XMLCheckResult(result);
+
+                // mov.y
+                result = animation->QueryFloatAttribute("mov_y", &mov_y);
+                XMLCheckResult(result);
+
+                // speed
+                result = animation->QueryFloatAttribute("speed", &speed);
+                XMLCheckResult(result);
+
+                LinearAnimation temp_anim = createLinearAnimation(
+                    segment_platforms + target,
+                    Vec2f(start_x, start_y),
+                    Vec2f(mov_x, mov_y),
+                    speed,
+                    true
+                );
+
+                segment_animations[animation_index] = new LinearAnimation(temp_anim);
+            }
+            else
+            {
+                cout << "Le chargement du type d'animation " << type << " n'a pas été implémenté!";
+                exit(1);
+            }
+
+            // 2.5.3• Récupérer la prochaine animation (= nullptr à la fin)
+            animation = animation->NextSiblingElement("Animation");
+        }
+
+        }
 
         //* 3• Affecter les données au segment
         this->segments[segment_index].setPlatforms(segment_platforms,nPlatforms);
         //FIXME Remplacer 0 par le nombre d'animations
-        this->segments[segment_index].setAnimations(segment_animations,0);
+        this->segments[segment_index].setAnimations(segment_animations,nAnimations);
 
         //* 3• Récupérer le segment suivant
         segment = segment->NextSiblingElement("Segment");
