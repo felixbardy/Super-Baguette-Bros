@@ -16,9 +16,11 @@ enum AnimationType
 
 struct Animation
 {
-    ///? Peut être remplacé par un ID
+    // Pointeur vers 'objet affecté par l'animation
     Entity* object;
+    // Type de l'animation
     AnimationType type;
+    // Indique si l'Animation doit être détruite par le Segment
     bool from_segment;
 };
 
