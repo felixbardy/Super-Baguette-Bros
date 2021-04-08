@@ -20,6 +20,13 @@ Segment::~Segment()
         platforms = nullptr;
     }
     if (animations != nullptr){
+        for (int i = 0; i < nAnimations; i++)
+        {   
+            // On libère chaque animation
+            //? Normalement, aucune animation n'a été libérée
+            delete animations[i];
+        }
+        // Puis on libère le tableau
         delete[] animations;
         animations = nullptr;
     }
