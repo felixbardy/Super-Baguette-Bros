@@ -8,44 +8,117 @@
 
 int main()
 {
-    // Création d'une liste simple de 3 segments
-    // On fait des segments de 30 de longueur
-    Segment* segments = new Segment[3];
+    World world("data/levels/example_level.xml");
 
-    // On créé 3 plateformes par segment
-    Platform* platforms = new Platform[3];
-    platforms[0] = Platform({0,0}, 10, 1, 0);
-    platforms[1] = Platform({10,3}, 10, 1, 0);
-    platforms[2] = Platform({20,6}, 10, 1, 0);
+    bool quit = false;
+    SDL_Event event;
 
-    // On ne fait pas d'animations pour l'instant
-    Animation** animations = new Animation*[0];
+    SDL_Init(SDL_INIT_VIDEO);
+    IMG_Init(IMG_INIT_PNG);
 
-    segments[0].setPlatforms(platforms, 3);
-    segments[0].setAnimations(animations, 0);
+    SDL_Window* window = SDL_CreateWindow(
+        "Super baguette bros",
+        SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
+        640, 480,
+        0
+    );
 
-    // Et on s'attaque au 2ème segment
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
 
-    platforms = new Platform[3];
-    platforms[0] = Platform({30,9}, 10, 1, 0);
-    platforms[1] = Platform({40,6}, 10, 1, 0);
-    platforms[2] = Platform({50,3}, 10, 1, 0);
-    animations = new Animation*[0];
+    SDL_Surface* sprite_sheet = IMG_Load("data/sprite-sheet.png");
 
-    segments[1].setPlatforms(platforms, 3);
-    segments[1].setAnimations(animations, 0);
+    SDL_Texture* sprite_sheet_tex = SDL_CreateTextureFromSurface(renderer, sprite_sheet);
+    //TODO Définir une/des classe pour gérer le spritesheet (nécéssite une discussion)
 
-    // Segment 3
-    platforms = new Platform[3];
-    platforms[0] = Platform({60,2}, 10, 1, 0);
-    platforms[1] = Platform({70,5}, 10, 1, 0);
-    platforms[2] = Platform({80,8}, 10, 1, 0);
-    animations = new Animation*[0];
-    
-    segments[2].setPlatforms(platforms, 3);
-    segments[2].setAnimations(animations, 0);
+    SDL_SetRenderDrawColor(renderer, 168, 230, 255, 255);
+    SDL_RenderClear(renderer);
 
-    World w = World(segments, 3);
+    Uint32 ticks, game_ticks;
+    Uint32 previous_game_tick = -1;
+
+    uint16_t player_input = 0;
+
+    while (!quit)
+    {
+        ticks = SDL_GetTicks();
+        game_ticks = ticks/150;
+
+        //1• Récupérer les inputs et les mettre à jour le buffer d'inputs du joueur
+        //Boucle d'évènements
+        while (SDL_PollEvent(&event) != NULL)
+        {
+            if (event.type == SDL_QUIT) quit = true;
+            else 
+            if (event.type == SDL_KEYDOWN)
+            {   //Si une touche est enfoncée
+                switch (event.key.keysym.scancode)
+                {
+                    case SDL_SCANCODE_SPACE:
+                        player_input |= Player::JUMP;
+                        break;
+                        
+                    case SDL_SCANCODE_W:
+                        player_input |= Player::JUMP;
+                        player_input |= Player::UP;
+                        break;
+                    
+                    case SDL_SCANCODE_S:
+                        player_input |= Player::DOWN;
+                        break;
+                    
+                    case SDL_SCANCODE_A:
+                        player_input |= Player::LEFT;
+                        break;
+                    
+                    case SDL_SCANCODE_D:
+                        player_input |= Player::RIGHT;
+                        break;
+                    
+                    default:
+                        break;
+                }
+            }
+        }
+
+        if (game_ticks == previous_game_tick)
+        {
+            //Ne rien faire
+        }
+        else //2• Mettre à jour l'image
+        {
+            //2.1• Passer les inputs à world
+            world.setPlayerInputs(player_input);
+            player_input = 0;
+
+            //2.2• Mettre à jour world
+            world.step();
+
+            //2.3• Affichage
+            
+            //2.3.1• Nettoyer le buffer
+            SDL_RenderClear(renderer);
+
+            //2.3.2• Afficher tous les objets
+            //TODO Afficher tous les objets avec des RenderCpy utilisant les bons Rect
+
+            //2.3.3• Afficher le buffer à l'écran
+            SDL_RenderPresent(renderer);
+        }
+    }
+
+    // À la sortie du programme:
+
+    //Détruire la texture
+    SDL_DestroyTexture(sprite_sheet_tex);
+    //Détruire la surface
+    SDL_FreeSurface(sprite_sheet);
+    //Détruire le renderer
+    SDL_DestroyRenderer(renderer);
+    //Détruire la fenêtre
+    SDL_DestroyWindow(window);
+    //Fermer SDL et SDL_Image
+    IMG_Quit();
+    SDL_Quit();
 
     return 0;
 }
