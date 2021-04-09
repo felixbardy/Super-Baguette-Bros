@@ -10,11 +10,6 @@
 class Entity
 {
 private:
-    ///? On pourrait ajouter un membre statique (commun à tous les instances de Entity)
-    ///? et un constant pour avoir des IDs d'objet comme ceci:
-    ///? static int last_ID;
-    ///? const int ID;
-
     ///Position de l'objet
     Vec2f pos;
     ///Vitesse de l'objet (si appliquable)

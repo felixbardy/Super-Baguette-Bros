@@ -7,10 +7,6 @@
 class Segment
 {
 private:
-    //? Ajouter un ID de Segment répercuté sur les Entités / Animations
-    //? permettrait de savoir quoi supprimer pour décharger le Segment
-    //! Pas besoin d'ID pour l'instant 
-    //? static int ID;
     /// Position de debut du segment
     int debut;
     /// Position de fin du segment
@@ -56,6 +52,9 @@ public:
      * \param size entier auquel affecter la taille du tableau
      **/
     void loadAnimations(Animation**& animations, int& size);
+
+    /// Retourne la taille du tableau d'Animations du Segment
+    int getNAnimation();
 };
 
 #endif //SEGMENT_H
