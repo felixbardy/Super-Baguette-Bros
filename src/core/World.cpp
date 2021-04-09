@@ -13,7 +13,7 @@ World::World()
 
 World::World(std::string filename)
 : platforms(nullptr), segments(nullptr),
- nPlatforms(nullptr), last_loaded_segment(-1)
+ nPlatforms(nullptr)
 {
     //FIXME Les erreurs qui stoppent l'exécution dans XMLCheckResult ou dans exit(...)
     //      devraient être remplacées par une non-confirmation de l'initialistion de World
