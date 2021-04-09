@@ -118,9 +118,6 @@ World::World(std::string filename)
         result = animations_list->QueryIntAttribute("count", &count); XMLCheckResult(result);
         int nAnimations = count;
 
-        std::cout<<"Segment n°"<<segment_index<<std::endl;
-        std::cout<<"Nombre d'animations: "<<nAnimations<<std::endl;
-
         // Si le tableau est vide 
         if (nAnimations == 0) // Allouer un tableau vide
             segment_animations = new Animation*[0];
@@ -135,7 +132,6 @@ World::World(std::string filename)
         // 2.5• Traiter toute la liste d'Animations
         for (int animation_index = 0; animation_index < nAnimations; animation_index++)
         {
-            std::cout<<"Animation n°"<<animation_index<<std::endl;
 
             // 2.5.1• Récupérer le type de l'Animation
             int temp_int;
