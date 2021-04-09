@@ -1,0 +1,34 @@
+<Root>
+    <Player x="1" y="3"></Player>
+    <Segments count="3">
+        <Segment>
+            <Platforms count="3">
+                <Platform x="0"  y="0" width="10" height="1" angle="0"></Platform>
+                <Platform x="10" y="3" width="10" height="1" angle="0"></Platform>
+                <Platform x="20" y="6" width="10" height="1" angle="0"></Platform>
+            </Platforms>
+            <Animations count="0">
+            </Animations>
+        </Segment>
+        <Segment>
+            <Platforms count="3">
+                <Platform x="30" y="9" width="10" height="1" angle="0"></Platform>
+                <Platform x="40" y="3" width="10" height="1" angle="0"></Platform>
+                <Platform x="50" y="5" width="10" height="1" angle="0"></Platform>
+            </Platforms>
+            <Animations count="0">
+            </Animations>
+        </Segment>
+        <Segment>
+            <Platforms count="3">
+                <Platform x="60" y="8"  width="10" height="1" angle="0"></Platform>
+                <Platform x="70" y="14" width="10" height="1" angle="0"></Platform>
+                <Platform x="60" y="11" width="5"  height="1" angle="0"></Platform>
+            </Platforms>
+            <Animations count="2">
+                <Animation type="0" target="2" start_x="50" start_y="11" mov_x="20" mov_y="0" speed="2"></Animation>
+                <Animation type="0" target="0" start_x="60" start_y="14" mov_x="0" mov_y="15" speed="1"></Animation>
+            </Animations>
+        </Segment>
+    </Segments>
+</Root>
