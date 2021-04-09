@@ -58,7 +58,7 @@ SDL_SOURCES = src/sdl/Renderer.cpp
 SDL_OBJECTS = obj/sdl/Renderer.o
 
 
-.PHONY: default all doc clean pentaclean core_test console_test sprite_test
+.PHONY: default all doc clean pentaclean core_test console_test sprite_test sdl_test
 
 default: all
 
@@ -78,6 +78,9 @@ console_test: bin/console_test
 #Règle de comfort
 sprite_test: bin/sprite_test
 
+#Règle de comfort
+sdl_test: bin/sdl_test
+
 # Génère l'exécutable de test du module 'core'
 bin/core_test: $(CORE_OBJECTS) obj/core_test.o
 	$(CXX) $(LFLAGS) -g $(CORE_OBJECTS) obj/core_test.o -o bin/core_test
@@ -89,6 +92,10 @@ bin/console_test: $(CORE_OBJECTS) $(CONSOLE_OBJECTS) obj/console_test.o
 # Génère l'exécutable de test des sprites
 bin/sprite_test: $(CORE_OBJECTS) $(SDL_OBJECTS) obj/sprite_test.o
 	$(CXX) $(LFLAGS) -g $(CORE_OBJECTS) $(SDL_OBJECTS) obj/sprite_test.o -o bin/sprite_test $(LIB_LINKS)
+
+# Génère l'exécutable de test du module 'sdl'
+bin/sdl_test: $(CORE_OBJECTS) $(SDL_OBJECTS) obj/sdl_test.o
+	$(CXX) $(LFLAGS) -g $(CORE_OBJECTS) $(SDL_OBJECTS) obj/sdl_test.o -o bin/sdl_test $(LIB_LINKS)
 
 # * * * * * * * * #
 # *PATTERN RULES* #
