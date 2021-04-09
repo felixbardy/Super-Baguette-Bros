@@ -21,7 +21,7 @@
 - Mourir ❌
 - Gagner ❌
 
-### Avoir des plateformes:
+### Avoir des plateformes: ✅
 
 - Chargées et déchargées au fur et à mesure du niveau ✅
 - Empêchant le joueur de tomber ✅
@@ -29,11 +29,19 @@
 - Pouvant être animées (déplacement linéaire) 🕑 70% \
 (Toute la structure d'animation est prête, il manque le traitement)
 
-### Avoir un affichage graphique: ❌
+### Avoir un affichage graphique: 🕑 15%
 
 - En temps réel ❌
 - Utilisant des sprites 🕑 50% \
 (Victoria a créé des sprites pour le jeu)
+
+### Pouvoir charger un niveau depuis un fichier: ✅
+
+- Chargement du Joueur ✅
+
+- Chargement des segments contenant:
+    - Les plateformes ✅
+    - Les animations 🕑 70%
 
 ## Autres objectifs moins urgents
 
