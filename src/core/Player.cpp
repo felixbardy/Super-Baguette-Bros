@@ -6,8 +6,8 @@ Player::Player()
     in_air = false;
     jumping = false;
     lives = 3;
-    setWidth(33);
-    setHeight(66);
+    setWidth(1);
+    setHeight(2);
 }
 
 Player::~Player()
