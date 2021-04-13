@@ -93,7 +93,7 @@ Vec2f GraphicRenderer::worldToScreen(Vec2f pos) const
     SDL_GetWindowSize(window, NULL, &win_h);
     return Vec2f(
         pos.x * unit_size - camera_offset,
-        win_h - pos.y * unit_size
+        win_h - (pos.y+2) * unit_size
     );
 }
 
