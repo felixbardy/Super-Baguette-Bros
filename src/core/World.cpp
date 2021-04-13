@@ -362,6 +362,8 @@ void World::loadNextSegment()
         //! chargées depuis un segment ont des indexs adjacents dans le vecteur
         int n=0;
         for (Animation* anim : animations){
+            //! Ce code est faux et dangereux
+            //FIXME La première animation n'est pas DU TOUT obligée de pointer vers la 1ère plateforme
             if(anim->object == platforms[0])
             {// Si l'objet pointé est le premier du tableau d'animations on s'arrête
                 break;
@@ -429,18 +431,23 @@ void World::step()
     {
         // 3.3.1• Si il y a une plateforme, fixer la position du joueur à sa hauteur*
 
-        bool on_platform = 0;
+        bool on_platform = false;
 
-        for (int i=0; (i<3) & (on_platform==0) ;i++)
+        for (int i=0; i < 3; i++)
         {
             for (int j = 0; j < *nPlatforms; j++)
             {
                 // 3.3.1• Sinon, décrémenter la position en y
-                if (player.superposition(platforms[i][j])) on_platform=1;
-
+                //FIXME Faire la détéction de collisions entre 'sous le joueur' et 'sur la plateforme' à la place
+                if (player.superposition(platforms[i][j])) {
+                    on_platform = true;
+                    break;
+                }
             }
+            if (on_platform) break;
         }
         if (!on_platform) player.fall();
+        else player.setInAir(false);
 	}
 
     player.clearAllInputs();
