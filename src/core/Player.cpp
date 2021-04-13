@@ -1,11 +1,13 @@
 #include "Player.h"
 
-Player::Player(/* args */)
+Player::Player()
 : current_input(0)
 {
     in_air = false;
     jumping = false;
     lives = 3;
+    setWidth(33);
+    setHeight(66);
 }
 
 Player::~Player()
