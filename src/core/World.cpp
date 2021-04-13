@@ -244,7 +244,7 @@ World::~World()
         delete [] segments;
 
     if (platforms != nullptr)
-        delete platforms;
+        delete [] platforms;
 
     if (nPlatforms != nullptr)
         delete [] nPlatforms;
