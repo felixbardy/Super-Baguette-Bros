@@ -52,35 +52,37 @@ int main()
         // SDL_PumpEvents() http://wiki.libsdl.org/SDL_PumpEvents
         // et const Uint8* SDL_GetKeyboardState(int* numkeys) http://wiki.libsdl.org/SDL_GetKeyboardState
         //Boucle d'évènements
+
+        SDL_PumpEvents();
+        const Uint8* keypressed = SDL_GetKeyboardState(NULL);
+
+        if (keypressed[SDL_SCANCODE_SPACE])
+            player_input |= Player::JUMP;
+        
+        if (keypressed[SDL_SCANCODE_W]) {
+            player_input |= Player::JUMP;
+            player_input |= Player::UP;
+        }
+
+        if (keypressed[SDL_SCANCODE_S])
+            player_input |= Player::DOWN;
+        
+        if (keypressed[SDL_SCANCODE_A])
+            player_input |= Player::LEFT;
+        
+        if (keypressed[SDL_SCANCODE_D])
+            player_input |= Player::RIGHT;
+
         while (SDL_PollEvent(&event) != NULL)
         {
             if (event.type == SDL_QUIT) quit = true;
             else 
             if (event.type == SDL_KEYDOWN)
             {   //Si une touche est enfoncée
+                //! Utiliser pour des contrôles occasionels comme mettre en pause ou quitter 
                 switch (event.key.keysym.scancode)
                 {
-                    case SDL_SCANCODE_SPACE:
-                        player_input |= Player::JUMP;
-                        break;
-                        
-                    case SDL_SCANCODE_W:
-                        player_input |= Player::JUMP;
-                        player_input |= Player::UP;
-                        break;
-                    
-                    case SDL_SCANCODE_S:
-                        player_input |= Player::DOWN;
-                        break;
-                    
-                    case SDL_SCANCODE_A:
-                        player_input |= Player::LEFT;
-                        break;
-                    
-                    case SDL_SCANCODE_D:
-                        player_input |= Player::RIGHT;
-                        break;
-                    
+                    //Insérer
                     default:
                         break;
                 }
