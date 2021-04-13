@@ -51,7 +51,7 @@ void GraphicRenderer::renderWorld(Uint32 game_ticks, uint16_t player_inputs)
 
     Platform** all_platforms = world->getPlatforms();
     const int* platform_sizes = world->getPlatformsSizes();
-    SDL_Rect srcrect_platform = {0, 132, 33, 33};
+    SDL_Rect srcrect_platform = {0, 66, 33, 33};
 
     for (int i = 0; i < 3; i++)
     {   // Dessiner chaque liste de plateformes
@@ -108,18 +108,18 @@ void GraphicRenderer::drawPlayer(Uint32 game_ticks, uint16_t player_inputs)
     const Player& player = world->getPlayer();
 
     Vec2f screen_pos = worldToScreen(player.getPosition());
-    SDL_Rect srcrect_player = {0, 66, 33, 66}; //Valeur de base
+    SDL_Rect srcrect_player = {0, 0, 33, 66}; //Valeur de base
     //cout<<"("<<screen_pos.x<<", "<<screen_pos.y<<")"<<endl;
 
     SDL_RendererFlip flip = SDL_FLIP_NONE;
 
     if (player_inputs & (Player::LEFT | Player::RIGHT))
-        srcrect_player = {33 + (33*int(game_ticks/3)) % 99, 66, 33, 66};
+        srcrect_player = {33 + (33*int(game_ticks/3)) % 99, 0, 33, 66};
     
     if ((player_inputs & Player::JUMP) || player.isInAir())
-        srcrect_player = {132, 66, 33, 66};
+        srcrect_player = {132, 0, 33, 66};
     else if (player_inputs & Player::DOWN)
-        srcrect_player = {165, 66, 33, 66};
+        srcrect_player = {165, 0, 33, 66};
     
     if (player.getDirection() == Player::LEFT) flip = SDL_FLIP_HORIZONTAL;
 
