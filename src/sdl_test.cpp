@@ -47,6 +47,10 @@ int main()
         game_ticks = ticks/17;
 
         //1• Récupérer les inputs et les mettre à jour le buffer d'inputs du joueur
+        //FIXME Cette méthode n'est pas optimal pour du jeu en temps réel
+        //TODO Convertir la lecture des inputs pour utiliser:
+        // SDL_PumpEvents() http://wiki.libsdl.org/SDL_PumpEvents
+        // et const Uint8* SDL_GetKeyboardState(int* numkeys) http://wiki.libsdl.org/SDL_GetKeyboardState
         //Boucle d'évènements
         while (SDL_PollEvent(&event) != NULL)
         {
