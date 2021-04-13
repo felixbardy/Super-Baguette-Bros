@@ -41,12 +41,12 @@ void Player::fall()
 	move({0, -0.2});
 }
 
-bool Player::isJumping()
+bool Player::isJumping() const
 {
     return jumping;
 }
 
-bool Player::isInAir()
+bool Player::isInAir() const
 {
     return in_air;
 }

@@ -39,10 +39,10 @@ public:
     void fall();
 
     /// Retourne la valeur de jumping
-    bool isJumping();
+    bool isJumping() const;
 
     /// Retourne la valeur de in_air
-    bool isInAir();
+    bool isInAir() const;
 
     /** \brief Permet d'activer les inputs voulus du joueur
      * \param mask Le masque représentant les inputs à activer
