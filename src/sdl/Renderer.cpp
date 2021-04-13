@@ -111,8 +111,8 @@ void GraphicRenderer::drawPlayer(Uint32 game_ticks, uint16_t player_inputs)
     SDL_Rect srcrect_player = {0, 66, 33, 66}; //Valeur de base
     //cout<<"("<<screen_pos.x<<", "<<screen_pos.y<<")"<<endl;
 
-    //TODO Définir un booléen 'flip' pour retourner le sprite si le joueur est orienté à gauche
-    //TODO Définir un champ pour la direction du joueur dans Player pour pouvoir faire ça
+    SDL_RendererFlip flip = SDL_FLIP_NONE;
+
     if (player_inputs & (Player::LEFT | Player::RIGHT))
         srcrect_player = {33 + (33*int(game_ticks/3)) % 99, 66, 33, 66};
     
@@ -120,7 +120,9 @@ void GraphicRenderer::drawPlayer(Uint32 game_ticks, uint16_t player_inputs)
         srcrect_player = {132, 66, 33, 66};
     else if (player_inputs & Player::DOWN)
         srcrect_player = {165, 66, 33, 66};
+    
+    if (player.getDirection() == Player::LEFT) flip = SDL_FLIP_HORIZONTAL;
 
     SDL_Rect dstrect = {(int)screen_pos.x,(int)screen_pos.y, unit_size, 2*unit_size};
-    SDL_RenderCopy(renderer, sprite_sheet, &srcrect_player, &dstrect);
+    SDL_RenderCopyEx(renderer, sprite_sheet, &srcrect_player, &dstrect, 0, NULL, flip);
 }
