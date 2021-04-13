@@ -1,4 +1,8 @@
 #include "Entity.h"
+#include <iostream>
+#include <cassert>
+
+using namespace std;
 
 Entity::Entity() :
 pos({0,0}),
@@ -19,9 +23,54 @@ Entity::~Entity()
 {
 }
 
-void Entity::testRegression()
+void    Entity::testRegression()
 {
     //TODO Implémenter le test régression de Entity
+    cout << "Entity: constructeur par valeurs... ";
+    
+    Entity EntityTest({10.0,10.0}, 10.0, 10.0, 10.0);
+    assert(EntityTest.pos.x == 10.0 && EntityTest.pos.y == 10.0);
+    assert(EntityTest.width == 10.0);
+    assert(EntityTest.height == 10.0);
+    assert(EntityTest.angle == 10.0);
+
+    cout << "OK" << endl;
+
+
+    cout << "Entity: constructeur par défaut... ";
+
+    Entity EntityTest2;
+    Vec2f vecTest = EntityTest2.getPosition();
+    assert(vecTest.x == 0 && vecTest.y == 0);
+    assert(EntityTest2.getWidth() == 0);
+    assert(EntityTest2.getHeight() == 0);
+    assert(EntityTest2.getAngle() == 0);
+
+    cout << "OK" << endl;
+
+    cout << "Entity: velocity et angle...";
+
+    EntityTest.setVelocity({10,10});
+    vecTest = EntityTest.getVelocity();
+    assert(vecTest.x == 10 && vecTest.y == 10);
+    EntityTest.applyForce({5,5});
+    assert(EntityTest.vel.x == 15 && EntityTest.vel.y == 15);
+    EntityTest.setAngle(15);
+    assert(EntityTest.getAngle() == 15);
+
+    cout << "OK" << endl;
+
+
+    cout << "Entity: move et superposition... ";
+
+    assert(!(EntityTest.superposition(EntityTest2))); //lorsqu'il n'y a pas de superpositon
+    EntityTest2.move({10,10});
+    assert(EntityTest2.pos.x == 10 && EntityTest2.pos.y == 10);
+    assert(EntityTest.superposition(EntityTest2)); //lorsqu'il y a superposition
+
+    cout << "OK" << endl;
+
+
 }
 
 Vec2f   Entity::getPosition() const
