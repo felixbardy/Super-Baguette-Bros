@@ -20,7 +20,7 @@ int main()
     SDL_Window* window = SDL_CreateWindow(
         "Super baguette bros",
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-        640, 480,
+        1920, 1080,
         0
     );
 
