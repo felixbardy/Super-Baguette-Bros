@@ -1,4 +1,8 @@
 #include "Player.h"
+#include <cassert>
+#include <iostream>
+
+using namespace std;
 
 Player::Player(/* args */)
 : current_input(0)
@@ -68,7 +72,71 @@ void Player::clearAllInputs()
 
 void Player::testRegression()
 {
-    //TODO Implémenter le test de régression de Player
+    //TODO Mettre a jour lorsque player est finalisé
+
+    cout << "Player: constructeur par défaut... ";
+
+    Player p;
+    assert(!p.isInAir());
+    assert(!p.isJumping());
+    assert(p.lives == 3);
+    assert(p.current_input == 0);
+
+    cout << "OK" << endl;
+
+
+    cout << "Player: lives...";
+
+    p.removeLife();
+    assert(p.checkLife() == 2);
+    p.addLife();
+    assert(p.lives == 3);
+
+    cout << "OK" << endl;
+
+
+    cout << "Player: air et jump... ";
+
+    p.jump();
+    assert(p.in_air);
+
+    cout << "OK" << endl;
+
+
+    cout << "Player: inputs... ";
+
+    assert(!p.checkInput(JUMP));
+    p.addInput(JUMP);
+    assert(p.checkInput(JUMP));
+    p.clearInput(JUMP);
+    assert(!p.checkInput(JUMP));
+
+    assert(!p.checkInput(DOWN));
+    p.addInput(DOWN);
+    assert(p.checkInput(DOWN));
+
+    assert(!p.checkInput(UP));
+    p.addInput(UP);
+    assert(p.checkInput(UP));
+
+    assert(!p.checkInput(LEFT));
+    p.addInput(LEFT);
+    assert(p.checkInput(LEFT));
+
+    assert(!p.checkInput(RIGHT));
+    p.addInput(RIGHT);
+    assert(p.checkInput(RIGHT));
+    
+    p.clearAllInputs();
+    assert(!p.checkInput(DOWN));
+    assert(!p.checkInput(UP));
+    assert(!p.checkInput(LEFT));
+    assert(!p.checkInput(RIGHT));
+
+    cout << "OK" << endl;
+
+
+
 }
 
 void Player::removeLife()
