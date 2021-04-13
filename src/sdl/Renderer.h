@@ -23,12 +23,14 @@ private:
 
     // bool is_in_bounds(const Platform& platform);
 
-    Vec2f worldToScreen(Vec2f pos);
+    Vec2f worldToScreen(Vec2f pos) const;
+
+    void drawPlayer(Uint32 game_ticks, uint16_t player_inputs);
 public:
     GraphicRenderer(World* world, SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* sprite_sheet);
     ~GraphicRenderer();
 
-    void renderWorld();
+    void renderWorld(Uint32 game_ticks, uint16_t player_input);
 };
 
 
