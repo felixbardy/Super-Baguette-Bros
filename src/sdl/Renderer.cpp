@@ -114,9 +114,9 @@ void GraphicRenderer::drawPlayer(Uint32 game_ticks, uint16_t player_inputs)
     //TODO Définir un booléen 'flip' pour retourner le sprite si le joueur est orienté à gauche
     //TODO Définir un champ pour la direction du joueur dans Player pour pouvoir faire ça
     if (player_inputs & (Player::LEFT | Player::RIGHT))
-        srcrect_player = {33 + (33*game_ticks) % 99, 66, 33, 66};
+        srcrect_player = {33 + (33*int(game_ticks/3)) % 99, 66, 33, 66};
     
-    if (player_inputs & Player::JUMP)
+    if ((player_inputs & Player::JUMP) || player.isInAir())
         srcrect_player = {132, 66, 33, 66};
     else if (player_inputs & Player::DOWN)
         srcrect_player = {165, 66, 33, 66};
