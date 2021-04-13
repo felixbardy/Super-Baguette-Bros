@@ -5,6 +5,7 @@
 #include <SDL2/SDL_ttf.h>
 
 #include "core/World.h"
+#include "sdl/Renderer.h"
 
 int main()
 {
@@ -19,7 +20,7 @@ int main()
     SDL_Window* window = SDL_CreateWindow(
         "Super baguette bros",
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-        640, 480,
+        1920, 1080,
         0
     );
 
@@ -33,6 +34,8 @@ int main()
     SDL_SetRenderDrawColor(renderer, 168, 230, 255, 255);
     SDL_RenderClear(renderer);
 
+    GraphicRenderer game_renderer(&world, window, renderer, sprite_sheet_tex);
+
     Uint32 ticks, game_ticks;
     Uint32 previous_game_tick = -1;
 
@@ -41,9 +44,13 @@ int main()
     while (!quit)
     {
         ticks = SDL_GetTicks();
-        game_ticks = ticks/150;
+        game_ticks = ticks/17;
 
         //1• Récupérer les inputs et les mettre à jour le buffer d'inputs du joueur
+        //FIXME Cette méthode n'est pas optimal pour du jeu en temps réel
+        //TODO Convertir la lecture des inputs pour utiliser:
+        // SDL_PumpEvents() http://wiki.libsdl.org/SDL_PumpEvents
+        // et const Uint8* SDL_GetKeyboardState(int* numkeys) http://wiki.libsdl.org/SDL_GetKeyboardState
         //Boucle d'évènements
         while (SDL_PollEvent(&event) != NULL)
         {
@@ -88,22 +95,17 @@ int main()
         {
             //2.1• Passer les inputs à world
             world.setPlayerInputs(player_input);
-            player_input = 0;
 
             //2.2• Mettre à jour world
             world.step();
 
             //2.3• Affichage
-            
-            //2.3.1• Nettoyer le buffer
-            SDL_RenderClear(renderer);
+            game_renderer.renderWorld(game_ticks, player_input);
 
-            //2.3.2• Afficher tous les objets
-            //TODO Afficher tous les objets avec des RenderCpy utilisant les bons Rect
-
-            //2.3.3• Afficher le buffer à l'écran
-            SDL_RenderPresent(renderer);
+            player_input = 0;
         }
+
+        previous_game_tick = game_ticks;
     }
 
     // À la sortie du programme:

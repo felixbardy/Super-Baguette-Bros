@@ -4,12 +4,14 @@
 
 using namespace std;
 
-Player::Player(/* args */)
+Player::Player()
 : current_input(0)
 {
     in_air = false;
     jumping = false;
     lives = 3;
+    setWidth(1);
+    setHeight(2);
 }
 
 Player::~Player()
@@ -19,24 +21,24 @@ Player::~Player()
 
 void Player::moveLeft()
 {
-    move({-1,0});
+    move({-0.2,0});
 }
 
 void Player::moveRight()
 {
-    move({1,0});
+    move({0.2,0});
 }
 
 void Player::jump()
 {
     //if (!in_air)
-    move({0,1});
+    move({0,0.2});
     in_air = true;
 }
 
 void Player::fall()
 {
-	move({0, -0.5});
+	move({0, -0.1});
 }
 
 bool Player::isJumping()
@@ -60,7 +62,7 @@ void Player::clearInput(uint16_t mask)
     current_input &= ~mask;
 }
 
-bool Player::checkInput(uint16_t mask)
+bool Player::checkInput(uint16_t mask) const
 {
     return (bool)(current_input & mask);
 }
@@ -70,7 +72,7 @@ void Player::clearAllInputs()
     current_input = 0;
 }
 
-void Player::testRegression()
+void Player::testRegression() const
 {
     //TODO Mettre a jour lorsque player est finalisé
 
@@ -149,7 +151,7 @@ void Player::addLife()
     lives++;
 }
 
-int Player::checkLife()
+int Player::checkLife() const
 {
     return lives;
 }
