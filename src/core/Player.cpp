@@ -51,6 +51,11 @@ bool Player::isInAir() const
     return in_air;
 }
 
+void Player::setInAir(bool in_air)
+{
+    this->in_air = in_air;
+}
+
 
 void Player::addInput(uint16_t mask)
 {

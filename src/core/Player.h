@@ -44,6 +44,8 @@ public:
     /// Retourne la valeur de in_air
     bool isInAir() const;
 
+    void setInAir(bool in_air);
+
     /** \brief Permet d'activer les inputs voulus du joueur
      * \param mask Le masque représentant les inputs à activer
      **/
