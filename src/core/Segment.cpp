@@ -1,4 +1,8 @@
 #include "Segment.h"
+#include <cassert>
+#include <iostream>
+
+using namespace std;
 
 Segment::Segment() 
 : platforms(nullptr), nPlatforms(0),
@@ -35,7 +39,63 @@ Segment::~Segment()
 
 void Segment::testRegression()
 {
-    //TODO Implémenter le test de régression de Segment
+    //TODO Optimiser?
+
+    cout << "Segment: constructeur par défaut... ";
+
+    Segment S;
+    assert(S.platforms == nullptr);
+    assert(S.nPlatforms == 0);
+    assert(S.animations == nullptr);
+    assert(S.nAnimations == 0);
+
+    cout << "OK" << endl;
+
+
+    cout << "Segment: Constructuer... ";
+
+    Platform * Plats = nullptr;
+    Plats = new Platform[5];
+    Animation** A = nullptr;
+    A = new Animation*[5];
+    Segment S2(Plats, 5, A, 5);
+    assert(S2.nPlatforms == 5);
+    assert(S2.getNAnimation() == 5);
+    assert(S2.platforms != nullptr);
+    assert(S2.animations != nullptr);
+
+    cout << "OK" << endl;
+
+
+    cout << "Segment: Set... ";
+
+    Platform * Plats2 = nullptr;
+    Plats2 = new Platform[10];
+    Animation** A2 = nullptr;
+    A2 = new Animation*[10];
+    S2.setPlatforms(Plats2, 10);
+    assert(S2.platforms != nullptr);
+    assert(S2.nPlatforms == 10);
+    S2.setAnimations(A2, 10);
+    assert(S2.animations != nullptr);
+    assert(S2.nAnimations == 10);
+
+    cout << "OK" << endl;
+
+    cout << "Segment: load... ";
+
+    Platform * Plat3 = nullptr;
+    int p3;
+    Animation** A3;
+    int a3;
+    S2.loadPlatforms(Plat3, p3);
+    assert(Plat3 != nullptr);
+    assert(p3 == S2.nPlatforms);
+    S2.loadAnimations(A3, a3);
+    assert(A3 != nullptr);
+    assert(a3 == S2.nAnimations);
+
+    cout << "OK" << endl;
 }
 
 void Segment::setPlatforms(Platform* platforms, int size)
