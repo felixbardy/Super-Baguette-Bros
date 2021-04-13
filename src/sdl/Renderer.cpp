@@ -67,7 +67,7 @@ void GraphicRenderer::renderWorld(Uint32 game_ticks, uint16_t player_inputs)
             for (Vec2f pos = position; pos.x < position.x + length; pos += {1,0})
             {
                 Vec2f screen_pos = worldToScreen(pos);
-                dstrect = {(int)screen_pos.x, (int)screen_pos.y, unit_size, unit_size};
+                dstrect = {(int)screen_pos.x, (int)screen_pos.y + unit_size, unit_size, unit_size};
                 SDL_RenderCopy(renderer, sprite_sheet, &srcrect_platform, &dstrect);
             }
         }
