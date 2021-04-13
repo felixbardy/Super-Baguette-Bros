@@ -17,24 +17,24 @@ Player::~Player()
 
 void Player::moveLeft()
 {
-    move({-1,0});
+    move({-0.2,0});
 }
 
 void Player::moveRight()
 {
-    move({1,0});
+    move({0.2,0});
 }
 
 void Player::jump()
 {
     //if (!in_air)
-    move({0,1});
+    move({0,0.2});
     in_air = true;
 }
 
 void Player::fall()
 {
-	move({0, -0.5});
+	move({0, -0.1});
 }
 
 bool Player::isJumping()
