@@ -424,6 +424,11 @@ void World::step()
 
     if (player.checkInput(Player::LEFT)) player.moveLeft();
 
+    if (player.checkInput(Player::DOWN) && !player.isInAir())
+        player.setHeight(1);
+    else
+        player.setHeight(2);
+
     // 3.2• Si le joueur saute, on met in_air à true et on incrémente la position en y
     if (player.checkInput(Player::JUMP)) player.jump();
     // 3.3• Si le joueur ne saute pas, vérifier la présence d'une plateforme en dessous:
