@@ -38,7 +38,7 @@ void Player::jump()
 
 void Player::fall()
 {
-	move({0, -0.1});
+	move({0, -0.2});
 }
 
 bool Player::isJumping()
