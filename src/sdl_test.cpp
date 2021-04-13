@@ -5,6 +5,7 @@
 #include <SDL2/SDL_ttf.h>
 
 #include "core/World.h"
+#include "sdl/Renderer.h"
 
 int main()
 {
@@ -32,6 +33,8 @@ int main()
 
     SDL_SetRenderDrawColor(renderer, 168, 230, 255, 255);
     SDL_RenderClear(renderer);
+
+    GraphicRenderer game_renderer(&world, window, renderer, sprite_sheet_tex);
 
     Uint32 ticks, game_ticks;
     Uint32 previous_game_tick = -1;
@@ -94,15 +97,7 @@ int main()
             world.step();
 
             //2.3• Affichage
-            
-            //2.3.1• Nettoyer le buffer
-            SDL_RenderClear(renderer);
-
-            //2.3.2• Afficher tous les objets
-            //TODO Afficher tous les objets avec des RenderCpy utilisant les bons Rect
-
-            //2.3.3• Afficher le buffer à l'écran
-            SDL_RenderPresent(renderer);
+            game_renderer.renderWorld();
         }
     }
 
