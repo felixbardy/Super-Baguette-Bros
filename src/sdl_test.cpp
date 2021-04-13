@@ -44,7 +44,7 @@ int main()
     while (!quit)
     {
         ticks = SDL_GetTicks();
-        game_ticks = ticks/150;
+        game_ticks = ticks/17;
 
         //1• Récupérer les inputs et les mettre à jour le buffer d'inputs du joueur
         //Boucle d'évènements
@@ -100,6 +100,8 @@ int main()
 
             player_input = 0;
         }
+
+        previous_game_tick = game_ticks;
     }
 
     // À la sortie du programme:
