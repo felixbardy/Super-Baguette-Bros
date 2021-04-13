@@ -1,8 +1,12 @@
 #include "Renderer.h"
 
 GraphicRenderer::GraphicRenderer(World* world, SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* sprite_sheet)
-: world(world), window(window), renderer(renderer), sprite_sheet(sprite_sheet), unit_size(33)
-{}
+: world(world), window(window), renderer(renderer), sprite_sheet(sprite_sheet)
+{
+    int win_h;
+    SDL_GetWindowSize(window, NULL, &win_h);
+    this->unit_size = win_h / 20;
+}
 
 GraphicRenderer::~GraphicRenderer()
 {}
