@@ -57,13 +57,13 @@ public:
     /** \brief Renvoie vrai si les inputs passés sont activés
      * \param mask Le masque représentant les inputs à vérifier
      **/
-    bool checkInput(uint16_t mask);
+    bool checkInput(uint16_t mask) const;
 
     /// Désactive tous les inputs du joueur
     void clearAllInputs();
 
     /// Une suite de tests pour s'assurer du bon fonctionnement de Player
-    void testRegression();
+    void testRegression() const;
 
     // Masques d'input
     // Masques
@@ -81,7 +81,7 @@ public:
     void addLife();
 
     /// Renvoie le nombre de vies du joueur
-    int checkLife();
+    int checkLife() const;
 
 };
 

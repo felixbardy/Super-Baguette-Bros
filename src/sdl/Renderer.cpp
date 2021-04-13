@@ -83,7 +83,11 @@ void GraphicRenderer::renderWorld(Uint32 game_ticks, uint16_t player_inputs)
     SDL_RenderPresent(renderer);
 }
 
-Vec2f GraphicRenderer::worldToScreen(Vec2f pos)
+/**
+ * \brief Renvoie les coordonnées sur la fenêtre correspondant aux coordonnées du monde données
+ * \param pos les coordonées à convertir
+ **/
+Vec2f GraphicRenderer::worldToScreen(Vec2f pos) const
 {
     int win_h;
     SDL_GetWindowSize(window, NULL, &win_h);

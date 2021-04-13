@@ -58,7 +58,7 @@ void Player::clearInput(uint16_t mask)
     current_input &= ~mask;
 }
 
-bool Player::checkInput(uint16_t mask)
+bool Player::checkInput(uint16_t mask) const
 {
     return (bool)(current_input & mask);
 }
@@ -68,7 +68,7 @@ void Player::clearAllInputs()
     current_input = 0;
 }
 
-void Player::testRegression()
+void Player::testRegression() const
 {
     //TODO Implémenter le test de régression de Player
 }
@@ -83,7 +83,7 @@ void Player::addLife()
     lives++;
 }
 
-int Player::checkLife()
+int Player::checkLife() const
 {
     return lives;
 }
