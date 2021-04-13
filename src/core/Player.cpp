@@ -5,11 +5,9 @@
 using namespace std;
 
 Player::Player()
-: current_input(0)
+: current_input(0), in_air(false), jumping(false),
+  lives(3), direction(RIGHT)
 {
-    in_air = false;
-    jumping = false;
-    lives = 3;
     setWidth(1);
     setHeight(2);
 }
@@ -22,11 +20,13 @@ Player::~Player()
 void Player::moveLeft()
 {
     move({-0.2,0});
+    direction = LEFT;
 }
 
 void Player::moveRight()
 {
     move({0.2,0});
+    direction = RIGHT;
 }
 
 void Player::jump()
@@ -159,4 +159,9 @@ void Player::addLife()
 int Player::checkLife() const
 {
     return lives;
+}
+
+uint16_t Player::getDirection() const
+{
+    return direction;
 }

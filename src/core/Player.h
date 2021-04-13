@@ -16,6 +16,9 @@ private:
     /// Stocke les masques passés comme input
     uint16_t current_input;
 
+    /// La direction actuelle du joueur
+    uint16_t direction;
+
     /// Indique le nombre de vies du joueur
     int lives;
 
@@ -84,6 +87,9 @@ public:
 
     /// Renvoie le nombre de vies du joueur
     int checkLife() const;
+
+    /// Renvoie la direction actuelle du joueur
+    uint16_t getDirection() const;
 
 };
 
