@@ -91,13 +91,14 @@ int main()
         {
             //2.1• Passer les inputs à world
             world.setPlayerInputs(player_input);
-            player_input = 0;
 
             //2.2• Mettre à jour world
             world.step();
 
             //2.3• Affichage
-            game_renderer.renderWorld();
+            game_renderer.renderWorld(game_ticks, player_input);
+
+            player_input = 0;
         }
     }
 

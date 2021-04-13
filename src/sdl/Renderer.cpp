@@ -11,7 +11,7 @@ GraphicRenderer::GraphicRenderer(World* world, SDL_Window* window, SDL_Renderer*
 GraphicRenderer::~GraphicRenderer()
 {}
 
-void GraphicRenderer::renderWorld()
+void GraphicRenderer::renderWorld(Uint32 game_ticks, uint16_t player_inputs)
 {
     //1• Récupérer des données
 
