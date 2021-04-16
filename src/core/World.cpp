@@ -439,7 +439,7 @@ void World::step()
 
         for (int i=0; i < 3; i++)
         {
-            for (int j = 0; j < *nPlatforms; j++)
+            for (int j = 0; j < nPlatforms[i]; j++)
             {
                 // 3.3.1• Sinon, décrémenter la position en y
                 //FIXME Faire la détéction de collisions entre 'sous le joueur' et 'sur la plateforme' à la place
