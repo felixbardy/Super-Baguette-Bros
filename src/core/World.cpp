@@ -383,8 +383,14 @@ const int* World::getPlatformsSizes() const
 }
 
 
-const Player& World::getPlayer() const{
+const Player& World::getPlayer() const
+{
     return player;
+}
+
+int World::getWorldEnd() const
+{
+    return (nSegments) * segmentWidth;
 }
 
 void World::setPlayerInputs(uint16_t input_mask)

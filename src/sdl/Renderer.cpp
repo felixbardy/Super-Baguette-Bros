@@ -28,7 +28,7 @@ void GraphicRenderer::renderWorld(Uint32 game_ticks, uint16_t player_inputs)
 
     //FIXME Récupérer la vraie fin du niveau
     // La fin du niveau
-    int world_end = 10000;
+    int world_end = world->getWorldEnd();
 
     // Le décalage de la caméra dans le monde
     this->camera_offset = 
@@ -36,7 +36,7 @@ void GraphicRenderer::renderWorld(Uint32 game_ticks, uint16_t player_inputs)
         0, // Minimum 0
         min(
             int(player.getPosition().x*unit_size - (win_w - unit_size) / 2), // Normalement: centré sur le joueur
-            world_end - win_w // Maximum: la fin du niveau moins un écran
+            world_end*unit_size - win_w // Maximum: la fin du niveau moins un écran
             )
     );
 
