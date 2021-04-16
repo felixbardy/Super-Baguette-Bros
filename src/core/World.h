@@ -23,6 +23,9 @@ private:
     /// Index du segment central parmis ceux actuellement chargés
     int centerLoadedSegment;
 
+    /// Largeur d'un segment
+    float segmentWidth;
+
     /// Tableau 2D mettant en relation les plateformes des segments avec World
     Platform** platforms;
 

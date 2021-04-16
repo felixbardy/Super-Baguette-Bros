@@ -35,6 +35,14 @@ World::World(std::string filename)
     // Si c'est nullptr, y'a de quoi avoir peur...
     if (root == nullptr) exit(XML_ERROR_FILE_READ_ERROR);
 
+    // Récupérer la largeur de segment
+    XMLElement* segment_width_elt = root->FirstChildElement("SegmentWidth");
+    // Si c'est nullptr, j'ai peur...
+    if (segment_width_elt == nullptr) exit(XML_ERROR_PARSING_ELEMENT);
+    
+
+    result = segment_width_elt->QueryFloatText(&(this->segmentWidth)); XMLCheckResult(result);
+
     // Récupérer la liste des segments
     XMLElement* segment_list = root->FirstChildElement("Segments");
     // Si c'est nullptr, je meurs...
@@ -56,6 +64,10 @@ World::World(std::string filename)
     for (int segment_index = 0; segment_index < nSegments; segment_index++)
     {   
         //* RÉCUPÉRATION DE SEGMENT *//
+        //* 0• Récupérer l'offset du segment
+
+        float offset = segment_index * segmentWidth;
+
         //* 1• Récupérer les platformes
         // 1.1• Récupérer l'élément Platforms
         XMLElement * platform_list = segment->FirstChildElement("Platforms");
@@ -99,7 +111,7 @@ World::World(std::string filename)
             XMLCheckResult(result);
 
             // 1.5.2• Affecter la nouvelle plateforme
-            segment_platforms[platform_index] = Platform(Vec2f(x,y),width,height,angle);
+            segment_platforms[platform_index] = Platform(Vec2f(x + offset, y),width,height,angle);
 
             // 1.5.3• Récupérer la prochaine plateforme (= nullptr à la fin)
             platform = platform->NextSiblingElement("Platform");
@@ -173,7 +185,7 @@ World::World(std::string filename)
 
                 LinearAnimation temp_anim = createLinearAnimation(
                     segment_platforms + target,
-                    Vec2f(start_x, start_y),
+                    Vec2f(start_x + offset, start_y),
                     Vec2f(mov_x, mov_y),
                     speed,
                     &segments[segment_index]
