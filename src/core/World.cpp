@@ -290,7 +290,7 @@ void World::loadFirstSegments()
     
 }
 
-
+/// Charge le segment précédent et décale les autres dans la structure de donnée
 void World::loadPreviousSegment()
 {
     /// Déchargement des animations
@@ -310,45 +310,26 @@ void World::loadPreviousSegment()
         }
     }
 
-        */
+    /// Décalage des données
+    platforms[2]=platforms[1];
+    nPlatforms[2]=nPlatforms[1];
+    
+    platforms[1]=platforms[0];
+    nPlatforms[1]=nPlatforms[0];
 
-        /// Méthode alternative (+ rapide)
-
-        //! Cette méthode repose sur le fait que toutes les animations
-        //! chargées depuis un segment ont des indexs adjacents dans le vecteur
-        int n=0;
-        for (Animation* anim : animations)
-        {
-            if( anim->object == platforms[2] )
-            {// Si l'objet pointé est le premier du tableau d'animations on s'arrête
-                break;
-            }
-            n++;
-        }
-        animations.erase(animations.begin() + n, animations.begin() + n + segments[centerLoadedSegment+1].getNAnimation());
-
-        /// Décalage des données
-
-        platforms[2]=platforms[1];
-        platforms[1]=platforms[0];
-        
-        nPlatforms[2]=nPlatforms[1];
-        nPlatforms[1]=nPlatforms[0];
-        segments[centerLoadedSegment-2].loadPlatforms(platforms[0],nPlatforms[0]);
-
-        //TODO Charger les nouvelles animations
+    // On charge le segment d'index center-2 dans l'emplacement d'index 0
+    segments[centerLoadedSegment-2].loadPlatforms(platforms[0],nPlatforms[0]);
 
 
-    }
+    //TODO Charger les nouvelles animations
 
+    // On met à jour l'index de segment central
+    centerLoadedSegment--; 
 }
 
-/// quasiment identique a loadPreviousSegments
+/// Charge le segment suivant et décale les autres dans la structure de donnée
 void World::loadNextSegment()
 {
-    /// test si le dernier segment charger est deja le dernier du niveau
-    if(centerLoadedSegment < nSegments-2)
-    {
 
     /// Déchargement des animations
     //// [Effacé] Cette méthode repose sur le fait que toutes les animations
@@ -366,37 +347,21 @@ void World::loadNextSegment()
         }
     }
 
-        */
+    ///changement de place des references
 
-        ///methode alternative (+ rapide)
+    platforms[0]=platforms[1];
+    nPlatforms[0]=nPlatforms[1];
+    
+    platforms[1]=platforms[2];
+    nPlatforms[1]=nPlatforms[2];
 
-        //! Cette méthode repose sur le fait que toutes les animations
-        //! chargées depuis un segment ont des indexs adjacents dans le vecteur
-        int n=0;
-        for (Animation* anim : animations){
-            //! Ce code est faux et dangereux
-            //FIXME La première animation n'est pas DU TOUT obligée de pointer vers la 1ère plateforme
-            if(anim->object == platforms[0])
-            {// Si l'objet pointé est le premier du tableau d'animations on s'arrête
-                break;
-            }
-            n++;
-        }
-        animations.erase(animations.begin() + n, animations.begin() + n + segments[centerLoadedSegment-1].getNAnimation());
+    // On charge le segment d'index center+2 dans l'emplacement d'index 2
+    segments[centerLoadedSegment+2].loadPlatforms(platforms[2],nPlatforms[2]);
 
-        ///changement de place des references
+    //TODO Charger les nouvelles animations
 
-        platforms[0]=platforms[1];
-        platforms[1]=platforms[2];
-        
-        nPlatforms[0]=nPlatforms[1];
-        nPlatforms[1]=nPlatforms[2];
-        segments[centerLoadedSegment+2].loadPlatforms(platforms[2],nPlatforms[2]);
-
-
-
-
-    }
+    // On met à jour l'index de segment central
+    centerLoadedSegment++; 
 }
 
 
@@ -468,4 +433,19 @@ void World::step()
 	}
 
     player.clearAllInputs();
+
+    //4• Chargement/Déchargement de segments
+    
+    if (centerLoadedSegment < nSegments - 2 
+        && 
+        player.getPosition().x > (centerLoadedSegment + 1) * segmentWidth)
+    {
+        loadNextSegment();
+    }
+
+    if (centerLoadedSegment > 1
+        && player.getPosition().x < (centerLoadedSegment) * segmentWidth)
+    {
+        loadPreviousSegment();
+    }
 }
