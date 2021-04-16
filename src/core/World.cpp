@@ -13,7 +13,8 @@ World::World()
 
 World::World(std::string filename)
 : platforms(nullptr), segments(nullptr),
- nPlatforms(nullptr)
+ nPlatforms(nullptr), segmentWidth(30),
+ centerLoadedSegment(1)
 {
     //FIXME Les erreurs qui stoppent l'exécution dans XMLCheckResult ou dans exit(...)
     //      devraient être remplacées par une non-confirmation de l'initialistion de World
@@ -72,10 +73,10 @@ World::World(std::string filename)
         // 1.1• Récupérer l'élément Platforms
         XMLElement * platform_list = segment->FirstChildElement("Platforms");
         // Si elles n'existent pas, on est dans le caca...
-        if (segment_list == nullptr) exit(XML_ERROR_PARSING_ELEMENT);
+        if (platform_list == nullptr) exit(XML_ERROR_PARSING_ELEMENT);
 
         // 1.2• Récupérer la taille du tableau
-        result = segment_list->QueryIntAttribute("count", &count);
+        result = platform_list->QueryIntAttribute("count", &count);
         XMLCheckResult(result);
         int nPlatforms = count;
 
