@@ -17,8 +17,7 @@ World::World(std::string filename)
  centerLoadedSegment(1)
 {
     //FIXME Les erreurs qui stoppent l'exécution dans XMLCheckResult ou dans exit(...)
-    //      devraient être remplacées par une non-confirmation de l'initialistion de World
-    //      ou au moins donner un contexte plus clair..;
+    //      devraient donner un contexte plus clair...
     using namespace tinyxml2;
 
     // Initialisation du document

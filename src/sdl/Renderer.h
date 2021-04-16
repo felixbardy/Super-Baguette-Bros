@@ -21,8 +21,6 @@ private:
     int unit_size;
     int camera_offset;
 
-    // bool is_in_bounds(const Platform& platform);
-
     Vec2f worldToScreen(Vec2f pos) const;
 
     void drawPlayer(Uint32 game_ticks, uint16_t player_inputs);
