@@ -2,13 +2,13 @@
 
 LinearAnimation createLinearAnimation(
     Entity* object, Vec2f start_point, Vec2f movement,
-    float speed, bool from_segment
+    float speed, void* origin_segment
 )
 {
     LinearAnimation anim;
     anim.object = object;
     anim.type   = LINEAR;
-    anim.from_segment = from_segment;
+    anim.origin_segment = origin_segment;
 
     anim.start_point    = start_point;
     anim.movement       = movement;
@@ -19,13 +19,13 @@ LinearAnimation createLinearAnimation(
 
 RotationAnimation createRotationAnimation(
     Entity* object, float start_angle, float rotation_speed,
-    bool from_segment
+    void* origin_segment
 )
 {
     RotationAnimation anim;
     anim.object = object;
     anim.type   = ROTATION;
-    anim.from_segment = from_segment;
+    anim.origin_segment = origin_segment;
 
     anim.start_angle    = start_angle;
     anim.rotation_speed = rotation_speed;
@@ -35,13 +35,13 @@ RotationAnimation createRotationAnimation(
 
 BouncyAnimation createBouncyAnimation(
     Entity* object, float rebound_height, float rebound_width,
-    int max_bounces, bool from_segment
+    int max_bounces, void* origin_segment
 )
 {
     BouncyAnimation anim;
     anim.object = object;
     anim.type   = BOUNCY;
-    anim.from_segment = from_segment;
+    anim.origin_segment = origin_segment;
 
     anim.height         = rebound_height;
     anim.width          = rebound_width;
@@ -53,13 +53,13 @@ BouncyAnimation createBouncyAnimation(
 
 PhysicAnimation createPhysicAnimation(
     Entity* object, Vec2f acceleration, float bounciness,
-    bool from_segment
+    void* origin_segment
 )
 {
     PhysicAnimation anim;
     anim.object = object;
     anim.type   = PHYSIC;
-    anim.from_segment = from_segment;
+    anim.origin_segment = origin_segment;
 
     anim.acc        = acceleration;
     anim.bounciness = bounciness;

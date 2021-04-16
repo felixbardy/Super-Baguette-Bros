@@ -176,7 +176,7 @@ World::World(std::string filename)
                     Vec2f(start_x, start_y),
                     Vec2f(mov_x, mov_y),
                     speed,
-                    true
+                    &segments[segment_index]
                 );
 
                 segment_animations[animation_index] = new LinearAnimation(temp_anim);
@@ -238,7 +238,7 @@ World::World(Segment* segments, int nSegments)
 World::~World()
 {
     for (Animation* anim : animations)
-        if (!anim->from_segment) delete anim;
+        if (anim->origin_segment == nullptr) delete anim;
     
     if (segments != nullptr)
         delete [] segments;
@@ -280,24 +280,22 @@ void World::loadFirstSegments()
 
 void World::loadPreviousSegment()
 {
-    /// test si le premier segment charger est deja le premier du niveau 
-    if(centerLoadedSegment > 1)
+    /// Déchargement des animations
+    //// [Effacé] Cette méthode repose sur le fait que toutes les animations
+    //// chargées depuis un segment ont des indexs adjacents dans le vecteur
+    //? L'implémentation actuelle est plus naïve mais ne repose
+    //? pas sur un savoir approximatif :/
+
+    // On parcours le vecteur à l'envers pour être sûr
+    // d'itérer sur l'intégralité malgré les suppressions
+    for (int n = animations.size() - 1; n >= 0; n--)
     {
-
-        ///unload des animations
-
-        /// methode inneficace (peut etre utile pour debug la version + rapide)
-        /*
-
-        int n=0;
-        for (Animation* anim : animations){
-            if((anim->object>platforms[2])&
-            (anim->object<(platforms[2]+(nPlatforms[2]*sizeof(Platform)))))
-            {
-                animations.erase(animations.begin() + n);
-            }
-            n++;
+        Animation* anim = animations[n];
+        if( anim->origin_segment == &segments[centerLoadedSegment + 1] )
+        {// Si l'objet pointé est le premier du tableau d'animations on s'arrête
+            animations.erase(animations.begin() + n);
         }
+    }
 
         */
 
@@ -339,20 +337,21 @@ void World::loadNextSegment()
     if(centerLoadedSegment < nSegments-2)
     {
 
-        ///unload des animations
+    /// Déchargement des animations
+    //// [Effacé] Cette méthode repose sur le fait que toutes les animations
+    //// chargées depuis un segment ont des indexs adjacents dans le vecteur
+    //? L'implémentation actuelle est plus naïve mais ne repose
+    //? pas sur un savoir approximatif :/
 
-        /// methode inneficace (peut etre utile pour debug la version + rapide)
-        /*
-
-        int n=0;
-        for (Animation* anim : animations){
-            if((anim->object>platforms[0])&
-            (anim->object<(platforms[0]+(nPlatforms[0]*sizeof(Platform)))))
-            {
-                animations.erase(animations.begin() + n);
-            }
-            n++;
+    // On parcours le vecteur à l'envers pour être sûr
+    // d'itérer sur l'intégralité malgré les suppressions
+    for (int n = animations.size() - 1; n >= 0; n--){
+        Animation* anim = animations[n];
+        if(anim->origin_segment == &(segments[centerLoadedSegment - 1]))
+        {// Si l'objet pointé est le premier du tableau d'animations on s'arrête
+            animations.erase(animations.begin() + n);
         }
+    }
 
         */
 
