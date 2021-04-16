@@ -69,6 +69,8 @@ public:
     /// Retourne une référence vers le Player
     const Player& getPlayer() const;
 
+    int getWorldEnd() const;
+
     /** \brief Passe l'input au Player pour l'nterpréter lors de la prochaine boucle
      * \param input_mask Le masque représentant les inputs à activer
      **/
