@@ -416,7 +416,6 @@ void World::step()
     // 3.3• Si le joueur ne saute pas, vérifier la présence d'une plateforme en dessous:
     else
     {
-        // 3.3.1• Si il y a une plateforme, fixer la position du joueur à sa hauteur*
 
         bool on_platform = false;
 
@@ -424,19 +423,25 @@ void World::step()
         {
             for (int j = 0; j < nPlatforms[i]; j++)
             {
-                // 3.3.1• Sinon, décrémenter la position en y
                 //FIXME Faire la détéction de collisions entre 'sous le joueur' et 'sur la plateforme' à la place
                 if (Hitbox::overlaping( // Si il y a collision entre...
                     player.getHitbox().bottom(0.05f),         // Juste sous le joueur
                     platforms[i][j].getHitbox().upper(0.2f)   // La partie haute de la plateforme
                     ))
                 {
+                    // 3.3.1• Si il y a une plateforme, fixer la position du joueur à sa hauteur
+                    Platform& platform = platforms[i][j];
                     on_platform = true;
+                    player.setPosition({
+                        player.getPosition().x,
+                        platform.getPosition().y + platform.getHeight()
+                    });
                     break;
                 }
             }
             if (on_platform) break;
         }
+        // 3.3.1• Sinon, tomber
         if (!on_platform) player.fall();
         else player.setInAir(false);
 	}
