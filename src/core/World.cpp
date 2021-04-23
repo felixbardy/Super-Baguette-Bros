@@ -426,7 +426,11 @@ void World::step()
             {
                 // 3.3.1• Sinon, décrémenter la position en y
                 //FIXME Faire la détéction de collisions entre 'sous le joueur' et 'sur la plateforme' à la place
-                if (player.superposition(platforms[i][j])) {
+                if (Hitbox::overlaping( // Si il y a collision entre...
+                    player.getHitbox().bottom(0.05f),         // Juste sous le joueur
+                    platforms[i][j].getHitbox().upper(0.2f)   // La partie haute de la plateforme
+                    ))
+                {
                     on_platform = true;
                     break;
                 }
