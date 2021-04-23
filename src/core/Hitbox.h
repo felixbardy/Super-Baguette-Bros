@@ -5,11 +5,10 @@
  * 
  * Une Hitbox a une position (Hitbox::getPos), une longueur et une largeur (Hitbox::getDimensions)
  * \image html hitbox.jpg width=25%
- * La classe implémente une Hitbox::overlaping pour tester les collisions entre 2 plateformes.
+ * La classe implémente Hitbox::overlaping pour tester les collisions entre 2 Hitbox.
  * Elle implémente également des getters et setters pour toutes ses données
- * et de nombreuses méthodes pour séléctionner des sous parties ou les alentours de la Hitbox.
- * Ces dernières prennent un paramètre scale dont le fonctionnement est décris plus bas pour Hitbox::upper
- * et montré par des schémas pour le reste des méthodes.<br><br>
+ * et de nombreuses méthodes pour séléctionner des sous parties ou les alentours de la Hitbox.<br>
+ * Ces dernières prennent un paramètre scale dont le fonctionnement est décris pour chaque méthode.<br><br>
  * 
  * Cette structure permet d'effectuer des détections de collisions plus fines tout en restant lisibles.<br>
  * Exemples de détections:<br>
@@ -27,15 +26,8 @@
  * if ( Hitbox::overlaping( player_hb.upper(), platform_hb.lower() ) )
  *     //do something
  * ```
- * 
- * Exemple de Hitbox::upper:<br>
- * scale est situé sur une échelle continue de -1 à 1:<br>
- * 1    -> Toute la partie haute<br>
- * 0.5  -> La moitié de la partie haute en partant du haut<br>
- * 0    -> Renvoie une erreur<br>
- * -0.5 -> La moitié de la partie haute en partant du milieu<br>
- * -1   -> Toute la partie haute<br>
- * Autres exemples en image:<br>
+ *
+ * Tour d'horizon des méthodes de modulation des hitboxes:
  * \image html hitbox1.jpg width=25%
  * \image html hitbox2.jpg width=25%
  * \image html hitbox3.jpg width=25%
@@ -101,7 +93,6 @@ public:
      * \text{scale} \in [-1,1] \: \setminus \: 0 : \\\
      * \begin{cases}
      *     [-1,0[ \: :&      \left\vert scale \right\vert \text{ fois la partie haute en partant du milieu de la Hitbox} \\\
-     *     0 \: :&           \text{renvoie une erreur} \\\
      *     ]0,1] \: :&       scale \text{ fois la partie haute en partant du bord haut de la Hitbox} 
      * \end{cases}
      * \f]
@@ -119,7 +110,6 @@ public:
      * \text{scale} \in [-1,1] \: \setminus \: 0 : \\\
      * \begin{cases}
      *     [-1,0[ \: :&      \left\vert scale \right\vert \text{ fois la partie basse en partant du milieu de la Hitbox} \\\
-     *     0 \: :&           \text{renvoie une erreur} \\\
      *     ]0,1] \: :&       scale \text{ fois la partie basse en partant du bord bas de la Hitbox} 
      * \end{cases}
      * \f]
@@ -136,7 +126,6 @@ public:
      * \text{scale} \in [-1,1] \: \setminus \: 0 : \\\
      * \begin{cases}
      *     [-1,0[ \: :&      \left\vert scale \right\vert \text{ fois la partie droite en partant du milieu de la Hitbox} \\\
-     *     0 \: :&           \text{renvoie une erreur} \\\
      *     ]0,1] \: :&       scale \text{ fois la partie droite en partant du bord droit de la Hitbox} 
      * \end{cases}
      * \f]
@@ -153,7 +142,6 @@ public:
      * \text{scale} \in [-1,1] \: \setminus \: 0 : \\\
      * \begin{cases}
      *     [-1,0[ \: :&      \left\vert scale \right\vert \text{ fois la partie gauche en partant du milieu de la Hitbox} \\\
-     *     0 \: :&           \text{renvoie une erreur} \\\
      *     ]0,1] \: :&       scale \text{ fois la partie gauche en partant du bord gauche de la Hitbox} 
      * \end{cases}
      * \f]
@@ -225,7 +213,7 @@ public:
     /** \brief Renvoie la Hitbox redimensionnée (modulée par scale)
      * 
      * \f[
-     * \text{scale} \in ]0,+\infty[ \: : \\\
+     * \text{scale} \in [0,+\infty[ \: : \\\
      * \text{Renvoie une Hitbox de même centre avec des dimension de }
      *  scale \text{ fois les dimensions initiales.}
      * \f]
