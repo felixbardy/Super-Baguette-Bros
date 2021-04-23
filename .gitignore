@@ -1,8 +1,8 @@
 ###Répertoires à ignorer récursivement###
 bin/
-doc/
+doc/html/
+doc/latex/
 obj/
 
 ###Exceptions###
 !.keep
-!doc/Doxyfile
