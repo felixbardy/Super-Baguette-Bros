@@ -202,5 +202,5 @@ Hitbox Hitbox::resized(float scale) const
         ),
         width * scale,
         height * scale
-    )
+    );
 }
