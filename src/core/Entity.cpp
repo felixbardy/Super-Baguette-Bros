@@ -123,6 +123,12 @@ void    Entity::setHeight(float newheight)
     height = newheight;
 }
 
+Hitbox Entity::getHitbox() const
+{
+    return Hitbox(pos, width, height);
+}
+
+
 void    Entity::applyForce(Vec2f force)
 {
     vel += force;

@@ -1,6 +1,7 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
+#include "Hitbox.h"
 #include "extern/vector2d.h"
 
 /// \brief Classe universelle d'entité
@@ -56,6 +57,10 @@ public:
     /// \brief Remplace la hauteur de l'objet par celle donnée
     void    setHeight(float newheight);
 
+    /// \brief Renvoie la Hitbox correspondant à l'entité
+    Hitbox getHitbox() const;
+
+
     /// \brief Ajoute la force donnée à la vitesse de l'objet (si appliquable)
     void    applyForce(Vec2f force);
     /// \brief Ajoute le mouvement donné à la position de l'objet
@@ -65,6 +70,7 @@ public:
 
     /// \brief Vérifie s'il y a une superposition entre deux entités
     bool    superposition(Entity ent2);
+
 };
 
 
