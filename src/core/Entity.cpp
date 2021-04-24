@@ -6,12 +6,14 @@ using namespace std;
 
 Entity::Entity() :
 pos({0,0}),
+vel({0,0}),
 width(0),
 height(0),
 angle(0)
 {}
 
-Entity::Entity(Vec2f pos, float width, float height, float angle)
+Entity::Entity(Vec2f pos, float width, float height, float angle) :
+vel({0,0})
 {
     setPosition(pos);
     setWidth(width);
