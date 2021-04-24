@@ -72,6 +72,17 @@ void    Entity::testRegression()
 
     cout << "OK" << endl;
 
+    cout << "Entity: getHitbox()... ";
+
+    Hitbox hitbox = EntityTest.getHitbox();
+    float hb_w, hb_h;
+    hitbox.getDimensions(&hb_w, &hb_h);
+    assert(hb_w == EntityTest.getWidth());
+    assert(hb_h == EntityTest.getHeight());
+    assert(hitbox.getPos() == EntityTest.getPosition());
+
+    cout << "OK" << endl;
+
 
 }
 
