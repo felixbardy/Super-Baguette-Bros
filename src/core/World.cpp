@@ -119,8 +119,6 @@ World::World(std::string filename)
         }
 
         //* 2• Récupérer les animations
-        //TODO Récupérer les animations
-
         // 2.1• Récupérer l'élément Animations
         XMLElement * animations_list = segment->FirstChildElement("Animations");
         // Mon imagination pour ces blaques est limitée...
@@ -207,7 +205,6 @@ World::World(std::string filename)
 
         //* 3• Affecter les données au segment
         this->segments[segment_index].setPlatforms(segment_platforms,nPlatforms);
-        //FIXME Remplacer 0 par le nombre d'animations
         this->segments[segment_index].setAnimations(segment_animations,nAnimations);
 
         //* 3• Récupérer le segment suivant
@@ -423,7 +420,6 @@ void World::step()
         {
             for (int j = 0; j < nPlatforms[i]; j++)
             {
-                //FIXME Faire la détéction de collisions entre 'sous le joueur' et 'sur la plateforme' à la place
                 if (Hitbox::overlaping( // Si il y a collision entre...
                     player.getHitbox().bottom(0.05f),         // Juste sous le joueur
                     platforms[i][j].getHitbox().upper(0.2f)   // La partie haute de la plateforme
