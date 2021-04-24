@@ -316,8 +316,14 @@ void World::loadPreviousSegment()
     // On charge le segment d'index center-2 dans l'emplacement d'index 0
     segments[centerLoadedSegment-2].loadPlatforms(platforms[0],nPlatforms[0]);
 
+    Animation** new_animations;
+    int new_anim_size;
+    segments[centerLoadedSegment-2].loadAnimations(new_animations, new_anim_size);
 
-    //TODO Charger les nouvelles animations
+    for (int i = 0; i < new_anim_size; i++)
+    {
+        animations.push_back(new_animations[i]);
+    }
 
     // On met à jour l'index de segment central
     centerLoadedSegment--; 
@@ -354,7 +360,14 @@ void World::loadNextSegment()
     // On charge le segment d'index center+2 dans l'emplacement d'index 2
     segments[centerLoadedSegment+2].loadPlatforms(platforms[2],nPlatforms[2]);
 
-    //TODO Charger les nouvelles animations
+    Animation** new_animations;
+    int new_anim_size;
+    segments[centerLoadedSegment+2].loadAnimations(new_animations, new_anim_size);
+
+    for (int i = 0; i < new_anim_size; i++)
+    {
+        animations.push_back(new_animations[i]);
+    }
 
     // On met à jour l'index de segment central
     centerLoadedSegment++; 
