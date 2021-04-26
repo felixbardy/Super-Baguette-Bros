@@ -3,6 +3,20 @@
 
 #include "Entity.h"
 
+//TODO Paufiner la mécanique de saut
+
+/** \class Player Player.h "src/core/Player.h"
+ * \brief Entité qui représente un joueur
+ * 
+ * Player hérite de Entity et donc de toutes ses fonctionalités.<br>
+ * La classe a également de nombreux champs et méthodes supplémentaires pour gérer le contrôle du joueur.<br>
+ * <br>
+ * Pour connaître les actions demandées, Player utilise un entier 16bit avec un masque pour chaque input. On a ainsi:<br>
+ * * Player::JUMP```: Sauter<br>
+ * * `Player::DOWN`, `Player::UP`, `Player::LEFT`, `Player::RIGHT`: Directions pressées<br>
+ * 
+ * L'interprétation est ensuite faite par `World::step` pour calculer le prochain état du monde
+ **/
 class Player : public Entity
 {
 private:

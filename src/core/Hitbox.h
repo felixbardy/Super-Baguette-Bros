@@ -1,6 +1,6 @@
 #include "extern/vector2d.h"
 
-/** \class Hitbox Hitbox.h "src/Hitbox.h"
+/** \class Hitbox Hitbox.h "src/core/Hitbox.h"
  * \brief représente une boite de collision
  * 
  * Une Hitbox a une position (Hitbox::getPos), une longueur et une largeur (Hitbox::getDimensions)
