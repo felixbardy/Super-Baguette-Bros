@@ -1,6 +1,7 @@
 #include "Hitbox.h"
 
 #include <iostream>
+#include <cassert>
 
 Hitbox::Hitbox(Vec2f pos, float width, float height)
 : pos(pos), width(width), height(height)
