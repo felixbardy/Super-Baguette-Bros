@@ -88,6 +88,7 @@ void Player::testRegression() const
     assert(!p.isJumping());
     assert(p.lives == 3);
     assert(p.current_input == 0);
+    assert(p.getHeight() == 2 && p.getWidth() == 1);
 
     cout << "OK" << endl;
 
@@ -142,6 +143,15 @@ void Player::testRegression() const
 
     cout << "OK" << endl;
 
+    cout << "Player: move et direction...";
+
+    assert(p.getDirection() == RIGHT);
+    p.moveLeft();
+    assert(p.getDirection() == LEFT);
+    p.moveRight();
+    assert(p.getDirection() == RIGHT);
+
+    cout << "OK" << endl;
 
 
 }
