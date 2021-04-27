@@ -1,6 +1,9 @@
 #include "World.h"
 
+#include <iostream>
+#include <cassert>
 #include <assert.h>
+
 
 #include "extern/tinyxml2.h"
 
@@ -379,6 +382,47 @@ void World::loadNextSegment()
 void World::testRegression()
 {
     // TODO Implémenter le test de régression de World
+    cout << "World: constructeur par defaut... " ;
+    World w1;
+    assert(w1.platforms == nullptr);
+    assert(w1.segments == nullptr);
+    assert(w1.nPlatforms == nullptr);
+    assert(w1.centerLoadedSegment == 1);
+    cout << "OK" << endl;
+
+    //TODO Completer le constructeur par fichier
+    cout << "World: constructeur par fichier... " ;
+
+    cout << "WIP" << endl;
+
+    cout << "World: constructeur par segment... ";
+
+    Segment * s = nullptr;
+    s = new Segment[5];
+    World w2(s, 5);
+    assert(w2.getPlatforms() != nullptr);
+    assert(w2.getPlatformsSizes() != nullptr);
+    assert(w2.segments != nullptr);
+    assert(w2.nSegments == 5);
+
+    cout << "OK" << endl;
+
+    cout << "World: Player du constructeur par segment:" << endl;
+    w2.player.testRegression();
+    w2.setPlayerInputs(Player::RIGHT);
+    assert(w2.player.checkInput(Player::RIGHT));
+    cout << "OK" << endl;
+
+    cout << "World: segments... ";
+    //TODO test regression de load segment
+    cout << "WIP" << endl;
+
+    cout << "World: step...";
+    //TODO test regression de step
+    cout << "WIP" << endl;
+
+
+
 }
 
 Platform** World::getPlatforms() const
