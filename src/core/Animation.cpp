@@ -1,4 +1,6 @@
 #include "Animation.h"
+#include <cassert>
+#include <iostream>
 
 LinearAnimation createLinearAnimation(
     Entity* object, Vec2f start_point, Vec2f movement,
@@ -68,6 +70,48 @@ PhysicAnimation createPhysicAnimation(
 }
 
 void testRegressionAnimations()
-{
-    //TODO Implémenter le test régression pour les fonctions génératrices d'animations
+{       
+    Entity* objtest = nullptr;
+    Vec2f vstart;
+    Vec2f vftest;
+    vftest.x = 10;
+    vftest.y = 10;
+    void * origin = nullptr;
+    float floattest = 5.1;
+
+    cout << "Animation: LinearAnimation... ";
+    LinearAnimation linear = createLinearAnimation(objtest, vstart, vftest, floattest, origin);
+    assert(linear.object == nullptr);
+    assert(linear.type == LINEAR);
+    assert(linear.origin_segment == nullptr);
+    assert(linear.start_point.x == 0 && linear.start_point.y == 0);
+    assert(linear.movement.x == 10 && linear.movement.y == 10);
+    assert(linear.speed == floattest);
+    cout << "OK" << endl;
+
+    cout << "Animation: RotationAnimation... ";
+    RotationAnimation rotation = createRotationAnimation(objtest, floattest, floattest, origin);
+    assert(rotation.object == nullptr);
+    assert(rotation.type == ROTATION);
+    assert(rotation.origin_segment == nullptr);
+    assert(rotation.start_angle == floattest && rotation.rotation_speed == floattest);
+    cout << "OK" << endl;
+
+    cout << "Animation: BouncyAnimation... ";
+    BouncyAnimation bouncy = createBouncyAnimation(objtest, floattest, floattest, 5, origin);
+    assert(bouncy.object == nullptr);
+    assert(bouncy.type == BOUNCY);
+    assert(bouncy.origin_segment == nullptr);
+    assert(bouncy.height == floattest && bouncy.width == floattest);
+    assert(bouncy.max_bounces == 5 && bouncy.bounces == 0);
+    cout << "OK" << endl;
+
+    cout << "Animation: PhysicAnimation... ";
+    PhysicAnimation physic = createPhysicAnimation(objtest, vftest, floattest, origin);
+    assert(physic.object == nullptr);
+    assert(physic.type == PHYSIC);
+    assert(physic.origin_segment == nullptr);
+    assert(physic.acc.x == vftest.x && physic.acc.y == vftest.y);
+    assert(physic.bounciness == floattest);
+    cout << "OK" << endl;
 }
