@@ -70,9 +70,13 @@ public:
     /// Retourne les tailles des tableaux de plateformes
     const int* getPlatformsSizes() const;
 
-    /// Retourne une référence vers le Player
+    /// Retourne une référence du Player
     const Player& getPlayer() const;
 
+    /// Renvoie une référence du vecteur de pieces
+    const std::vector<Entity*>& getPieces();
+
+    // Renvoie la longueur totale du niveau
     int getWorldEnd() const;
 
     /** \brief Passe l'input au Player pour l'nterpréter lors de la prochaine boucle

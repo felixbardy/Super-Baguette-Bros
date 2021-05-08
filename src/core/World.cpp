@@ -482,6 +482,11 @@ const Player& World::getPlayer() const
     return player;
 }
 
+const std::vector<Entity*>& World::getPieces()
+{
+    return pieces;
+}
+
 int World::getWorldEnd() const
 {
     return (nSegments) * segmentWidth;
