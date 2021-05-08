@@ -8,6 +8,21 @@
 #include "Segment.h"
 
 //TODO Documentation
+/** \class World World.h "src/core/World.h"
+ * \brief Représente le Monde et contient les méthodes pour son évolution
+ * 
+ * World représente le monde, le niveau.<br>
+ * Le niveau est divisé en n segments (où n >= 3).<br>
+ * World::segments stocke tous les segments du niveau mais seuls
+ * les 3 autour du joueur sont pris en compte.<br>
+ * Au fur et à mesure que le joueur bouge, le contenu des segments est 
+ * chargé et déchargé dans les champs World::animations, World::platforms et World::pieces
+ * à l'aide des méthodes World::loadPreviousSegment et World::loadNextSegment.
+ * World::step est la méthode à invoquer à chaque frame physique.<br>
+ * World implémente aussi une variété de getters pour permettre 
+ * à une classe extérieure d'avoir toutes les informations nécésssaires
+ * à l'affichage.
+ **/
 class World
 {
 private:
