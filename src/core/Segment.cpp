@@ -34,6 +34,9 @@ Segment::~Segment()
         delete[] animations;
         animations = nullptr;
     }
+
+    for (auto piece : pieces)
+        delete piece;
 }
 
 
@@ -125,4 +128,14 @@ void Segment::loadAnimations(Animation**& animations, int& size)
 int Segment::getNAnimation()
 {
     return nAnimations;
+}
+
+void Segment::addPiece(int x, int y)
+{
+    this->pieces.push_back( new Piece({x,y}, this) );
+}
+
+vector<Piece*>* Segment::getPieces()
+{
+    return &pieces;
 }

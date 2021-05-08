@@ -8,19 +8,19 @@
 #include "extern/tinyxml2.h"
 
 World::World()
-: platforms(nullptr), segments(nullptr),
- nPlatforms(nullptr), centerLoadedSegment(1)
+: score(0),
+  segments(nullptr), centerLoadedSegment(1),
+  platforms(nullptr), nPlatforms(nullptr)
 {
     
 }
 
 World::World(std::string filename)
-: platforms(nullptr), segments(nullptr),
- nPlatforms(nullptr), segmentWidth(30),
- centerLoadedSegment(1)
+: score(0), 
+  segments(nullptr), centerLoadedSegment(1),
+  platforms(nullptr), segmentWidth(30),
+  nPlatforms(nullptr)
 {
-    //FIXME Les erreurs qui stoppent l'exécution dans XMLCheckResult ou dans exit(...)
-    //      devraient donner un contexte plus clair...
     using namespace tinyxml2;
 
     // Initialisation du document
@@ -202,15 +202,48 @@ World::World(std::string filename)
 
             // 2.5.3• Récupérer la prochaine animation (= nullptr à la fin)
             animation = animation->NextSiblingElement("Animation");
+        } // Fin for animations
+
+        } // Fin else
+        
+        //* 3• Récupérer les pièces
+        XMLElement * pieces = segment->FirstChildElement("Pieces");
+
+        XMLElement * bloc = pieces->FirstChildElement("Bloc");
+        
+        while (bloc != nullptr)
+        {
+            int minx, miny, maxx, maxy;
+
+            // Bottom left
+            result = bloc->QueryIntAttribute("minx", &minx);
+            XMLCheckResult(result);
+            result = bloc->QueryIntAttribute("miny", &miny);
+            XMLCheckResult(result);
+
+            // Top right
+            result = bloc->QueryIntAttribute("maxx", &maxx);
+            XMLCheckResult(result);
+            result = bloc->QueryIntAttribute("maxy", &maxy);
+            XMLCheckResult(result);
+
+            Segment& current_segment = this->segments[segment_index];
+
+            for (int x = minx; x <= maxx; x++)
+            for (int y = miny; y <= maxy; y++)
+            {
+                current_segment.addPiece(x + offset, y);
+            }
+
+            // On récupère le bloc suivant
+            bloc = bloc->NextSiblingElement("Bloc");
         }
 
-        }
-
-        //* 3• Affecter les données au segment
+        //* 4• Affecter les données au segment
         this->segments[segment_index].setPlatforms(segment_platforms,nPlatforms);
         this->segments[segment_index].setAnimations(segment_animations,nAnimations);
 
-        //* 3• Récupérer le segment suivant
+        //* 5• Récupérer le segment suivant
         segment = segment->NextSiblingElement("Segment");
     }
 
@@ -237,7 +270,8 @@ World::World(std::string filename)
 }
 
 World::World(Segment* segments, int nSegments)
-: segments(segments), nSegments(nSegments), centerLoadedSegment(1)
+: segments(segments), nSegments(nSegments), 
+  score(0), centerLoadedSegment(1)
 {
     platforms = new Platform*[3];
     nPlatforms = new int[3];
@@ -267,6 +301,7 @@ void World::loadFirstSegments()
     Segment* segment;
     Platform* new_platforms;
     Animation** new_animations;
+    std::vector<Piece*>* new_pieces;
     int platforms_size;
     int animations_size;
 
@@ -276,14 +311,19 @@ void World::loadFirstSegments()
         segment = &segments[i];
         segment->loadPlatforms(new_platforms, platforms_size);
         segment->loadAnimations(new_animations, animations_size);
+        new_pieces = segment->getPieces();
 
         // On charge les plateformes dans World
         platforms[i] = new_platforms;
         nPlatforms[i] = platforms_size;
 
-        // Et on charge les animations dans World
+        // On charge les animations dans World
         for (int j = 0; j < animations_size; j++)
             animations.push_back(new_animations[j]);
+        
+        // On charge les pieces dans World
+        for (int j = 0; j < new_pieces->size(); j++)
+            pieces.push_back( (*new_pieces)[j] );
     }
     
     
@@ -292,6 +332,7 @@ void World::loadFirstSegments()
 /// Charge le segment précédent et décale les autres dans la structure de donnée
 void World::loadPreviousSegment()
 {
+    //TODO Charger les pièces
     /// Déchargement des animations
     //// [Effacé] Cette méthode repose sur le fait que toutes les animations
     //// chargées depuis un segment ont des indexs adjacents dans le vecteur
@@ -304,10 +345,17 @@ void World::loadPreviousSegment()
     {
         Animation* anim = animations[n];
         if( anim->origin_segment == &segments[centerLoadedSegment + 1] )
-        {// Si l'objet pointé est le premier du tableau d'animations on s'arrête
             animations.erase(animations.begin() + n);
-        }
     }
+
+    // Même chose pour les pièces
+    for (int n = pieces.size() - 1; n >= 0; n--)
+    {
+        Piece* piece = pieces[n];
+        // On en profite pour retirer les pièces prises
+        if ( piece->isTaken() || piece->getOrigin() == &segments[centerLoadedSegment + 1] )
+            pieces.erase(pieces.begin() + n);
+    } 
 
     /// Décalage des données
     platforms[2]=platforms[1];
@@ -319,14 +367,18 @@ void World::loadPreviousSegment()
     // On charge le segment d'index center-2 dans l'emplacement d'index 0
     segments[centerLoadedSegment-2].loadPlatforms(platforms[0],nPlatforms[0]);
 
+    // On charge les animations
     Animation** new_animations;
     int new_anim_size;
     segments[centerLoadedSegment-2].loadAnimations(new_animations, new_anim_size);
 
     for (int i = 0; i < new_anim_size; i++)
-    {
         animations.push_back(new_animations[i]);
-    }
+
+    // On charge les pieces
+    std::vector<Piece*>* new_pieces = segments[centerLoadedSegment-2].getPieces();
+    for (auto piece : *new_pieces)
+        if (!piece->isTaken()) pieces.push_back(piece);
 
     // On met à jour l'index de segment central
     centerLoadedSegment--; 
@@ -335,7 +387,7 @@ void World::loadPreviousSegment()
 /// Charge le segment suivant et décale les autres dans la structure de donnée
 void World::loadNextSegment()
 {
-
+    //TODO Charger les pièces
     /// Déchargement des animations
     //// [Effacé] Cette méthode repose sur le fait que toutes les animations
     //// chargées depuis un segment ont des indexs adjacents dans le vecteur
@@ -352,6 +404,15 @@ void World::loadNextSegment()
         }
     }
 
+    // Même chose pour les pièces
+    for (int n = pieces.size() - 1; n >= 0; n--)
+    {
+        Piece* piece = pieces[n];
+        // On en profite pour retirer les pièces prises
+        if ( piece->isTaken() || piece->getOrigin() == &segments[centerLoadedSegment - 1] )
+            pieces.erase(pieces.begin() + n);
+    } 
+
     ///changement de place des references
 
     platforms[0]=platforms[1];
@@ -363,14 +424,19 @@ void World::loadNextSegment()
     // On charge le segment d'index center+2 dans l'emplacement d'index 2
     segments[centerLoadedSegment+2].loadPlatforms(platforms[2],nPlatforms[2]);
 
+
+    // On charge les segments
     Animation** new_animations;
     int new_anim_size;
     segments[centerLoadedSegment+2].loadAnimations(new_animations, new_anim_size);
 
     for (int i = 0; i < new_anim_size; i++)
-    {
         animations.push_back(new_animations[i]);
-    }
+
+    // On charge les pieces
+    std::vector<Piece*>* new_pieces = segments[centerLoadedSegment+2].getPieces();
+    for (auto piece : *new_pieces)
+        if (!piece->isTaken()) pieces.push_back(piece);
 
     // On met à jour l'index de segment central
     centerLoadedSegment++; 
@@ -381,7 +447,6 @@ void World::loadNextSegment()
 
 void World::testRegression()
 {
-    // TODO Implémenter le test de régression de World
     cout << "World: constructeur par defaut... " ;
     World w1;
     assert(w1.platforms == nullptr);
@@ -390,7 +455,7 @@ void World::testRegression()
     assert(w1.centerLoadedSegment == 1);
     cout << "OK" << endl;
 
-    //TODO Completer le constructeur par fichier
+    //TODO Implémenter le test du constructeur par fichier
     cout << "World: constructeur par fichier... " ;
 
     cout << "WIP" << endl;
@@ -439,6 +504,11 @@ const int* World::getPlatformsSizes() const
 const Player& World::getPlayer() const
 {
     return player;
+}
+
+const std::vector<Piece*>& World::getPieces() const
+{
+    return pieces;
 }
 
 int World::getWorldEnd() const
@@ -501,7 +571,26 @@ void World::step()
 
     player.clearAllInputs();
 
-    //4• Chargement/Déchargement de segments
+    //4• Collectage des pièces
+    Entity* piece = nullptr;
+    for (int i = pieces.size() - 1; i >= 0; i--)
+    {
+        piece = pieces[i];
+        if (piece != nullptr)
+        {
+            // Si le joueur touche la pièce
+            if (Hitbox::overlaping(piece->getHitbox(), player.getHitbox()))
+            {
+                // Marquer la pièce comme prise
+                pieces[i]->setTaken(true);
+
+                // Et augmenter le score du joueur
+                score++;
+            }
+        }
+    }
+
+    //5• Chargement/Déchargement de segments
     
     if (centerLoadedSegment < nSegments - 2 
         && 

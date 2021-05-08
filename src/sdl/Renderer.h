@@ -9,8 +9,6 @@
 
 #include "core/World.h"
 
-/// TODO Réfléchir à coder un gestionnaire de spritesheets pour simplifier l'affichage dans Renderer
-
 class GraphicRenderer
 {
 private:

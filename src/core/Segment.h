@@ -1,8 +1,10 @@
 #ifndef SEGMENT_H
 #define SEGMENT_H
 
+#include <vector>
+
 #include "Animation.h"
-#include "Platform.h"
+#include "Objects.h"
 
 class Segment
 {
@@ -19,6 +21,8 @@ private:
     Animation** animations;
     /// Nombre d'animations associées au segment
     int nAnimations;
+    /// Les pièces du segment
+    std::vector<Piece*> pieces;
 public:
     ///Constructeur par défaut, le segment est inutilisable tel quel.
     Segment();
@@ -55,6 +59,15 @@ public:
 
     /// Retourne la taille du tableau d'Animations du Segment
     int getNAnimation();
+    
+    /** \brief Ajoute une pièce de coordonée x,y au segment
+     * \param x position en x de la pièce
+     * \param y position en y de la pièce
+     **/
+    void addPiece(int x, int y);
+
+    /// Renvoie un pointeur vers le vecteur de pieces du segment
+    vector<Piece*>* getPieces();
 };
 
 #endif //SEGMENT_H

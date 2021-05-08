@@ -14,6 +14,9 @@ private:
     /// Le joueur
     Player player;
 
+    // Le score du joueur
+    int score;
+
     /// Tableau de segments prechargés
     Segment* segments;
     
@@ -32,9 +35,11 @@ private:
     /// Tableau stockant les tailles des tableaux de segments
     int* nPlatforms;
 
+    /// Contient les pièces actuellement chargées
+    std::vector<Piece*> pieces;
+
     //? Ajouter une liste pour d'autres entités
 
-    //! A chaque suppression d'animation de ce vector: FAIRE UN delete SUR LE POINTEUR
     /// Tableau dynamique stockant les pointeurs vers les Animations
     std::vector<Animation*> animations;
 
@@ -48,7 +53,6 @@ private:
     void loadNextSegment();
 
 public:
-    //TODO Définir un constructeur par flux de fichier pour pouvoir charger un niveau 
     /// Constructeur par défaut (objet inutilisable)
     World();
     /// Constructeur par fichier
@@ -66,9 +70,13 @@ public:
     /// Retourne les tailles des tableaux de plateformes
     const int* getPlatformsSizes() const;
 
-    /// Retourne une référence vers le Player
+    /// Retourne une référence du Player
     const Player& getPlayer() const;
 
+    /// Renvoie une référence du vecteur de pieces
+    const std::vector<Piece*>& getPieces() const;
+
+    // Renvoie la longueur totale du niveau
     int getWorldEnd() const;
 
     /** \brief Passe l'input au Player pour l'nterpréter lors de la prochaine boucle

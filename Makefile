@@ -11,6 +11,8 @@ LFLAGS = -ggdb -Wall
 LOCAL_INCLUDES = 	src 
 
 ifeq ($(OS), MacOS)
+	CXX = clang++
+
 	LIB_INCLUDES = \
 		-I/Library/Frameworks/SDL2.framework/Headers \
 		-I/Library/Frameworks/SDL2_ttf.framework/Headers \
@@ -36,7 +38,7 @@ endif
 CORE_SOURCES = src/core/Animation.cpp \
 			   src/core/Entity.cpp \
 			   src/core/Hitbox.cpp \
-			   src/core/Platform.cpp \
+			   src/core/Objects.cpp \
 			   src/core/Player.cpp \
 			   src/core/Segment.cpp \
 			   src/core/World.cpp \
@@ -45,7 +47,7 @@ CORE_SOURCES = src/core/Animation.cpp \
 CORE_OBJECTS = obj/core/Animation.o \
 			   obj/core/Entity.o \
 			   obj/core/Hitbox.o \
-			   obj/core/Platform.o \
+			   obj/core/Objects.o \
 			   obj/core/Player.o \
 			   obj/core/Segment.o \
 			   obj/core/World.o \
@@ -125,7 +127,7 @@ doc:
 
 # Supprime les fichiers objet
 clean:
-	rm -rf obj/**.o
+	rm -rf obj/*.o obj/*/*.o
 
 # Supprime les fichiers objets, les exécutables et la documentation
 pentaclean: clean

@@ -27,7 +27,6 @@ Entity::~Entity()
 
 void    Entity::testRegression()
 {
-    //TODO Implémenter le test régression de Entity
     cout << "Entity: constructeur par valeurs... ";
     
     Entity EntityTest({10.0,10.0}, 10.0, 10.0, 10.0);

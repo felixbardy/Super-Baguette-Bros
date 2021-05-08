@@ -79,7 +79,6 @@ void Player::clearAllInputs()
 
 void Player::testRegression() const
 {
-    //TODO Mettre a jour lorsque player est finalisé
 
     cout << "Player: constructeur par défaut... ";
 
