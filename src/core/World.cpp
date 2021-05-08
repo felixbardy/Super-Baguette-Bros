@@ -580,9 +580,24 @@ void World::step()
         }
     }
 
-    //TODO Si le joueur tombe du niveau, perdre une vie
+//TODO Si le joueur tombe du niveau, perdre une vie. Optimiser
+    if (player.getPosition().y < 0)
+    {
+        Vec2f posInitiale;
+        posInitiale.x=1;
+        posInitiale.y=1;
+        player.removeLife();
+        player.setPosition(posInitiale);
+        cout << "Nombre de vies:" << player.checkLife() << endl;
+    }
+    
 
     //TODO Si le joueur n'a plus de vie: perdre
+    if (player.checkLife() == 0)
+    {
+        //TODO Completer
+        cout << "game over";
+    }
 
     //TODO Si le joueur atteint la fin: gagner
 
