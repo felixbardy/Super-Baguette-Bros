@@ -38,7 +38,7 @@ endif
 CORE_SOURCES = src/core/Animation.cpp \
 			   src/core/Entity.cpp \
 			   src/core/Hitbox.cpp \
-			   src/core/Platform.cpp \
+			   src/core/Objects.cpp \
 			   src/core/Player.cpp \
 			   src/core/Segment.cpp \
 			   src/core/World.cpp \
@@ -47,7 +47,7 @@ CORE_SOURCES = src/core/Animation.cpp \
 CORE_OBJECTS = obj/core/Animation.o \
 			   obj/core/Entity.o \
 			   obj/core/Hitbox.o \
-			   obj/core/Platform.o \
+			   obj/core/Objects.o \
 			   obj/core/Player.o \
 			   obj/core/Segment.o \
 			   obj/core/World.o \
