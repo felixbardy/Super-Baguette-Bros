@@ -26,7 +26,6 @@ void GraphicRenderer::renderWorld(Uint32 game_ticks, uint16_t player_inputs)
 
     const Player& player = world->getPlayer();
 
-    //FIXME Récupérer la vraie fin du niveau
     // La fin du niveau
     int world_end = world->getWorldEnd();
 
@@ -75,14 +74,14 @@ void GraphicRenderer::renderWorld(Uint32 game_ticks, uint16_t player_inputs)
 
     //2.4• Dessiner les pièces
 
-    const std::vector<Entity*> pieces = world->getPieces();
+    const std::vector<Piece*> pieces = world->getPieces();
     SDL_Rect srcrect_piece = {33, 66, 33, 33};
     SDL_Rect dstrect;
     Vec2f screen_pos;
 
     for (auto piece : pieces)
     {
-        if (piece != nullptr)
+        if (!piece->isTaken())
         {
             screen_pos = worldToScreen(piece->getPosition());
             dstrect = {(int)screen_pos.x, (int)screen_pos.y + unit_size, unit_size, unit_size};
