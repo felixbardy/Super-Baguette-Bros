@@ -8,16 +8,18 @@
 #include "extern/tinyxml2.h"
 
 World::World()
-: platforms(nullptr), segments(nullptr),
- nPlatforms(nullptr), centerLoadedSegment(1)
+: score(0),
+  segments(nullptr), centerLoadedSegment(1),
+  platforms(nullptr), nPlatforms(nullptr)
 {
     
 }
 
 World::World(std::string filename)
-: platforms(nullptr), segments(nullptr),
- nPlatforms(nullptr), segmentWidth(30),
- centerLoadedSegment(1)
+: score(0), 
+  segments(nullptr), centerLoadedSegment(1),
+  platforms(nullptr), segmentWidth(30),
+  nPlatforms(nullptr)
 {
     //FIXME Les erreurs qui stoppent l'exécution dans XMLCheckResult ou dans exit(...)
     //      devraient donner un contexte plus clair...
@@ -202,15 +204,49 @@ World::World(std::string filename)
 
             // 2.5.3• Récupérer la prochaine animation (= nullptr à la fin)
             animation = animation->NextSiblingElement("Animation");
+        } // Fin for animations
+
+        } // Fin else
+        
+        //* 3• Récupérer les pièces
+        XMLElement * pieces = segment->FirstChildElement("Pieces");
+
+        XMLElement * bloc = pieces->FirstChildElement("Bloc");
+        
+        while (bloc != nullptr)
+        {
+            int minx, miny, maxx, maxy;
+
+            // Bottom left
+            result = bloc->QueryIntAttribute("minx", &minx);
+            XMLCheckResult(result);
+            result = bloc->QueryIntAttribute("miny", &miny);
+            XMLCheckResult(result);
+
+            // Top right
+            result = bloc->QueryIntAttribute("maxx", &maxx);
+            XMLCheckResult(result);
+            result = bloc->QueryIntAttribute("maxy", &maxy);
+            XMLCheckResult(result);
+
+            Segment& current_segment = this->segments[segment_index];
+
+            for (int x = minx; x <= maxx; x++)
+            for (int y = miny; y <= maxy; y++)
+            {
+                //TODO Ajouter une pièce au segment
+                current_segment.addPiece(x + offset, y);
+            }
+
+            // On récupère le bloc suivant
+            bloc = bloc->NextSiblingElement("Bloc");
         }
 
-        }
-
-        //* 3• Affecter les données au segment
+        //* 4• Affecter les données au segment
         this->segments[segment_index].setPlatforms(segment_platforms,nPlatforms);
         this->segments[segment_index].setAnimations(segment_animations,nAnimations);
 
-        //* 3• Récupérer le segment suivant
+        //* 5• Récupérer le segment suivant
         segment = segment->NextSiblingElement("Segment");
     }
 
@@ -237,7 +273,8 @@ World::World(std::string filename)
 }
 
 World::World(Segment* segments, int nSegments)
-: segments(segments), nSegments(nSegments), centerLoadedSegment(1)
+: segments(segments), nSegments(nSegments), 
+  score(0), centerLoadedSegment(1)
 {
     platforms = new Platform*[3];
     nPlatforms = new int[3];
@@ -264,6 +301,7 @@ World::~World()
 
 void World::loadFirstSegments()
 {
+    //TODO Charger les pièces
     Segment* segment;
     Platform* new_platforms;
     Animation** new_animations;
@@ -292,6 +330,7 @@ void World::loadFirstSegments()
 /// Charge le segment précédent et décale les autres dans la structure de donnée
 void World::loadPreviousSegment()
 {
+    //TODO Charger les pièces
     /// Déchargement des animations
     //// [Effacé] Cette méthode repose sur le fait que toutes les animations
     //// chargées depuis un segment ont des indexs adjacents dans le vecteur
@@ -335,7 +374,7 @@ void World::loadPreviousSegment()
 /// Charge le segment suivant et décale les autres dans la structure de donnée
 void World::loadNextSegment()
 {
-
+    //TODO Charger les pièces
     /// Déchargement des animations
     //// [Effacé] Cette méthode repose sur le fait que toutes les animations
     //// chargées depuis un segment ont des indexs adjacents dans le vecteur
@@ -501,7 +540,27 @@ void World::step()
 
     player.clearAllInputs();
 
-    //4• Chargement/Déchargement de segments
+    //4• Collectage des pièces
+    Entity* piece = nullptr;
+    for (int i = pieces.size() - 1; i >= 0; i--)
+    {
+        piece = pieces[i];
+        if (piece != nullptr)
+        {
+            // Si le joueur touche la pièce
+            if (Hitbox::overlaping(piece->getHitbox(), player.getHitbox()))
+            {
+                // Supprimer la pièce
+                delete pieces[i];
+                pieces[i] = nullptr;
+
+                // Et augmenter le score du joueur
+                score++;
+            }
+        }
+    }
+
+    //5• Chargement/Déchargement de segments
     
     if (centerLoadedSegment < nSegments - 2 
         && 

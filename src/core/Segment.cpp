@@ -126,3 +126,8 @@ int Segment::getNAnimation()
 {
     return nAnimations;
 }
+
+void Segment::addPiece(int x, int y)
+{
+    this->pieces.push_back( new Entity({(float)x,(float)y},1,1,0) );
+}

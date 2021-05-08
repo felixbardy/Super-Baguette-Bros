@@ -14,6 +14,9 @@ private:
     /// Le joueur
     Player player;
 
+    // Le score du joueur
+    int score;
+
     /// Tableau de segments prechargés
     Segment* segments;
     
@@ -32,9 +35,11 @@ private:
     /// Tableau stockant les tailles des tableaux de segments
     int* nPlatforms;
 
+    /// Contient les pièces actuellement chargées
+    vector<Entity*> pieces;
+
     //? Ajouter une liste pour d'autres entités
 
-    //! A chaque suppression d'animation de ce vector: FAIRE UN delete SUR LE POINTEUR
     /// Tableau dynamique stockant les pointeurs vers les Animations
     std::vector<Animation*> animations;
 
