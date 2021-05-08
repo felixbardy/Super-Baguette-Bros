@@ -127,7 +127,7 @@ doc:
 
 # Supprime les fichiers objet
 clean:
-	rm -rf obj/**.o
+	rm -rf obj/*.o obj/*/*.o
 
 # Supprime les fichiers objets, les exécutables et la documentation
 pentaclean: clean
