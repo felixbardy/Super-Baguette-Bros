@@ -93,7 +93,9 @@ void GraphicRenderer::renderWorld(Uint32 game_ticks, uint16_t player_inputs)
     //2.6• Dessiner le joueur
     drawPlayer(game_ticks, player_inputs);
     //2.7• Dessiner le 1er plan
-    
+    //TODO Dessiner le score
+    //TODO Dessiner les vies
+
     //3• Afficher le monde
     SDL_RenderPresent(renderer);
 }

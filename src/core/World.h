@@ -7,7 +7,7 @@
 #include "Player.h"
 #include "Segment.h"
 
-
+//TODO Documentation
 class World
 {
 private:
@@ -72,6 +72,8 @@ public:
 
     /// Retourne une référence du Player
     const Player& getPlayer() const;
+
+    //TODO getScore
 
     /// Renvoie une référence du vecteur de pieces
     const std::vector<Piece*>& getPieces() const;

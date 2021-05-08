@@ -580,6 +580,12 @@ void World::step()
         }
     }
 
+    //TODO Si le joueur tombe du niveau, perdre une vie
+
+    //TODO Si le joueur n'a plus de vie: perdre
+
+    //TODO Si le joueur atteint la fin: gagner
+
     //5• Chargement/Déchargement de segments
     
     if (centerLoadedSegment < nSegments - 2 
