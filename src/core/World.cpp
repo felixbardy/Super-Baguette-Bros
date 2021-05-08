@@ -409,7 +409,7 @@ void World::loadNextSegment()
     {
         Piece* piece = pieces[n];
         // On en profite pour retirer les pièces prises
-        if ( piece->isTaken() || piece->getOrigin() == &segments[centerLoadedSegment + 1] )
+        if ( piece->isTaken() || piece->getOrigin() == &segments[centerLoadedSegment - 1] )
             pieces.erase(pieces.begin() + n);
     } 
 
