@@ -90,7 +90,6 @@ struct PhysicAnimation : Animation
     Vec2f acc;
     /// Tendance à rebondir (0 (arrêt immédiat) -> 1 (pas de perte d'énergie))
     float bounciness;
-    ///TODO Ajouter des caractéristiques
 };
 
 /** \brief Renvoie une structure d'animation physique avec les paramètres donnés
@@ -99,8 +98,6 @@ struct PhysicAnimation : Animation
  * \param bounciness La propention de l'objet à rebondir (de 0 à 1)
  **/
 PhysicAnimation createPhysicAnimation(Entity* object, Vec2f acceleration, float bounciness, void* origin_segment = nullptr );
-
-///TODO Ajouter des types d'animation si besoin
 
 void testRegressionAnimations();
 

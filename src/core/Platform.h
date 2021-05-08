@@ -3,8 +3,6 @@
 
 #include "Entity.h"
 
-/// TODO Implémenter Platform après Entity
-
 class Platform : public Entity
 {
 private:

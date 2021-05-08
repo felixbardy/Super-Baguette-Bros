@@ -21,8 +21,6 @@ World::World(std::string filename)
   platforms(nullptr), segmentWidth(30),
   nPlatforms(nullptr)
 {
-    //FIXME Les erreurs qui stoppent l'exécution dans XMLCheckResult ou dans exit(...)
-    //      devraient donner un contexte plus clair...
     using namespace tinyxml2;
 
     // Initialisation du document
@@ -234,7 +232,6 @@ World::World(std::string filename)
             for (int x = minx; x <= maxx; x++)
             for (int y = miny; y <= maxy; y++)
             {
-                //TODO Ajouter une pièce au segment
                 current_segment.addPiece(x + offset, y);
             }
 
@@ -420,7 +417,6 @@ void World::loadNextSegment()
 
 void World::testRegression()
 {
-    // TODO Implémenter le test de régression de World
     cout << "World: constructeur par defaut... " ;
     World w1;
     assert(w1.platforms == nullptr);
@@ -429,7 +425,7 @@ void World::testRegression()
     assert(w1.centerLoadedSegment == 1);
     cout << "OK" << endl;
 
-    //TODO Completer le constructeur par fichier
+    //TODO Implémenter le test du constructeur par fichier
     cout << "World: constructeur par fichier... " ;
 
     cout << "WIP" << endl;

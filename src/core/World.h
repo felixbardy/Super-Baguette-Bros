@@ -53,7 +53,6 @@ private:
     void loadNextSegment();
 
 public:
-    //TODO Définir un constructeur par flux de fichier pour pouvoir charger un niveau 
     /// Constructeur par défaut (objet inutilisable)
     World();
     /// Constructeur par fichier
