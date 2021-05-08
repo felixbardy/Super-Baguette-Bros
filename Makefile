@@ -11,6 +11,8 @@ LFLAGS = -ggdb -Wall
 LOCAL_INCLUDES = 	src 
 
 ifeq ($(OS), MacOS)
+	CXX = clang++
+
 	LIB_INCLUDES = \
 		-I/Library/Frameworks/SDL2.framework/Headers \
 		-I/Library/Frameworks/SDL2_ttf.framework/Headers \
