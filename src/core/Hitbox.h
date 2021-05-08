@@ -43,6 +43,12 @@ private:
     // La hauteur de la Hitbox
     float height;
 public:
+
+    /**
+     * Constructeur par defaut
+     **/
+    Hitbox();
+
     /** \brief Constructeur par données de Hitbox
      * \param pos la position de la Hitbox
      * \param width la largeur de la Hitbox
@@ -223,6 +229,11 @@ public:
      * \param scale facteur de redimensionnement
      **/
     Hitbox resized(float scale) const;
+
+    /**
+     * Test de regression de Hitbox.
+    */
+    void testRegression();
 
 };
 
