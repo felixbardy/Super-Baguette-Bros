@@ -11,7 +11,8 @@
             <Animations count="0">
             </Animations>
             <Pieces>
-                <Bloc minx="3" miny="1" maxx="7" maxy="3"></Bloc>
+                <Bloc minx="3"  miny="1" maxx="7"  maxy="4"></Bloc>
+                <Bloc minx="10" miny="4" maxx="19" maxy="4"></Bloc>
             </Pieces>
         </Segment>
         <Segment>
