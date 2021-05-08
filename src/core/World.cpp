@@ -302,6 +302,7 @@ void World::loadFirstSegments()
     Segment* segment;
     Platform* new_platforms;
     Animation** new_animations;
+    std::vector<Entity*>* new_pieces;
     int platforms_size;
     int animations_size;
 
@@ -311,14 +312,19 @@ void World::loadFirstSegments()
         segment = &segments[i];
         segment->loadPlatforms(new_platforms, platforms_size);
         segment->loadAnimations(new_animations, animations_size);
+        new_pieces = segment->getPieces();
 
         // On charge les plateformes dans World
         platforms[i] = new_platforms;
         nPlatforms[i] = platforms_size;
 
-        // Et on charge les animations dans World
+        // On charge les animations dans World
         for (int j = 0; j < animations_size; j++)
             animations.push_back(new_animations[j]);
+        
+        // On charge les pieces dans World
+        for (int j = 0; j < new_pieces->size(); j++)
+            pieces.push_back( (*new_pieces)[j] );
     }
     
     

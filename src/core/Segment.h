@@ -65,6 +65,9 @@ public:
      * \param y position en y de la pièce
      **/
     void addPiece(int x, int y);
+
+    /// Renvoie un pointeur vers le vecteur de pieces du segment
+    vector<Entity*>* getPieces();
 };
 
 #endif //SEGMENT_H

@@ -131,3 +131,8 @@ void Segment::addPiece(int x, int y)
 {
     this->pieces.push_back( new Entity({(float)x,(float)y},1,1,0) );
 }
+
+vector<Entity*>* Segment::getPieces()
+{
+    return &pieces;
+}
