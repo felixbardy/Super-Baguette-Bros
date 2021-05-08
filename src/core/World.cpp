@@ -345,10 +345,17 @@ void World::loadPreviousSegment()
     {
         Animation* anim = animations[n];
         if( anim->origin_segment == &segments[centerLoadedSegment + 1] )
-        {// Si l'objet pointé est le premier du tableau d'animations on s'arrête
             animations.erase(animations.begin() + n);
-        }
     }
+
+    // Même chose pour les pièces
+    for (int n = pieces.size() - 1; n >= 0; n--)
+    {
+        Piece* piece = pieces[n];
+        // On en profite pour retirer les pièces prises
+        if ( piece->isTaken() || piece->getOrigin() == &segments[centerLoadedSegment + 1] )
+            pieces.erase(pieces.begin() + n);
+    } 
 
     /// Décalage des données
     platforms[2]=platforms[1];
@@ -360,14 +367,18 @@ void World::loadPreviousSegment()
     // On charge le segment d'index center-2 dans l'emplacement d'index 0
     segments[centerLoadedSegment-2].loadPlatforms(platforms[0],nPlatforms[0]);
 
+    // On charge les animations
     Animation** new_animations;
     int new_anim_size;
     segments[centerLoadedSegment-2].loadAnimations(new_animations, new_anim_size);
 
     for (int i = 0; i < new_anim_size; i++)
-    {
         animations.push_back(new_animations[i]);
-    }
+
+    // On charge les pieces
+    std::vector<Piece*>* new_pieces = segments[centerLoadedSegment-2].getPieces();
+    for (auto piece : *new_pieces)
+        if (!piece->isTaken()) pieces.push_back(piece);
 
     // On met à jour l'index de segment central
     centerLoadedSegment--; 
@@ -393,6 +404,15 @@ void World::loadNextSegment()
         }
     }
 
+    // Même chose pour les pièces
+    for (int n = pieces.size() - 1; n >= 0; n--)
+    {
+        Piece* piece = pieces[n];
+        // On en profite pour retirer les pièces prises
+        if ( piece->isTaken() || piece->getOrigin() == &segments[centerLoadedSegment + 1] )
+            pieces.erase(pieces.begin() + n);
+    } 
+
     ///changement de place des references
 
     platforms[0]=platforms[1];
@@ -404,14 +424,19 @@ void World::loadNextSegment()
     // On charge le segment d'index center+2 dans l'emplacement d'index 2
     segments[centerLoadedSegment+2].loadPlatforms(platforms[2],nPlatforms[2]);
 
+
+    // On charge les segments
     Animation** new_animations;
     int new_anim_size;
     segments[centerLoadedSegment+2].loadAnimations(new_animations, new_anim_size);
 
     for (int i = 0; i < new_anim_size; i++)
-    {
         animations.push_back(new_animations[i]);
-    }
+
+    // On charge les pieces
+    std::vector<Piece*>* new_pieces = segments[centerLoadedSegment+2].getPieces();
+    for (auto piece : *new_pieces)
+        if (!piece->isTaken()) pieces.push_back(piece);
 
     // On met à jour l'index de segment central
     centerLoadedSegment++; 
