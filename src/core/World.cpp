@@ -332,12 +332,7 @@ void World::loadFirstSegments()
 /// Charge le segment précédent et décale les autres dans la structure de donnée
 void World::loadPreviousSegment()
 {
-    //TODO Charger les pièces
     /// Déchargement des animations
-    //// [Effacé] Cette méthode repose sur le fait que toutes les animations
-    //// chargées depuis un segment ont des indexs adjacents dans le vecteur
-    //? L'implémentation actuelle est plus naïve mais ne repose
-    //? pas sur un savoir approximatif :/
 
     // On parcours le vecteur à l'envers pour être sûr
     // d'itérer sur l'intégralité malgré les suppressions
@@ -387,12 +382,7 @@ void World::loadPreviousSegment()
 /// Charge le segment suivant et décale les autres dans la structure de donnée
 void World::loadNextSegment()
 {
-    //TODO Charger les pièces
     /// Déchargement des animations
-    //// [Effacé] Cette méthode repose sur le fait que toutes les animations
-    //// chargées depuis un segment ont des indexs adjacents dans le vecteur
-    //? L'implémentation actuelle est plus naïve mais ne repose
-    //? pas sur un savoir approximatif :/
 
     // On parcours le vecteur à l'envers pour être sûr
     // d'itérer sur l'intégralité malgré les suppressions
