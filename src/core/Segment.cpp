@@ -34,6 +34,9 @@ Segment::~Segment()
         delete[] animations;
         animations = nullptr;
     }
+
+    for (auto piece : pieces)
+        delete piece;
 }
 
 
