@@ -36,7 +36,7 @@ private:
     int* nPlatforms;
 
     /// Contient les pièces actuellement chargées
-    vector<Entity*> pieces;
+    std::vector<Piece*> pieces;
 
     //? Ajouter une liste pour d'autres entités
 
@@ -74,7 +74,7 @@ public:
     const Player& getPlayer() const;
 
     /// Renvoie une référence du vecteur de pieces
-    const std::vector<Entity*>& getPieces();
+    const std::vector<Piece*>& getPieces() const;
 
     // Renvoie la longueur totale du niveau
     int getWorldEnd() const;

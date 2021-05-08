@@ -298,11 +298,10 @@ World::~World()
 
 void World::loadFirstSegments()
 {
-    //TODO Charger les pièces
     Segment* segment;
     Platform* new_platforms;
     Animation** new_animations;
-    std::vector<Entity*>* new_pieces;
+    std::vector<Piece*>* new_pieces;
     int platforms_size;
     int animations_size;
 
@@ -482,7 +481,7 @@ const Player& World::getPlayer() const
     return player;
 }
 
-const std::vector<Entity*>& World::getPieces()
+const std::vector<Piece*>& World::getPieces() const
 {
     return pieces;
 }
@@ -557,9 +556,8 @@ void World::step()
             // Si le joueur touche la pièce
             if (Hitbox::overlaping(piece->getHitbox(), player.getHitbox()))
             {
-                // Supprimer la pièce
-                delete pieces[i];
-                pieces[i] = nullptr;
+                // Marquer la pièce comme prise
+                pieces[i]->setTaken(true);
 
                 // Et augmenter le score du joueur
                 score++;
