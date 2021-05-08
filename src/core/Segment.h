@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "Animation.h"
-#include "Platform.h"
+#include "Objects.h"
 
 class Segment
 {
@@ -22,7 +22,7 @@ private:
     /// Nombre d'animations associées au segment
     int nAnimations;
     /// Les pièces du segment
-    std::vector<Entity*> pieces;
+    std::vector<Piece*> pieces;
 public:
     ///Constructeur par défaut, le segment est inutilisable tel quel.
     Segment();
@@ -67,7 +67,7 @@ public:
     void addPiece(int x, int y);
 
     /// Renvoie un pointeur vers le vecteur de pieces du segment
-    vector<Entity*>* getPieces();
+    vector<Piece*>* getPieces();
 };
 
 #endif //SEGMENT_H

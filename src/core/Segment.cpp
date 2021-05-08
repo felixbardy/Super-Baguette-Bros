@@ -129,10 +129,10 @@ int Segment::getNAnimation()
 
 void Segment::addPiece(int x, int y)
 {
-    this->pieces.push_back( new Entity({(float)x,(float)y},0.7,0.7,0) );
+    this->pieces.push_back( new Piece({x,y}, this) );
 }
 
-vector<Entity*>* Segment::getPieces()
+vector<Piece*>* Segment::getPieces()
 {
     return &pieces;
 }
