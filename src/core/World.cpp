@@ -602,7 +602,8 @@ void World::step()
     //FIXME Actuellement, les segments sont chargés et déchargés jusqu'à atteindre le début
     if (player.getPosition().y < 0 
         || player.getPosition().x < 0 
-        || player.getPosition().y > 25)
+        || player.getPosition().y > 25
+        || player.getPosition().x > getWorldEnd())
     {
         Vec2f posInitiale;
         posInitiale.x=1;
