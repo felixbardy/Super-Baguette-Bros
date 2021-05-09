@@ -585,7 +585,9 @@ void World::step()
 
     // Si le joueur tombe du niveau, perdre une vie.
     //FIXME Actuellement, les segments sont chargés et déchargés jusqu'à atteindre le début
-    if (player.getPosition().y < 0)
+    if (player.getPosition().y < 0 
+        || player.getPosition().x < 0 
+        || player.getPosition().y > 25)
     {
         Vec2f posInitiale;
         posInitiale.x=1;
@@ -593,6 +595,7 @@ void World::step()
         player.removeLife();
         player.setPosition(posInitiale);
         cout << "Nombre de vies:" << player.getLives() << endl;
+        loadFirstSegments();
     }
     
 
@@ -603,6 +606,11 @@ void World::step()
     }
 
     //TODO Si le joueur atteint la fin: gagner
+    if (player.getPosition().x >= getGoal().getPosition().x-4
+        && player.getPosition().y >= getGoal().getPosition().y-4)
+    {
+        cout << "Victoire";
+    }
 
     //5• Chargement/Déchargement de segments
     
