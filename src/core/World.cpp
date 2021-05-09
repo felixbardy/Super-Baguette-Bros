@@ -553,7 +553,7 @@ void World::step()
     {
         if(!player.isInAir())
             player.jump();
-        else if (player.jumpsAvailable() < 10)
+        else if (player.jumpsAvailable() < 20)
             player.jump();
     }
     // 3.3• Si le joueur ne saute pas, vérifier la présence d'une plateforme en dessous:

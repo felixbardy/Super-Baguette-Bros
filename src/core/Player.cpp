@@ -32,7 +32,7 @@ void Player::moveRight()
 void Player::jump()
 {
     //if (!in_air)
-    move({0,0.75});
+    move({0,0.5});
     in_air = true;
     jumptimer++;
 }
