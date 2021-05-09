@@ -454,9 +454,11 @@ void World::loadNextSegment()
 
 void World::testRegression()
 {
+    //TODO Tester les frames
+
     cout << "World: constructeur par defaut... " ;
     World w1;
-    assert(w1.platforms == nullptr);
+    assert(w1.getPlatforms() == nullptr);
     assert(w1.segments == nullptr);
     assert(w1.nPlatforms == nullptr);
     assert(w1.centerLoadedSegment == 1);
@@ -480,7 +482,7 @@ void World::testRegression()
     cout << "OK" << endl;
 
     cout << "World: Player du constructeur par segment:" << endl;
-    w2.player.testRegression();
+    w2.getPlayer().testRegression();
     w2.setPlayerInputs(Player::RIGHT);
     assert(w2.player.checkInput(Player::RIGHT));
     cout << "OK" << endl;
@@ -493,7 +495,14 @@ void World::testRegression()
     //TODO test regression de step
     cout << "WIP" << endl;
 
-
+    cout << "World: des autres getters...";
+    assert(getScore() == 0);
+    score++;
+    assert(getScore() == 1);
+    w2.segmentWidth = 1;
+    assert(w1.getWorldEnd() == 0);
+    assert(w2.getWorldEnd() == w2.nSegments * w2.segmentWidth);
+    cout << "OK" << endl;
 
 }
 
