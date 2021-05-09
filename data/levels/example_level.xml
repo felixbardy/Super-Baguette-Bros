@@ -25,6 +25,7 @@
             <Animations count="0">
             </Animations>
             <Pieces>
+                <Bloc minx="11" miny="4" maxx="12" maxy="8"></Bloc>
             </Pieces>
         </Segment>
         <Segment>
@@ -38,6 +39,13 @@
                 <Animation type="0" target="0" start_x="60" start_y="14" mov_x="0" mov_y="15" speed="1"></Animation>
             </Animations>
             <Pieces>
+                <Bloc minx="0" miny="12" maxx="4" maxy="12"></Bloc>
+                <Bloc minx="20" miny="14" maxx="21" maxy="15"></Bloc>
+                <Bloc minx="22" miny="12" maxx="23" maxy="13"></Bloc>
+                <Bloc minx="24" miny="10" maxx="25" maxy="11"></Bloc>
+                <Bloc minx="26" miny="8" maxx="27" maxy="9"></Bloc>
+                <Bloc minx="28" miny="6" maxx="29" maxy="7"></Bloc>
+                <Bloc minx="30" miny="4" maxx="31" maxy="5"></Bloc>
             </Pieces>
         </Segment>
         <Segment>
