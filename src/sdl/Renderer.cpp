@@ -50,7 +50,7 @@ void GraphicRenderer::renderWorld(Uint32 game_ticks, uint16_t player_inputs)
 
     Platform** all_platforms = world->getPlatforms();
     const int* platform_sizes = world->getPlatformsSizes();
-    SDL_Rect srcrect_platform = {0, 66, 33, 33};
+    SDL_Rect srcrect_platform = {0, 66, 33, 30};
 
     for (int i = 0; i < 3; i++)
     {   // Dessiner chaque liste de plateformes
@@ -75,7 +75,7 @@ void GraphicRenderer::renderWorld(Uint32 game_ticks, uint16_t player_inputs)
     //2.4• Dessiner les pièces
 
     const std::vector<Piece*> pieces = world->getPieces();
-    SDL_Rect srcrect_piece = {33, 66, 33, 33};
+    SDL_Rect srcrect_piece = {33, 66, 24, 24};
     SDL_Rect dstrect;
     Vec2f screen_pos;
 
