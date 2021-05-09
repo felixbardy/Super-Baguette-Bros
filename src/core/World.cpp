@@ -601,7 +601,6 @@ void World::step()
     if (player.getLives() == 0)
     {
         //TODO Completer
-        cout << "game over";
     }
 
     //TODO Si le joueur atteint la fin: gagner
