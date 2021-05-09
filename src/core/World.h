@@ -88,7 +88,8 @@ public:
     /// Retourne une référence du Player
     const Player& getPlayer() const;
 
-    //TODO getScore
+    /// Renvoie le score actuel du joueur
+    int getScore() const;
 
     /// Renvoie une référence du vecteur de pieces
     const std::vector<Piece*>& getPieces() const;

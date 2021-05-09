@@ -496,6 +496,11 @@ const Player& World::getPlayer() const
     return player;
 }
 
+int World::getScore() const
+{
+    return score;
+}
+
 const std::vector<Piece*>& World::getPieces() const
 {
     return pieces;
