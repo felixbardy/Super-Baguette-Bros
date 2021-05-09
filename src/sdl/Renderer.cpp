@@ -1,7 +1,7 @@
 #include "Renderer.h"
 
-GraphicRenderer::GraphicRenderer(World* world, SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* sprite_sheet)
-: world(world), window(window), renderer(renderer), sprite_sheet(sprite_sheet)
+GraphicRenderer::GraphicRenderer(World* world, SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* sprite_sheet, TTF_Font* font)
+: world(world), window(window), renderer(renderer), sprite_sheet(sprite_sheet), font(font)
 {
     int win_h;
     SDL_GetWindowSize(window, NULL, &win_h);
@@ -50,7 +50,7 @@ void GraphicRenderer::renderWorld(Uint32 game_ticks, uint16_t player_inputs)
 
     Platform** all_platforms = world->getPlatforms();
     const int* platform_sizes = world->getPlatformsSizes();
-    SDL_Rect srcrect_platform = {0, 66, 33, 33};
+    SDL_Rect srcrect_platform = {0, 66, 33, 30};
 
     for (int i = 0; i < 3; i++)
     {   // Dessiner chaque liste de plateformes
@@ -75,7 +75,7 @@ void GraphicRenderer::renderWorld(Uint32 game_ticks, uint16_t player_inputs)
     //2.4• Dessiner les pièces
 
     const std::vector<Piece*> pieces = world->getPieces();
-    SDL_Rect srcrect_piece = {33, 66, 33, 33};
+    SDL_Rect srcrect_piece = {33, 66, 24, 24};
     SDL_Rect dstrect;
     Vec2f screen_pos;
 
@@ -93,8 +93,42 @@ void GraphicRenderer::renderWorld(Uint32 game_ticks, uint16_t player_inputs)
     //2.6• Dessiner le joueur
     drawPlayer(game_ticks, player_inputs);
     //2.7• Dessiner le 1er plan
-    //TODO Dessiner le score
-    //TODO Dessiner les vies
+    
+    //2.7.1• Afficher les vies
+    // Dessin du coeur
+    SDL_Rect srcrect_coeur = {57,66,34,30};
+    dstrect = {0, 0, 2*unit_size, 2*unit_size};
+    SDL_RenderCopy(renderer, sprite_sheet, &srcrect_coeur, &dstrect);
+
+
+    // Nombre de vies
+    std::string text = to_string(player.getLives());
+    SDL_Surface* text_surface = TTF_RenderText_Blended(font, text.c_str(), {255, 255, 255});
+	SDL_Texture* text_texture = SDL_CreateTextureFromSurface(renderer, text_surface);
+
+    dstrect = {2*unit_size, 0, unit_size * (int)text.length(), 2*unit_size};
+    SDL_RenderCopy(renderer, text_texture, NULL, &dstrect);
+
+    // Libérer la surface et la texture
+    SDL_FreeSurface(text_surface);
+    SDL_DestroyTexture(text_texture);
+
+    //2.7.2• Afficher le score
+
+    // Dessin de la pièce
+    dstrect = {win_w - 2*unit_size, 0, 2*unit_size, 2*unit_size};
+    SDL_RenderCopy(renderer, sprite_sheet, &srcrect_piece, &dstrect);
+
+    text = to_string(world->getScore());
+    text_surface = TTF_RenderText_Blended(font, text.c_str(), {255, 255, 255});
+	text_texture = SDL_CreateTextureFromSurface(renderer, text_surface);
+
+    dstrect = {win_w - (2 + (int)text.length()) * unit_size, 0, (int)text.length() * unit_size, 2*unit_size};
+    SDL_RenderCopy(renderer, text_texture, NULL, &dstrect);
+
+    // Libérer la surface et la texture
+    SDL_FreeSurface(text_surface);
+    SDL_DestroyTexture(text_texture);
 
     //3• Afficher le monde
     SDL_RenderPresent(renderer);

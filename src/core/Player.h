@@ -100,7 +100,7 @@ public:
     void addLife();
 
     /// Renvoie le nombre de vies du joueur
-    int checkLife() const;
+    int getLives() const;
 
     /// Renvoie la direction actuelle du joueur
     uint16_t getDirection() const;

@@ -496,6 +496,11 @@ const Player& World::getPlayer() const
     return player;
 }
 
+int World::getScore() const
+{
+    return score;
+}
+
 const std::vector<Piece*>& World::getPieces() const
 {
     return pieces;
@@ -562,11 +567,11 @@ void World::step()
     player.clearAllInputs();
 
     //4• Collectage des pièces
-    Entity* piece = nullptr;
+    Piece* piece = nullptr;
     for (int i = pieces.size() - 1; i >= 0; i--)
     {
         piece = pieces[i];
-        if (piece != nullptr)
+        if (!piece->isTaken())
         {
             // Si le joueur touche la pièce
             if (Hitbox::overlaping(piece->getHitbox(), player.getHitbox()))
@@ -589,12 +594,12 @@ void World::step()
         posInitiale.y=1;
         player.removeLife();
         player.setPosition(posInitiale);
-        cout << "Nombre de vies:" << player.checkLife() << endl;
+        cout << "Nombre de vies:" << player.getLives() << endl;
     }
     
 
     //TODO Si le joueur n'a plus de vie: perdre
-    if (player.checkLife() == 0)
+    if (player.getLives() == 0)
     {
         //TODO Completer
     }
