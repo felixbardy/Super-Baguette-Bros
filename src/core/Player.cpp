@@ -5,7 +5,7 @@
 using namespace std;
 
 Player::Player()
-: current_input(0), in_air(false), jumping(false),
+: current_input(0), in_air(false), jumping(false), jumptimer(0),
   lives(3), direction(RIGHT)
 {
     setWidth(1);
@@ -32,8 +32,9 @@ void Player::moveRight()
 void Player::jump()
 {
     //if (!in_air)
-    move({0,0.2});
+    move({0,0.75});
     in_air = true;
+    jumptimer++;
 }
 
 void Player::fall()
@@ -173,4 +174,14 @@ int Player::getLives() const
 uint16_t Player::getDirection() const
 {
     return direction;
+}
+
+int Player::jumpsAvailable() const
+{
+    return jumptimer;
+}
+
+void Player::jumpReset()
+{
+    jumptimer = 0;
 }
