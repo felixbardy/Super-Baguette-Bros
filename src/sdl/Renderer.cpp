@@ -89,7 +89,16 @@ void GraphicRenderer::renderWorld(Uint32 game_ticks, uint16_t player_inputs)
         }
     }
 
-    //2.5• Dessiner les autres entités 
+    //2.5• Dessiner les autres entités
+
+    // Dessiner l'objectif
+    SDL_Rect srcrect_goal = {91, 66, 30, 30};
+    const Entity& goal = world->getGoal();
+    screen_pos = worldToScreen( goal.getPosition() );
+
+    dstrect = {(int)screen_pos.x, (int)screen_pos.y, 2*unit_size, 2*unit_size};
+    SDL_RenderCopy(renderer, sprite_sheet, &srcrect_goal, &dstrect);
+
     //2.6• Dessiner le joueur
     drawPlayer(game_ticks, player_inputs);
     //2.7• Dessiner le 1er plan
