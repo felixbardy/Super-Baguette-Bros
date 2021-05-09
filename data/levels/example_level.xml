@@ -1,6 +1,7 @@
 <Root>
     <SegmentWidth>30</SegmentWidth>
     <Player x="1" y="3"></Player>
+    <Goal segment_index="5" x="19" y="15"></Goal>
     <Segments count="6">
         <Segment>
             <Platforms count="3">
@@ -64,7 +65,7 @@
         <Segment>
             <Platforms count="3">
                 <Platform x="0" y="8"  width="10" height="1" angle="0"></Platform>
-                <Platform x="10" y="14" width="10" height="1" angle="0"></Platform>
+                <Platform x="10" y="14" width="11" height="1" angle="0"></Platform>
                 <Platform x="0" y="11" width="5"  height="1" angle="0"></Platform>
             </Platforms>
             <Animations count="2">
