@@ -585,7 +585,8 @@ void World::step()
         }
     }
 
-//TODO Si le joueur tombe du niveau, perdre une vie. Optimiser
+    // Si le joueur tombe du niveau, perdre une vie.
+    //FIXME Actuellement, les segments sont chargés et déchargés jusqu'à atteindre le début
     if (player.getPosition().y < 0)
     {
         Vec2f posInitiale;
