@@ -64,9 +64,9 @@ SDL_OBJECTS = obj/sdl/Renderer.o
 
 .PHONY: default all doc clean pentaclean core_test console_test sprite_test sdl_test
 
-default: all
+default: sdl_test
 
-all: core_test doc
+all: sdl_test doc
 
 
 # * * * * * * * #
