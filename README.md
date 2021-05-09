@@ -71,7 +71,7 @@ Génère la documentation en html à l'aide de Doxygen
 Supprime les fichiers `.o` de `obj/`
 
 * `pentaclean`: \
-Supprime également les contenus de `bin` et `doc/` (sauf `image.doxy` et les contenus de `doc/img`)
+Supprime également les contenus de `bin` et `doc/` (sauf `doc/Doxyfile` et les contenus de `doc/img`)
 
 ## Développement
 
