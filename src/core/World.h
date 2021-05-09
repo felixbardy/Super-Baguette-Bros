@@ -53,6 +53,9 @@ private:
     /// Contient les pièces actuellement chargées
     std::vector<Piece*> pieces;
 
+    /// L'entité représentant l'objectif à atteindre
+    Entity goal;
+
     //? Ajouter une liste pour d'autres entités
 
     /// Tableau dynamique stockant les pointeurs vers les Animations
@@ -94,8 +97,11 @@ public:
     /// Renvoie une référence du vecteur de pieces
     const std::vector<Piece*>& getPieces() const;
 
-    // Renvoie la longueur totale du niveau
+    /// Renvoie la longueur totale du niveau
     int getWorldEnd() const;
+
+    /// Renvoie l'objectif du niveau
+    const Entity& getGoal() const;
 
     /** \brief Passe l'input au Player pour l'nterpréter lors de la prochaine boucle
      * \param input_mask Le masque représentant les inputs à activer

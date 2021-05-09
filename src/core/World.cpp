@@ -42,9 +42,26 @@ World::World(std::string filename)
     XMLElement* segment_width_elt = root->FirstChildElement("SegmentWidth");
     // Si c'est nullptr, j'ai peur...
     if (segment_width_elt == nullptr) exit(XML_ERROR_PARSING_ELEMENT);
+    result = segment_width_elt->QueryFloatText(&(this->segmentWidth)); XMLCheckResult(result);
+
+    // Récupérer l'objectif
+
+    XMLElement* goal = root->FirstChildElement("Goal");
+    // Si c'est nullptr, j'ai peur...
+    if (goal == nullptr) exit(XML_ERROR_PARSING_ELEMENT);
+    int goal_x, goal_y, goal_seg_index;
+    result = goal->QueryIntAttribute("segment_index", &goal_seg_index); XMLCheckResult(result);
+    result = goal->QueryIntAttribute("x", &goal_x); XMLCheckResult(result);
+    result = goal->QueryIntAttribute("y", &goal_y); XMLCheckResult(result);
+
+    this->goal = Entity({(float)goal_x + goal_seg_index * segmentWidth, (float)goal_y},2,2,0);
+
+    cout << "goal.x: " << this->goal.getPosition().x <<endl;
+    cout << "goal.y: " << this->goal.getPosition().y <<endl;
+    cout << "goal.width: " << this->goal.getWidth() <<endl;
+    cout << "goal.height: " << this->goal.getHeight() <<endl;
     
 
-    result = segment_width_elt->QueryFloatText(&(this->segmentWidth)); XMLCheckResult(result);
 
     // Récupérer la liste des segments
     XMLElement* segment_list = root->FirstChildElement("Segments");
@@ -480,41 +497,22 @@ void World::testRegression()
 
 }
 
-Platform** World::getPlatforms() const
-{
-    return platforms;
-}
+Platform** World::getPlatforms() const { return platforms; }
 
-const int* World::getPlatformsSizes() const
-{
-    return nPlatforms;
-}
+const int* World::getPlatformsSizes() const { return nPlatforms; }
 
 
-const Player& World::getPlayer() const
-{
-    return player;
-}
+const Player& World::getPlayer() const { return player; }
 
-int World::getScore() const
-{
-    return score;
-}
+int World::getScore() const { return score; }
 
-const std::vector<Piece*>& World::getPieces() const
-{
-    return pieces;
-}
+const std::vector<Piece*>& World::getPieces() const { return pieces; }
 
-int World::getWorldEnd() const
-{
-    return (nSegments) * segmentWidth;
-}
+int World::getWorldEnd() const { return (nSegments) * segmentWidth; }
 
-void World::setPlayerInputs(uint16_t input_mask)
-{
-    player.addInput(input_mask);
-}
+const Entity& World::getGoal() const { return goal; }
+
+void World::setPlayerInputs(uint16_t input_mask) { player.addInput(input_mask); }
 
 void World::step()
 {
