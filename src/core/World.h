@@ -32,6 +32,9 @@ private:
     // Le score du joueur
     int score;
 
+    // Le nombre de frames calculées depuis le début
+    unsigned long int frameCount;
+
     /// Tableau de segments prechargés
     Segment* segments;
     

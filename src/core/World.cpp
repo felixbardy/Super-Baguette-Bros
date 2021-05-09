@@ -8,7 +8,7 @@
 #include "extern/tinyxml2.h"
 
 World::World()
-: score(0),
+: score(0), frameCount(0),
   segments(nullptr), centerLoadedSegment(1),
   platforms(nullptr), nPlatforms(nullptr)
 {
@@ -16,7 +16,7 @@ World::World()
 }
 
 World::World(std::string filename)
-: score(0), 
+: score(0), frameCount(0),
   segments(nullptr), centerLoadedSegment(1),
   platforms(nullptr), segmentWidth(30),
   nPlatforms(nullptr)
@@ -618,4 +618,7 @@ void World::step()
     {
         loadPreviousSegment();
     }
+
+    //6• Incrémenter le compteur de frames
+    frameCount++;
 }
