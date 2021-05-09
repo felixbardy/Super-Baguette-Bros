@@ -18,8 +18,8 @@
 - Se déplacer ✅
 - Sauter 🕑 50% \
 (Le personnage est capable de sauter indéfiniment)
-- Mourir ❌
-- Gagner ❌
+- Mourir 🕑
+- Gagner 🕑
 
 ### Avoir des plateformes: ✅
 
@@ -50,9 +50,9 @@
 - Qui tuent ❌
 - Éliminables ❌
 
-### Avoir des pièces: ❌
+### Avoir des pièces: ✅
 
-- Récoltables ❌
+- Récoltables ✅
 - Chargées au fur et à mesure ✅
 
 D'autres types d'animations pour les plateformes 🕑 40% \
