@@ -567,11 +567,11 @@ void World::step()
     player.clearAllInputs();
 
     //4• Collectage des pièces
-    Entity* piece = nullptr;
+    Piece* piece = nullptr;
     for (int i = pieces.size() - 1; i >= 0; i--)
     {
         piece = pieces[i];
-        if (piece != nullptr)
+        if (!piece->isTaken())
         {
             // Si le joueur touche la pièce
             if (Hitbox::overlaping(piece->getHitbox(), player.getHitbox()))
