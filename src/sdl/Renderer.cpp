@@ -1,7 +1,7 @@
 #include "Renderer.h"
 
-GraphicRenderer::GraphicRenderer(World* world, SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* sprite_sheet)
-: world(world), window(window), renderer(renderer), sprite_sheet(sprite_sheet)
+GraphicRenderer::GraphicRenderer(World* world, SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* sprite_sheet, TTF_Font* font)
+: world(world), window(window), renderer(renderer), sprite_sheet(sprite_sheet), font(font)
 {
     int win_h;
     SDL_GetWindowSize(window, NULL, &win_h);

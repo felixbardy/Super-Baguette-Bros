@@ -16,6 +16,7 @@ private:
     SDL_Window* window;
     SDL_Renderer* renderer;
     SDL_Texture* sprite_sheet;
+    TTF_Font* font;
     int unit_size;
     int camera_offset;
 
@@ -23,7 +24,7 @@ private:
 
     void drawPlayer(Uint32 game_ticks, uint16_t player_inputs);
 public:
-    GraphicRenderer(World* world, SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* sprite_sheet);
+    GraphicRenderer(World* world, SDL_Window* window, SDL_Renderer* renderer, SDL_Texture* sprite_sheet, TTF_Font* font);
     ~GraphicRenderer();
 
     void renderWorld(Uint32 game_ticks, uint16_t player_input);

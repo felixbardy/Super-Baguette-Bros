@@ -16,6 +16,13 @@ int main()
 
     SDL_Init(SDL_INIT_VIDEO);
     IMG_Init(IMG_INIT_PNG);
+    if ( TTF_Init() == -1)
+    {
+        cout << "Failed to initialize SDL_TTF!" << endl;
+        IMG_Quit();
+        SDL_Quit();
+        exit(1);
+    }
 
     SDL_Window* window = SDL_CreateWindow(
         "Super baguette bros",
@@ -29,12 +36,21 @@ int main()
     SDL_Surface* sprite_sheet = IMG_Load("data/sprite-sheet.png");
 
     SDL_Texture* sprite_sheet_tex = SDL_CreateTextureFromSurface(renderer, sprite_sheet);
-    //TODO Définir une/des classe pour gérer le spritesheet (nécéssite une discussion)
+
+    TTF_Font* blocky_font = TTF_OpenFont("data/blocky.ttf", 24);
+    if (blocky_font == NULL)
+    {
+        cout << "Failed to open font!" << endl;
+        TTF_Quit();
+        IMG_Quit();
+        SDL_Quit();
+        exit(1);
+    }
 
     SDL_SetRenderDrawColor(renderer, 168, 230, 255, 255);
     SDL_RenderClear(renderer);
 
-    GraphicRenderer game_renderer(&world, window, renderer, sprite_sheet_tex);
+    GraphicRenderer game_renderer(&world, window, renderer, sprite_sheet_tex, blocky_font);
 
     Uint32 ticks, game_ticks;
     Uint32 previous_game_tick = -1;
@@ -114,11 +130,14 @@ int main()
     SDL_DestroyTexture(sprite_sheet_tex);
     //Détruire la surface
     SDL_FreeSurface(sprite_sheet);
+    //Fermer la police
+    TTF_CloseFont(blocky_font);
     //Détruire le renderer
     SDL_DestroyRenderer(renderer);
     //Détruire la fenêtre
     SDL_DestroyWindow(window);
-    //Fermer SDL et SDL_Image
+    //Fermer SDL, SDL_Image et SDL_ttf
+    TTF_Quit();
     IMG_Quit();
     SDL_Quit();
 
