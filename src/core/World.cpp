@@ -593,12 +593,12 @@ void World::step()
         posInitiale.y=1;
         player.removeLife();
         player.setPosition(posInitiale);
-        cout << "Nombre de vies:" << player.checkLife() << endl;
+        cout << "Nombre de vies:" << player.getLives() << endl;
     }
     
 
     //TODO Si le joueur n'a plus de vie: perdre
-    if (player.checkLife() == 0)
+    if (player.getLives() == 0)
     {
         //TODO Completer
         cout << "game over";

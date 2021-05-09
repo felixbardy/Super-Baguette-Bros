@@ -95,7 +95,7 @@ void Player::testRegression() const
     cout << "Player: lives...";
 
     p.removeLife();
-    assert(p.checkLife() == 2);
+    assert(p.getLives() == 2);
     p.addLife();
     assert(p.lives == 3);
 
@@ -165,7 +165,7 @@ void Player::addLife()
     lives++;
 }
 
-int Player::checkLife() const
+int Player::getLives() const
 {
     return lives;
 }
