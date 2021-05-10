@@ -54,12 +54,14 @@ void Segment::testRegression()
     cout << "OK" << endl;
 
 
-    cout << "Segment: Constructuer... ";
+    cout << "Segment: Constructeur... ";
 
     Platform * Plats = nullptr;
     Plats = new Platform[5];
     Animation** A = nullptr;
     A = new Animation*[5];
+    for (int i = 0; i < 5; i++)
+        A[i] = new Animation();
     Segment S2(Plats, 5, A, 5);
     assert(S2.nPlatforms == 5);
     assert(S2.getNAnimation() == 5);
@@ -79,6 +81,8 @@ void Segment::testRegression()
     assert(S.platforms != nullptr);
     assert(S.nPlatforms == 10);
     S.setAnimations(A2, 10);
+    for (int i = 0; i < 10; i++)
+        A2[i] = new Animation();
     assert(S.animations != nullptr);
     assert(S.nAnimations == 10);
 
