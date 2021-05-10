@@ -27,6 +27,7 @@ private:
     /// Indique si le joueur est en train de sauter
     bool jumping;
 
+    /// Indique le temps que le saut dure
     int jumptimer;
 
     /// Stocke les masques passés comme input
@@ -109,6 +110,7 @@ public:
 
     int jumpsAvailable() const;
 
+    /// Remet le compteur de sauts à 0
     void jumpReset();
 
 };
