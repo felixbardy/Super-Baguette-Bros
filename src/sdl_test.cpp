@@ -145,7 +145,6 @@ int main()
                 else 
                 if (event.type == SDL_KEYDOWN)
                 {   //Si une touche est enfoncée
-                    cout << "Hello" <<endl;
                     if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
                     {
                             quit = true;
@@ -179,7 +178,6 @@ int main()
                 else 
                 if (event.type == SDL_KEYDOWN)
                 {   //Si une touche est enfoncée
-                    cout << "Bye" <<endl;
                     if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
                     {
                             quit = true;
