@@ -143,10 +143,6 @@ void GraphicRenderer::renderWorld(Uint32 game_ticks, uint16_t player_inputs)
     SDL_RenderPresent(renderer);
 }
 
-/**
- * \brief Renvoie les coordonnées sur la fenêtre correspondant aux coordonnées du monde données
- * \param pos les coordonées à convertir
- **/
 Vec2f GraphicRenderer::worldToScreen(Vec2f pos) const
 {
     int win_h;
@@ -157,11 +153,6 @@ Vec2f GraphicRenderer::worldToScreen(Vec2f pos) const
     );
 }
 
-/**
- * \brief Dessine le joueur
- * \param game_ticks le numéro de frame actuel (utilisé pour alterner les sprites de marche)
- * \param player_inputs les inputs fournis au joueur cette frame là
- **/
 void GraphicRenderer::drawPlayer(Uint32 game_ticks, uint16_t player_inputs)
 {
     //2.6• Dessiner le joueur
