@@ -6,6 +6,19 @@
 #include "Animation.h"
 #include "Objects.h"
 
+/** \class Segment Segment.h "src/core/segment.h"
+ * \brief représente une portion d'un niveau
+ * 
+ * Un Segment est une portion de niveau.<br>
+ * Il s'agit d'une classe de stockage qui contient 
+ * les plateformes, pièces, animations et autres entités
+ * de sa section du niveau.<br>
+ * Il sera chargé et déchargé au besoin par World 
+ * pour alléger les calculs en évitant par exemple 
+ * d'avoir à détécter les collisions entre le joueur au début
+ * et une plateforme en bout de niveau.
+ * 
+ **/
 class Segment
 {
 private:
