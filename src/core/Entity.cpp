@@ -58,6 +58,8 @@ void    Entity::testRegression()
     assert(EntityTest.vel.x == 15 && EntityTest.vel.y == 15);
     EntityTest.setAngle(15);
     assert(EntityTest.getAngle() == 15);
+    EntityTest.rotate(5.5);
+    assert(EntityTest.angle == (15 + 5.5));
 
     cout << "OK" << endl;
 

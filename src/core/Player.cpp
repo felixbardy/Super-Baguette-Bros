@@ -89,6 +89,7 @@ void Player::testRegression() const
     assert(p.lives == 3);
     assert(p.current_input == 0);
     assert(p.getHeight() == 2 && p.getWidth() == 1);
+    assert(p.jumptimer == 0);
 
     cout << "OK" << endl;
 
@@ -107,6 +108,9 @@ void Player::testRegression() const
 
     p.jump();
     assert(p.in_air);
+    assert(p.jumpsAvailable() == 1);
+    p.jumpReset();
+    assert(p.jumptimer == 0);
 
     cout << "OK" << endl;
 

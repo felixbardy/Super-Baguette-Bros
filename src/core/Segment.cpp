@@ -42,7 +42,6 @@ Segment::~Segment()
 
 void Segment::testRegression()
 {
-    //TODO Optimiser?
 
     cout << "Segment: constructeur par défaut... ";
 
@@ -50,7 +49,7 @@ void Segment::testRegression()
     assert(S.platforms == nullptr);
     assert(S.nPlatforms == 0);
     assert(S.animations == nullptr);
-    assert(S.nAnimations == 0);
+    assert(S.getNAnimation() == 0);
 
     cout << "OK" << endl;
 
@@ -76,16 +75,12 @@ void Segment::testRegression()
     Plats2 = new Platform[10];
     Animation** A2 = nullptr;
     A2 = new Animation*[10];
-    //! ATTENTION
-    //FIXME Appeler setPlatforms sur un segment existant ne détruit pas les données remplacées
-    //? Je suggère de juste considérer cet appel comme illégal (donc ne pas le tester ou renvoyer une erreur si les données sont déjà initialisées)
-    S2.setPlatforms(Plats2, 10);
-    assert(S2.platforms != nullptr);
-    assert(S2.nPlatforms == 10);
-    //! Même chose pour setAnimations
-    S2.setAnimations(A2, 10);
-    assert(S2.animations != nullptr);
-    assert(S2.nAnimations == 10);
+    S.setPlatforms(Plats2, 10);
+    assert(S.platforms != nullptr);
+    assert(S.nPlatforms == 10);
+    S.setAnimations(A2, 10);
+    assert(S.animations != nullptr);
+    assert(S.nAnimations == 10);
 
     cout << "OK" << endl;
 
