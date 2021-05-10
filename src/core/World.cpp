@@ -462,10 +462,21 @@ void World::testRegression()
     assert(w1.segments == nullptr);
     assert(w1.nPlatforms == nullptr);
     assert(w1.centerLoadedSegment == 1);
+    assert(w1.frameCount == 0);
+    assert(w1.score == 0);
     cout << "OK" << endl;
 
     //TODO Implémenter le test du constructeur par fichier
     cout << "World: constructeur par fichier... " ;
+
+    /*World w3("data/levels/example_level.xml");
+    assert(w3.score == 0);
+    assert(w3.frameCount == 0);
+    assert(w3.getPlatforms() != nullptr);
+    assert(w3.getPlatformsSizes() != nullptr);
+    assert(w3.segments != nullptr);
+    assert(w3.nSegments == 6);*/
+    
 
     cout << "WIP" << endl;
 
@@ -478,6 +489,7 @@ void World::testRegression()
     assert(w2.getPlatformsSizes() != nullptr);
     assert(w2.segments != nullptr);
     assert(w2.nSegments == 5);
+    assert(w2.score == 0);
 
     cout << "OK" << endl;
 
@@ -500,7 +512,6 @@ void World::testRegression()
     score++;
     assert(getScore() == 1);
     w2.segmentWidth = 1;
-    assert(w1.getWorldEnd() == 0);
     assert(w2.getWorldEnd() == w2.nSegments * w2.segmentWidth);
     cout << "OK" << endl;
 
@@ -523,7 +534,7 @@ const Entity& World::getGoal() const { return goal; }
 
 void World::setPlayerInputs(uint16_t input_mask) { player.addInput(input_mask); }
 
-void World::step()
+int World::step()
 {
     // 3• On applique l'update physique:
 
@@ -538,10 +549,16 @@ void World::step()
         player.setHeight(2);
 
     // 3.2• Si le joueur saute, on met in_air à true et on incrémente la position en y
-    if (player.checkInput(Player::JUMP)) player.jump();
-    // 3.3• Si le joueur ne saute pas, vérifier la présence d'une plateforme en dessous:
-    else
+    if (player.checkInput(Player::JUMP)) 
     {
+        if(!player.isInAir())
+            player.jump();
+        else if (player.jumpsAvailable() < 20)
+            player.jump();
+    }
+    // 3.3• Si le joueur ne saute pas, vérifier la présence d'une plateforme en dessous:
+    //else
+    //{
 
         bool on_platform = false;
 
@@ -568,8 +585,12 @@ void World::step()
         }
         // 3.3.1• Sinon, tomber
         if (!on_platform) player.fall();
-        else player.setInAir(false);
-	}
+        else 
+        {
+            player.setInAir(false);
+            player.jumpReset();
+        }
+	//}
 
     player.clearAllInputs();
 
@@ -592,10 +613,10 @@ void World::step()
         }
     }
 
-    //5• On a gagné?
+    //5• Si on a atteint la baguette, on a gagné
     if (Hitbox::overlaping(player.getHitbox(), goal.getHitbox()))
     {
-        //TODO On a gagné
+        return 1;
     }
 
     // Si le joueur tombe du niveau, perdre une vie.
@@ -615,17 +636,10 @@ void World::step()
     }
     
 
-    //TODO Si le joueur n'a plus de vie: perdre
-    if (player.getLives() == 0)
+    // Si le joueur n'a plus de vie: perdre
+    if (player.getLives() == -1)
     {
-        //TODO Completer
-    }
-
-    //TODO Si le joueur atteint la fin: gagner
-    if (player.getPosition().x >= getGoal().getPosition().x-4
-        && player.getPosition().y >= getGoal().getPosition().y-4)
-    {
-        cout << "Victoire";
+        return -1;
     }
 
     //5• Chargement/Déchargement de segments
@@ -645,4 +659,7 @@ void World::step()
 
     //6• Incrémenter le compteur de frames
     frameCount++;
+
+    //7• C'était une frame normale: renvoyer 0
+    return 0;
 }

@@ -27,6 +27,8 @@ private:
     /// Indique si le joueur est en train de sauter
     bool jumping;
 
+    int jumptimer;
+
     /// Stocke les masques passés comme input
     uint16_t current_input;
 
@@ -104,6 +106,10 @@ public:
 
     /// Renvoie la direction actuelle du joueur
     uint16_t getDirection() const;
+
+    int jumpsAvailable() const;
+
+    void jumpReset();
 
 };
 

@@ -56,8 +56,9 @@ int main()
     Uint32 previous_game_tick = -1;
 
     uint16_t player_input = 0;
+    int game_stop = 0;
 
-    while (!quit)
+    while (!quit && !game_stop)
     {
         ticks = SDL_GetTicks();
         game_ticks = ticks/17;
@@ -113,7 +114,7 @@ int main()
             world.setPlayerInputs(player_input);
 
             //2.2• Mettre à jour world
-            world.step();
+            game_stop = world.step();
 
             //2.3• Affichage
             game_renderer.renderWorld(game_ticks, player_input);
@@ -122,6 +123,40 @@ int main()
         }
 
         previous_game_tick = game_ticks;
+    }
+
+    // Si on est sortis de la boucle après une défaite
+    if ( game_stop == -1 )
+    {
+        SDL_Surface* end_screen = IMG_Load("data/gameover.png");
+        SDL_Texture* end_screen_tex = SDL_CreateTextureFromSurface(renderer, end_screen);
+
+        SDL_RenderCopy(renderer, end_screen_tex, NULL, NULL);
+
+        SDL_RenderPresent(renderer);
+
+        quit = false;
+        while ( !quit )
+        {
+            SDL_PumpEvents();
+            while (SDL_PollEvent(&event) != NULL)
+            {
+                if (event.type == SDL_QUIT) quit = true;
+                else 
+                if (event.type == SDL_KEYDOWN)
+                {   //Si une touche est enfoncée
+                    cout << "Hello" <<endl;
+                    if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
+                    {
+                            quit = true;
+                    }
+                }
+            }
+        }
+
+        SDL_DestroyTexture(end_screen_tex);
+        SDL_FreeSurface(end_screen);
+
     }
 
     // À la sortie du programme:
