@@ -3,7 +3,6 @@
 
 #include "Entity.h"
 
-//TODO Paufiner la mécanique de saut
 
 /** \class Player Player.h "src/core/Player.h"
  * \brief Entité qui représente un joueur
