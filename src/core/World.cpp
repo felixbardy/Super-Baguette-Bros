@@ -504,7 +504,7 @@ void World::testRegression()
     cout << "WIP" << endl;
 
     cout << "World: step...";
-    //assert(w1.step() == 0);
+    assert(w3.step() == 0);
     cout << "WIP" << endl;
 
     cout << "World: des autres getters...";
