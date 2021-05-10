@@ -111,8 +111,10 @@ public:
      **/
     void setPlayerInputs(uint16_t input_mask);
 
-    /// Exécute une frame dans le monde
-    void step();
+    /** \brief Exécute une frame dans le monde
+     * \returns Renvoie 0 dans une frame normale, -1 si le joueur a perdu, 1 si le joueur a gagné
+     **/
+    int step();
 };
 
 

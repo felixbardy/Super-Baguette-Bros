@@ -534,7 +534,7 @@ const Entity& World::getGoal() const { return goal; }
 
 void World::setPlayerInputs(uint16_t input_mask) { player.addInput(input_mask); }
 
-void World::step()
+int World::step()
 {
     // 3• On applique l'update physique:
 
@@ -613,11 +613,10 @@ void World::step()
         }
     }
 
-    //5• On a gagné?
+    //5• Si on a atteint la baguette, on a gagné
     if (Hitbox::overlaping(player.getHitbox(), goal.getHitbox()))
     {
-        //TODO On a gagné
-        cout << "victoire";
+        return 1;
     }
 
     // Si le joueur tombe du niveau, perdre une vie.
@@ -637,10 +636,10 @@ void World::step()
     }
     
 
-    //TODO Si le joueur n'a plus de vie: perdre
-    if (player.getLives() == 0)
+    // Si le joueur n'a plus de vie: perdre
+    if (player.getLives() == -1)
     {
-        //TODO Completer
+        return -1;
     }
 
     //5• Chargement/Déchargement de segments
@@ -660,4 +659,7 @@ void World::step()
 
     //6• Incrémenter le compteur de frames
     frameCount++;
+
+    //7• C'était une frame normale: renvoyer 0
+    return 0;
 }
