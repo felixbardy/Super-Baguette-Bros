@@ -1,13 +1,19 @@
 #include "Entity.h"
+#include <iostream>
+#include <cassert>
+
+using namespace std;
 
 Entity::Entity() :
 pos({0,0}),
+vel({0,0}),
 width(0),
 height(0),
 angle(0)
 {}
 
-Entity::Entity(Vec2f pos, float width, float height, float angle)
+Entity::Entity(Vec2f pos, float width, float height, float angle) :
+vel({0,0})
 {
     setPosition(pos);
     setWidth(width);
@@ -19,9 +25,66 @@ Entity::~Entity()
 {
 }
 
-void Entity::testRegression()
+void    Entity::testRegression()
 {
-    //TODO Implémenter le test régression de Entity
+    cout << "Entity: constructeur par valeurs... ";
+    
+    Entity EntityTest({10.0,10.0}, 10.0, 10.0, 10.0);
+    assert(EntityTest.pos.x == 10.0 && EntityTest.pos.y == 10.0);
+    assert(EntityTest.width == 10.0);
+    assert(EntityTest.height == 10.0);
+    assert(EntityTest.angle == 10.0);
+
+    cout << "OK" << endl;
+
+
+    cout << "Entity: constructeur par défaut... ";
+
+    Entity EntityTest2;
+    Vec2f vecTest = EntityTest2.getPosition();
+    assert(vecTest.x == 0 && vecTest.y == 0);
+    assert(EntityTest2.getWidth() == 0);
+    assert(EntityTest2.getHeight() == 0);
+    assert(EntityTest2.getAngle() == 0);
+
+    cout << "OK" << endl;
+
+    cout << "Entity: velocity et angle...";
+
+    EntityTest.setVelocity({10,10});
+    vecTest = EntityTest.getVelocity();
+    assert(vecTest.x == 10 && vecTest.y == 10);
+    EntityTest.applyForce({5,5});
+    assert(EntityTest.vel.x == 15 && EntityTest.vel.y == 15);
+    EntityTest.setAngle(15);
+    assert(EntityTest.getAngle() == 15);
+    EntityTest.rotate(5.5);
+    assert(EntityTest.angle == (15 + 5.5));
+
+    cout << "OK" << endl;
+
+
+    cout << "Entity: move et superposition... ";
+
+    assert(!(EntityTest.superposition(EntityTest2))); //lorsqu'il n'y a pas de superpositon
+    EntityTest2.move({10,10});
+    assert(EntityTest2.pos.x == 10 && EntityTest2.pos.y == 10);
+    assert(EntityTest.superposition(EntityTest2)); //lorsqu'il y a superposition
+
+    cout << "OK" << endl;
+
+    cout << "Entity: getHitbox()... ";
+
+    Hitbox hitbox = EntityTest.getHitbox();
+    float hb_w, hb_h;
+    hitbox.getDimensions(&hb_w, &hb_h);
+    assert(hb_w == EntityTest.getWidth());
+    assert(hb_h == EntityTest.getHeight());
+    assert(hitbox.getPos() == EntityTest.getPosition());
+
+    cout << "OK" << endl;
+
+
 }
 
 Vec2f   Entity::getPosition() const
@@ -74,6 +137,12 @@ void    Entity::setHeight(float newheight)
     height = newheight;
 }
 
+Hitbox Entity::getHitbox() const
+{
+    return Hitbox(pos, width, height);
+}
+
+
 void    Entity::applyForce(Vec2f force)
 {
     vel += force;
@@ -91,8 +160,10 @@ void    Entity::rotate(float angle)
 
 bool    Entity::superposition(Entity ent2)
 {
-    if ( ((ent2.pos.x + ent2.width) < pos.x) || ((pos.x + width) < ent2.pos.x) || ((ent2.pos.y + ent2.height) < pos.y) || ((pos.y + height) < ent2.pos.y))
-        return false;
-    else
-        return true;
+    return !( // Vrai sauf si:
+           ((ent2.pos.x + ent2.width) < pos.x)  // ent2 est complètement à gauche de this
+        || ((pos.x + width) < ent2.pos.x)       // this est complètement à gauche de ent2
+        || ((ent2.pos.y + ent2.height) < pos.y) // ent2 est complètement en dessous de this
+        || ((pos.y + height) < ent2.pos.y)      // this est complètement en dessous de ent2
+    );
 }

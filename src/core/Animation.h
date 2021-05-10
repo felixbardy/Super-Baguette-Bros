@@ -16,10 +16,12 @@ enum AnimationType
 
 struct Animation
 {
-    ///? Peut être remplacé par un ID
+    // Pointeur vers 'objet affecté par l'animation
     Entity* object;
+    // Type de l'animation
     AnimationType type;
-    bool from_segment;
+    // L'adresse du segment ayant créé l'animation (ou nullptr si elle a été créée autrement)
+    void* origin_segment;
 };
 
 //* * * * * * * * * * * * *//
@@ -45,10 +47,7 @@ struct LinearAnimation : Animation
  * \param movement Le mouvement de l'objet
  * \param speed La vitesse de déplacement de l'objet
  **/
-LinearAnimation createLinearAnimation(
-    Entity* object, Vec2f start_point,
-    Vec2f movement, float speed
-);
+LinearAnimation createLinearAnimation( Entity* object, Vec2f start_point, Vec2f movement, float speed, void* origin_segment = nullptr );
 
 struct RotationAnimation : Animation
 {
@@ -63,7 +62,7 @@ struct RotationAnimation : Animation
  * \param start_angle L'inclinaison initiale de l'objet
  * \param rotation_speed La vitesse de rotation de l'objet (négative pour le sens horaire)
  **/
-RotationAnimation createRotationAnimation(Entity* object, float start_angle, float rotation_speed);
+RotationAnimation createRotationAnimation(Entity* object, float start_angle, float rotation_speed, void* origin_segment = nullptr );
 
 struct BouncyAnimation : Animation
 {
@@ -83,7 +82,7 @@ struct BouncyAnimation : Animation
  * \param rebound_width La longueur d'un rebond
  * \param max_bounces Le nombre de rebonds avant disparition de l'objet
  **/
-BouncyAnimation createBouncyAnimation(Entity* object, float rebound_height, float rebound_width, int max_bounces);
+BouncyAnimation createBouncyAnimation(Entity* object, float rebound_height, float rebound_width, int max_bounces, void* origin_segment = nullptr );
 
 struct PhysicAnimation : Animation
 {
@@ -91,7 +90,6 @@ struct PhysicAnimation : Animation
     Vec2f acc;
     /// Tendance à rebondir (0 (arrêt immédiat) -> 1 (pas de perte d'énergie))
     float bounciness;
-    ///TODO Ajouter des caractéristiques
 };
 
 /** \brief Renvoie une structure d'animation physique avec les paramètres donnés
@@ -99,9 +97,7 @@ struct PhysicAnimation : Animation
  * \param acceleration L'acceleration constante à appliquer à l'objet (habituellement la gravité)
  * \param bounciness La propention de l'objet à rebondir (de 0 à 1)
  **/
-PhysicAnimation createPhysicAnimation(Entity* object, Vec2f acceleration, float bounciness);
-
-///TODO Ajouter des types d'animation si besoin
+PhysicAnimation createPhysicAnimation(Entity* object, Vec2f acceleration, float bounciness, void* origin_segment = nullptr );
 
 void testRegressionAnimations();
 

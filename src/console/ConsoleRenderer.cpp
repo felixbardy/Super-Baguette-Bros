@@ -30,8 +30,7 @@ void ConsoleRenderer::render()
     const int* nPlatforms = world->getPlatformsSizes();
     const Player& player = world->getPlayer();
 
-    //FIXME Récupérer la vraie fin du monde
-    float world_end = 1000000; 
+    float world_end = world->getWorldEnd(); 
 
     // Si le joueur est trop proche du bord, la caméra se bloque
     // Sinon, elle suit le joueur

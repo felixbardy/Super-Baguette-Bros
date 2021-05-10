@@ -3,8 +3,19 @@
 
 #include "Entity.h"
 
-/// TODO Fixer clairement à quoi ressemblent les contrôles du joueur avant de l'implémenter
 
+/** \class Player Player.h "src/core/Player.h"
+ * \brief Entité qui représente un joueur
+ * 
+ * Player hérite de Entity et donc de toutes ses fonctionalités.<br>
+ * La classe a également de nombreux champs et méthodes supplémentaires pour gérer le contrôle du joueur.<br>
+ * <br>
+ * Pour connaître les actions demandées, Player utilise un entier 16bit avec un masque pour chaque input. On a ainsi:<br>
+ * * Player::JUMP```: Sauter<br>
+ * * `Player::DOWN`, `Player::UP`, `Player::LEFT`, `Player::RIGHT`: Directions pressées<br>
+ * 
+ * L'interprétation est ensuite faite par `World::step` pour calculer le prochain état du monde
+ **/
 class Player : public Entity
 {
 private:
@@ -15,8 +26,17 @@ private:
     /// Indique si le joueur est en train de sauter
     bool jumping;
 
+    /// Indique le temps que le saut dure
+    int jumptimer;
+
     /// Stocke les masques passés comme input
     uint16_t current_input;
+
+    /// La direction actuelle du joueur
+    uint16_t direction;
+
+    /// Indique le nombre de vies du joueur
+    int lives;
 
 public:
 
@@ -38,10 +58,12 @@ public:
     void fall();
 
     /// Retourne la valeur de jumping
-    bool isJumping();
+    bool isJumping() const;
 
     /// Retourne la valeur de in_air
-    bool isInAir();
+    bool isInAir() const;
+
+    void setInAir(bool in_air);
 
     /** \brief Permet d'activer les inputs voulus du joueur
      * \param mask Le masque représentant les inputs à activer
@@ -56,13 +78,13 @@ public:
     /** \brief Renvoie vrai si les inputs passés sont activés
      * \param mask Le masque représentant les inputs à vérifier
      **/
-    bool checkInput(uint16_t mask);
+    bool checkInput(uint16_t mask) const;
 
     /// Désactive tous les inputs du joueur
     void clearAllInputs();
 
     /// Une suite de tests pour s'assurer du bon fonctionnement de Player
-    void testRegression();
+    void testRegression() const;
 
     // Masques d'input
     // Masques
@@ -72,6 +94,23 @@ public:
     static const uint16_t LEFT     = 1 << 3;
     static const uint16_t RIGHT    = 1 << 4;
     // Il reste de la place pour encore 11 inputs (ex: attaque)
+
+    /// Enlève une vie au joueur
+    void removeLife();
+
+    /// Ajoute une vie au joueur
+    void addLife();
+
+    /// Renvoie le nombre de vies du joueur
+    int getLives() const;
+
+    /// Renvoie la direction actuelle du joueur
+    uint16_t getDirection() const;
+
+    int jumpsAvailable() const;
+
+    /// Remet le compteur de sauts à 0
+    void jumpReset();
 
 };
 

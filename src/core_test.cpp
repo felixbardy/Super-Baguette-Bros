@@ -18,5 +18,7 @@ int main()
     Segment s;
     s.testRegression();
     testRegressionAnimations();
+    Hitbox h;
+    h.testRegression();
     return 0;
 }

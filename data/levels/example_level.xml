@@ -1,0 +1,87 @@
+<Root>
+    <SegmentWidth>30</SegmentWidth>
+    <Player x="1" y="3"></Player>
+    <Goal segment_index="5" x="19" y="15"></Goal>
+    <Segments count="6">
+        <Segment>
+            <Platforms count="3">
+                <Platform x="0"  y="0" width="10" height="1" angle="0"></Platform>
+                <Platform x="10" y="3" width="10" height="1" angle="0"></Platform>
+                <Platform x="20" y="6" width="10" height="1" angle="0"></Platform>
+            </Platforms>
+            <Animations count="0">
+            </Animations>
+            <Pieces>
+                <Bloc minx="3"  miny="1" maxx="7"  maxy="4"></Bloc>
+                <Bloc minx="10" miny="4" maxx="19" maxy="4"></Bloc>
+            </Pieces>
+        </Segment>
+        <Segment>
+            <Platforms count="3">
+                <Platform x="0" y="9" width="10" height="1" angle="0"></Platform>
+                <Platform x="10" y="3" width="10" height="1" angle="0"></Platform>
+                <Platform x="20" y="5" width="10" height="1" angle="0"></Platform>
+            </Platforms>
+            <Animations count="0">
+            </Animations>
+            <Pieces>
+                <Bloc minx="11" miny="4" maxx="12" maxy="8"></Bloc>
+            </Pieces>
+        </Segment>
+        <Segment>
+            <Platforms count="3">
+                <Platform x="0" y="8"  width="10" height="1" angle="0"></Platform>
+                <Platform x="10" y="14" width="10" height="1" angle="0"></Platform>
+                <Platform x="0" y="11" width="5"  height="1" angle="0"></Platform>
+            </Platforms>
+            <Animations count="2">
+                <Animation type="0" target="2" start_x="50" start_y="11" mov_x="20" mov_y="0" speed="2"></Animation>
+                <Animation type="0" target="0" start_x="60" start_y="14" mov_x="0" mov_y="15" speed="1"></Animation>
+            </Animations>
+            <Pieces>
+                <Bloc minx="0" miny="12" maxx="4" maxy="12"></Bloc>
+                <Bloc minx="20" miny="14" maxx="21" maxy="15"></Bloc>
+                <Bloc minx="22" miny="12" maxx="23" maxy="13"></Bloc>
+                <Bloc minx="24" miny="10" maxx="25" maxy="11"></Bloc>
+                <Bloc minx="26" miny="8" maxx="27" maxy="9"></Bloc>
+                <Bloc minx="28" miny="6" maxx="29" maxy="7"></Bloc>
+                <Bloc minx="30" miny="4" maxx="31" maxy="5"></Bloc>
+            </Pieces>
+        </Segment>
+        <Segment>
+            <Platforms count="3">
+                <Platform x="0"  y="0" width="10" height="1" angle="0"></Platform>
+                <Platform x="10" y="3" width="10" height="1" angle="0"></Platform>
+                <Platform x="20" y="6" width="10" height="1" angle="0"></Platform>
+            </Platforms>
+            <Animations count="0">
+            </Animations>
+            <Pieces>
+            </Pieces>
+        </Segment>
+        <Segment>
+            <Platforms count="3">
+                <Platform x="0" y="9" width="10" height="1" angle="0"></Platform>
+                <Platform x="10" y="3" width="10" height="1" angle="0"></Platform>
+                <Platform x="20" y="5" width="10" height="1" angle="0"></Platform>
+            </Platforms>
+            <Animations count="0">
+            </Animations>
+            <Pieces>
+            </Pieces>
+        </Segment>
+        <Segment>
+            <Platforms count="3">
+                <Platform x="0" y="8"  width="10" height="1" angle="0"></Platform>
+                <Platform x="10" y="14" width="11" height="1" angle="0"></Platform>
+                <Platform x="0" y="11" width="5"  height="1" angle="0"></Platform>
+            </Platforms>
+            <Animations count="2">
+                <Animation type="0" target="2" start_x="50" start_y="11" mov_x="20" mov_y="0" speed="2"></Animation>
+                <Animation type="0" target="0" start_x="60" start_y="14" mov_x="0" mov_y="15" speed="1"></Animation>
+            </Animations>
+            <Pieces>
+            </Pieces>
+        </Segment>
+    </Segments>
+</Root>

@@ -6,6 +6,7 @@ using namespace std;
 
 int main()
 {
+    /*
     // Création d'une liste simple de 3 segments
     // On fait des segments de 30 de longueur
     Segment* segments = new Segment[3];
@@ -44,7 +45,8 @@ int main()
     segments[2].setAnimations(animations, 0);
 
     World w = World(segments, 3);
-    
+    */
+    World w("data/levels/example_level.xml");
     ConsoleRenderer cr = ConsoleRenderer(&w, 60, 20, 1);
 
     string input;
