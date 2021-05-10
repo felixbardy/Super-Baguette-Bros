@@ -504,13 +504,13 @@ void World::testRegression()
     cout << "WIP" << endl;
 
     cout << "World: step...";
-    //TODO test regression de step
+    //assert(w1.step() == 0);
     cout << "WIP" << endl;
 
     cout << "World: des autres getters...";
-    assert(getScore() == 0);
-    score++;
-    assert(getScore() == 1);
+    assert(w1.getScore() == 0);
+    w1.score++;
+    assert(w1.getScore() == 1);
     w2.segmentWidth = 1;
     assert(w2.getWorldEnd() == w2.nSegments * w2.segmentWidth);
     cout << "OK" << endl;
