@@ -21,7 +21,7 @@ Ce projet utilise la librairie graphique [SDL2](https://www.libsdl.org/index.php
 
 ```bash
 sudo apt-get install libsdl2-dev libsdl2-image-dev libsdl2-ttf-dev
-````
+```
 
 Ou sous MacOS avec Homebrew:
 
