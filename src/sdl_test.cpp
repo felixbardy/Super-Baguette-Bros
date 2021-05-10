@@ -162,7 +162,7 @@ int main()
     // Si on est sortis de la boucle après une victoire
     if ( game_stop == 1 )
     {
-        SDL_Surface* end_screen = IMG_Load("data/gameover.png");
+        SDL_Surface* end_screen = IMG_Load("data/victory.png");
         SDL_Texture* end_screen_tex = SDL_CreateTextureFromSurface(renderer, end_screen);
 
         SDL_RenderCopy(renderer, end_screen_tex, NULL, NULL);
