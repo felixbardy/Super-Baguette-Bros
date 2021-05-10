@@ -155,6 +155,7 @@ void Player::testRegression() const
     p.moveRight();
     assert(p.getDirection() == RIGHT);
 
+    cout << "OK" << endl;
 
 
 }
