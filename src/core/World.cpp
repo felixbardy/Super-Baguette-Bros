@@ -632,7 +632,6 @@ int World::step()
         player.removeLife();
         player.setPosition(posInitiale);
         cout << "Nombre de vies:" << player.getLives() << endl;
-        loadFirstSegments();
     }
     
 
